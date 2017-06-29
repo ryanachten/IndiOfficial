@@ -32,7 +32,7 @@ $(window).resize(function(){
 });
 
 
-var defaultVisMode = 'indiTest01';
+var defaultVisMode = 'chladniPlate';
 var canvWidth, canvHeight;
 var canvasCtx;
 var bgColor;
@@ -120,8 +120,8 @@ function visualise(visMode){
 	else if(visMode === 'WaveForm'){
 		waveForm(dataArray, bufferLength);
 	}
-	else if(visMode === 'WaveForm'){
-		indiTest01(dataArray, bufferLength);
+	else if(visMode === 'chladniPlate'){
+		chladniPlate(dataArray, bufferLength);
 	}
 	else if(visMode === 'Off'){
 		visOff();
