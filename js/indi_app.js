@@ -32,7 +32,7 @@ $(window).resize(function(){
 });
 
 
-var defaultVisMode = 'WaveForm';
+var defaultVisMode = 'indiTest01';
 var canvWidth, canvHeight;
 var canvasCtx;
 var bgColor;
@@ -55,7 +55,7 @@ function init(){
 													canvWidth/2, canvHeight/2, canvWidth/2);
 			bgColor.addColorStop(1,"hsl(180, 20%, 90%)");
 			bgColor.addColorStop(0,"hsl(150, 0.5%, 95%)");
-			
+
 		canvasCtx.fillStyle = bgColor;
 		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
 
@@ -119,6 +119,9 @@ function visualise(visMode){
 	}
 	else if(visMode === 'WaveForm'){
 		waveForm(dataArray, bufferLength);
+	}
+	else if(visMode === 'WaveForm'){
+		indiTest01(dataArray, bufferLength);
 	}
 	else if(visMode === 'Off'){
 		visOff();
