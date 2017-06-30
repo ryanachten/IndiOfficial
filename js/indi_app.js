@@ -32,7 +32,7 @@ $(window).resize(function(){
 });
 
 
-var defaultVisMode = 'chladniPlate';
+var defaultVisMode = 'indiTest01';
 var canvWidth, canvHeight;
 var canvasCtx;
 var bgColor;
@@ -116,6 +116,9 @@ function visualise(visMode){
 	console.log(visMode);
 	if(visMode === 'BarGraph'){
 		barGraph(dataArray, bufferLength); 
+	}
+	else if(visMode === 'indiTest01'){
+		indiTest01(dataArray, bufferLength);
 	}
 	else if(visMode === 'WaveForm'){
 		waveForm(dataArray, bufferLength);

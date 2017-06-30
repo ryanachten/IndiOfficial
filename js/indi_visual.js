@@ -39,124 +39,113 @@ function waveForm(dataArray, bufferLength){
 
 function indiTest01(dataArray, bufferLength){
 
-		var requiredAssets = 5; //not the best approach
+		var requiredAssets = 7; //not the best approach
 								//	- subject to falability if not updated
 		var loadedAssets = 0;
+		var rodDashSvg, rodOuterSvg, rodInnerSvg, 
+			dashOuterSvg, dashInnerSvg,
+			dotOuterSvg, dotInnerSvg; //svg assets
 
-		var rodDashSvg = new Image();
-		rodDashSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Dash.svg';
-		rodDashSvg.onload = function(){
-			loadedAssets++;
-			initImages();			
-		};
+		var RodParticle, DashParticle, DotParticle; //anon funct objects
+		
+		function loadAssets(){			
 
-		var rodOuterSvg = new Image();
-		rodOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Outer.svg';
-		rodOuterSvg.onload = function(){
-			loadedAssets++;
-			initImages();			
-		};
-
-		var rodInnerSvg = new Image();
-		rodInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Inner.svg';
-		rodInnerSvg.onload = function(){
-			loadedAssets++;
-			initImages();
-		};
-
-		var dashOuterSvg = new Image();
-		dashOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Outer.svg';
-		dashOuterSvg.onload = function(){
-			loadedAssets++;
-			initImages();			
-		};
-
-		var dashInnerSvg = new Image();
-		dashInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Inner.svg';
-		dashInnerSvg.onload = function(){
-			loadedAssets++;
-			initImages();
-		};
-
-		var dotOuterSvg = new Image();
-		dotOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Outer.svg';
-		dotOuterSvg.onload = function(){
-			loadedAssets++;
-			initImages();			
-		};
-
-		var dotInnerSvg = new Image();
-		dotInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Inner.svg';
-		dotInnerSvg.onload = function(){
-			loadedAssets++;
-			initImages();
-		};
-
-
-		var RodParticle = (function(){
-			this.width = 60;
-			this.height = 15;
-			this.draw = function(xPos, yPos, degrees){
-				canvasCtx.save();
-				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(degrees * Math.PI/180);
-				canvasCtx.drawImage(rodDashSvg, 0, 0);	
-				canvasCtx.drawImage(rodOuterSvg, 0, 0);
-				canvasCtx.drawImage(rodInnerSvg, 0, 4);
-				canvasCtx.restore();
+			rodDashSvg = new Image();
+			rodDashSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Dash.svg';
+			rodDashSvg.onload = function(){
+				loadedAssets++;
+				initParts();			
 			};
-		});
 
-		var DashParticle = (function(){
-			this.width = 27;
-			this.height = 15;
-			this.draw = function(xPos, yPos, degrees){
-				canvasCtx.save();
-				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(degrees * Math.PI/180);	
-				canvasCtx.drawImage(dashOuterSvg, 0, 0);
-				canvasCtx.drawImage(dashInnerSvg, 0, 0.5);
-				canvasCtx.restore();
+			rodOuterSvg = new Image();
+			rodOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Outer.svg';
+			rodOuterSvg.onload = function(){
+				loadedAssets++;
+				initParts();			
 			};
-		});
 
-		var DotParticle = (function(){
-			this.width = 15;
-			this.height = 15;
-			this.draw = function(xPos, yPos, degrees){
-				canvasCtx.save();
-				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(degrees * Math.PI/180);	
-				canvasCtx.drawImage(dotOuterSvg, 0, 0);
-				canvasCtx.drawImage(dotInnerSvg, 0, 0.5);
-				canvasCtx.restore();
+			rodInnerSvg = new Image();
+			rodInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Inner.svg';
+			rodInnerSvg.onload = function(){
+				loadedAssets++;
+				initParts();
 			};
-		});
 
-		var rodPart; 
-		var dashPart;
-		var dotPart;
+			dashOuterSvg = new Image();
+			dashOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Outer.svg';
+			dashOuterSvg.onload = function(){
+				loadedAssets++;
+				initParts();			
+			};
 
+			dashInnerSvg = new Image();
+			dashInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Inner.svg';
+			dashInnerSvg.onload = function(){
+				loadedAssets++;
+				initParts();
+			};
 
-		function init(){
+			dotOuterSvg = new Image();
+			dotOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Outer.svg';
+			dotOuterSvg.onload = function(){
+				loadedAssets++;
+				initParts();			
+			};
 
-			var grd = canvasCtx.createRadialGradient(canvWidth/2, canvHeight/2, 0,
-													canvWidth/2, canvHeight/2, canvWidth/2);
-			grd.addColorStop(1,"hsl(180, 20%, 90%)");
-			grd.addColorStop(0,"hsl(150, 0.5%, 95%)");
-
-			canvasCtx.fillStyle = grd;
-			canvasCtx.fillRect(0,0, canvWidth, canvHeight);
+			dotInnerSvg = new Image();
+			dotInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Inner.svg';
+			dotInnerSvg.onload = function(){
+				loadedAssets++;
+				initParts();
+			};
 		}
-		init();
+
+		loadAssets();
 
 
-		function initImages(){
+		function initParts(){
 
 			if(loadedAssets === requiredAssets){
-				rodPart = new RodParticle();
-				dashPart = new DashParticle();
-				dotPart = new DotParticle();
+
+				RodParticle = (function(){
+					this.width = 60;
+					this.height = 15;
+					this.draw = function(xPos, yPos, degrees){
+						canvasCtx.save();
+						canvasCtx.translate(xPos, yPos);
+						canvasCtx.rotate(degrees * Math.PI/180);
+						canvasCtx.drawImage(rodDashSvg, 0, 0);	
+						canvasCtx.drawImage(rodOuterSvg, 0, 0);
+						canvasCtx.drawImage(rodInnerSvg, 0, 4);
+						canvasCtx.restore();
+					};
+				});
+
+				DashParticle = (function(){
+					this.width = 27;
+					this.height = 15;
+					this.draw = function(xPos, yPos, degrees){
+						canvasCtx.save();
+						canvasCtx.translate(xPos, yPos);
+						canvasCtx.rotate(degrees * Math.PI/180);	
+						canvasCtx.drawImage(dashOuterSvg, 0, 0);
+						canvasCtx.drawImage(dashInnerSvg, 0, 0.5);
+						canvasCtx.restore();
+					};
+				});
+
+				DotParticle = (function(){
+					this.width = 15;
+					this.height = 15;
+					this.draw = function(xPos, yPos, degrees){
+						canvasCtx.save();
+						canvasCtx.translate(xPos, yPos);
+						canvasCtx.rotate(degrees * Math.PI/180);	
+						canvasCtx.drawImage(dotOuterSvg, 0, 0);
+						canvasCtx.drawImage(dotInnerSvg, 0, 0.5);
+						canvasCtx.restore();
+					};
+				});
 
 				draw();
 			}
@@ -164,6 +153,9 @@ function indiTest01(dataArray, bufferLength){
 
 
 		function draw(){
+			var rodPart = new RodParticle();
+			var dashPart = new DashParticle();
+			var dotPart = new DotParticle();
 			rodPart.draw(canvWidth/2, canvHeight/2, 0);
 			rodPart.draw(canvWidth/2, canvHeight/2 + rodPart.height, 0);
 			dashPart.draw(canvWidth/4, canvHeight/4, 0);
@@ -173,7 +165,7 @@ function indiTest01(dataArray, bufferLength){
 		}		
 
 	}
-	indiTest01();
+
 
 	function chladniPlate(dataArray, bufferLength){
 
