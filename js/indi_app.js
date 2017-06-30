@@ -21,7 +21,7 @@
 
 var audioCtx, analyser;
 
-var defaultVisMode = 'indiTest01';
+var defaultVisMode = 'chladniPlate';
 var canvWidth, canvHeight;
 var canvasCtx;
 var bgColor;
@@ -143,10 +143,10 @@ function initParts(){
 		RodParticle = (function(){
 			this.width = 60;
 			this.height = 15;
-			this.draw = function(xPos, yPos, degrees){
+			this.draw = function(xPos, yPos, radians){
 				canvasCtx.save();
 				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(degrees * Math.PI/180);
+				canvasCtx.rotate(radians);
 				canvasCtx.drawImage(rodDashSvg, 0, 0);	
 				canvasCtx.drawImage(rodOuterSvg, 0, 0);
 				canvasCtx.drawImage(rodInnerSvg, 0, 4);
@@ -157,10 +157,10 @@ function initParts(){
 		DashParticle = (function(){
 			this.width = 27;
 			this.height = 15;
-			this.draw = function(xPos, yPos, degrees){
+			this.draw = function(xPos, yPos, radians){
 				canvasCtx.save();
 				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(degrees * Math.PI/180);	
+				canvasCtx.rotate(radians);	
 				canvasCtx.drawImage(dashOuterSvg, 0, 0);
 				canvasCtx.drawImage(dashInnerSvg, 0, 0.5);
 				canvasCtx.restore();
@@ -170,10 +170,10 @@ function initParts(){
 		DotParticle = (function(){
 			this.width = 15;
 			this.height = 15;
-			this.draw = function(xPos, yPos, degrees){
+			this.draw = function(xPos, yPos, radians){
 				canvasCtx.save();
 				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(degrees * Math.PI/180);	
+				canvasCtx.rotate(radians);	
 				canvasCtx.drawImage(dotOuterSvg, 0, 0);
 				canvasCtx.drawImage(dotInnerSvg, 0, 0.5);
 				canvasCtx.restore();
