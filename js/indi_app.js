@@ -1,7 +1,3 @@
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-var analyser = audioCtx.createAnalyser();
-
-
 // var fftInput = document.getElementById("fft-input");
 // fftInput.onchange = function(){
 // 	window.cancelAnimationFrame(drawVisual);
@@ -23,24 +19,27 @@ var analyser = audioCtx.createAnalyser();
 // 	analyser.smoothingTimeConstant = smoothingRange.value/100;
 // }
 
-
-$(window).resize(function(){
-	canvas.width = $(window).width();
-	canvas.height = $(window).height();
-	canvWidth = canvas.width;
-	canvHeight = canvas.height;
-});
-
+var audioCtx, analyser;
 
 var defaultVisMode = 'indiTest01';
 var canvWidth, canvHeight;
 var canvasCtx;
 var bgColor;
 
+var requiredAssets = 7; //not the best approach
+								//	- subject to falability if not updated
+var loadedAssets = 0;
+var rodDashSvg, rodOuterSvg, rodInnerSvg, 
+	dashOuterSvg, dashInnerSvg,
+	dotOuterSvg, dotInnerSvg; //svg assets
+
+var RodParticle, DashParticle, DotParticle; //anon funct objects
+
 
 function init(){
 
-	//Canvas Setup
+	audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	analyser = audioCtx.createAnalyser();
 	
 	var canvas = document.querySelector("#visualiser");
 		
@@ -71,7 +70,8 @@ function init(){
 				source = audioCtx.createMediaStreamSource(stream);
 				source.connect(analyser);
 
-				visualise(defaultVisMode);
+				// visualise(defaultVisMode);
+				loadAssets();
 			  },
 
 			function(err) {
@@ -83,27 +83,105 @@ function init(){
 init();
 
 
-function getBuffer(fftSize){
-	analyser.fftSize = 256; //1024
-	var bufferLength = analyser.frequencyBinCount;
-	console.log(bufferLength);
-	var dataArray = new Uint8Array(bufferLength);
-	var dataBuffer = {
-		"buffer" : bufferLength,
-		"data" : dataArray
-	}
-	return dataBuffer;
+function loadAssets(){			
+
+	rodDashSvg = new Image();
+	rodDashSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Dash.svg';
+	rodDashSvg.onload = function(){
+		loadedAssets++;
+		initParts();			
+	};
+
+	rodOuterSvg = new Image();
+	rodOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Outer.svg';
+	rodOuterSvg.onload = function(){
+		loadedAssets++;
+		initParts();			
+	};
+
+	rodInnerSvg = new Image();
+	rodInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Inner.svg';
+	rodInnerSvg.onload = function(){
+		loadedAssets++;
+		initParts();
+	};
+
+	dashOuterSvg = new Image();
+	dashOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Outer.svg';
+	dashOuterSvg.onload = function(){
+		loadedAssets++;
+		initParts();			
+	};
+
+	dashInnerSvg = new Image();
+	dashInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Inner.svg';
+	dashInnerSvg.onload = function(){
+		loadedAssets++;
+		initParts();
+	};
+
+	dotOuterSvg = new Image();
+	dotOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Outer.svg';
+	dotOuterSvg.onload = function(){
+		loadedAssets++;
+		initParts();			
+	};
+
+	dotInnerSvg = new Image();
+	dotInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Inner.svg';
+	dotInnerSvg.onload = function(){
+		loadedAssets++;
+		initParts();
+	};
 }
 
 
-function changeVisualMode(visualMode){
-	window.cancelAnimationFrame(drawVisual);
-	drawVisual = undefined;
-	
-	removeVisualSettings();
-	document.getElementById('vis-settings').style.display = 'none';
-	
-	visualise(visualMode);
+function initParts(){
+
+	if(loadedAssets === requiredAssets){
+
+		RodParticle = (function(){
+			this.width = 60;
+			this.height = 15;
+			this.draw = function(xPos, yPos, degrees){
+				canvasCtx.save();
+				canvasCtx.translate(xPos, yPos);
+				canvasCtx.rotate(degrees * Math.PI/180);
+				canvasCtx.drawImage(rodDashSvg, 0, 0);	
+				canvasCtx.drawImage(rodOuterSvg, 0, 0);
+				canvasCtx.drawImage(rodInnerSvg, 0, 4);
+				canvasCtx.restore();
+			};
+		});
+
+		DashParticle = (function(){
+			this.width = 27;
+			this.height = 15;
+			this.draw = function(xPos, yPos, degrees){
+				canvasCtx.save();
+				canvasCtx.translate(xPos, yPos);
+				canvasCtx.rotate(degrees * Math.PI/180);	
+				canvasCtx.drawImage(dashOuterSvg, 0, 0);
+				canvasCtx.drawImage(dashInnerSvg, 0, 0.5);
+				canvasCtx.restore();
+			};
+		});
+
+		DotParticle = (function(){
+			this.width = 15;
+			this.height = 15;
+			this.draw = function(xPos, yPos, degrees){
+				canvasCtx.save();
+				canvasCtx.translate(xPos, yPos);
+				canvasCtx.rotate(degrees * Math.PI/180);	
+				canvasCtx.drawImage(dotOuterSvg, 0, 0);
+				canvasCtx.drawImage(dotInnerSvg, 0, 0.5);
+				canvasCtx.restore();
+			};
+		});
+
+		visualise(defaultVisMode);
+	}
 }
 
 
@@ -131,6 +209,32 @@ function visualise(visMode){
 	}
 }
 
+
+function getBuffer(fftSize){
+	analyser.fftSize = 256; //1024
+	var bufferLength = analyser.frequencyBinCount;
+	console.log(bufferLength);
+	var dataArray = new Uint8Array(bufferLength);
+	var dataBuffer = {
+		"buffer" : bufferLength,
+		"data" : dataArray
+	}
+	return dataBuffer;
+}
+
+
+function changeVisualMode(visualMode){
+	window.cancelAnimationFrame(drawVisual);
+	drawVisual = undefined;
+	
+	removeVisualSettings();
+	document.getElementById('vis-settings').style.display = 'none';
+	
+	visualise(visualMode);
+}
+
+
+
 function visOff(){
 	canvasCtx.clearRect(0,0,canvWidth, canvHeight);
 	canvasCtx.fillStyle = bgColor;
@@ -145,3 +249,10 @@ function removeVisualSettings(){
 	}
 	$('.vis-setting').remove();
 }
+
+$(window).resize(function(){
+	canvas.width = $(window).width();
+	canvas.height = $(window).height();
+	canvWidth = canvas.width;
+	canvHeight = canvas.height;
+});

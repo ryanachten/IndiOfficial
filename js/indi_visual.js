@@ -39,119 +39,6 @@ function waveForm(dataArray, bufferLength){
 
 function indiTest01(dataArray, bufferLength){
 
-		var requiredAssets = 7; //not the best approach
-								//	- subject to falability if not updated
-		var loadedAssets = 0;
-		var rodDashSvg, rodOuterSvg, rodInnerSvg, 
-			dashOuterSvg, dashInnerSvg,
-			dotOuterSvg, dotInnerSvg; //svg assets
-
-		var RodParticle, DashParticle, DotParticle; //anon funct objects
-		
-		function loadAssets(){			
-
-			rodDashSvg = new Image();
-			rodDashSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Dash.svg';
-			rodDashSvg.onload = function(){
-				loadedAssets++;
-				initParts();			
-			};
-
-			rodOuterSvg = new Image();
-			rodOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Outer.svg';
-			rodOuterSvg.onload = function(){
-				loadedAssets++;
-				initParts();			
-			};
-
-			rodInnerSvg = new Image();
-			rodInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Inner.svg';
-			rodInnerSvg.onload = function(){
-				loadedAssets++;
-				initParts();
-			};
-
-			dashOuterSvg = new Image();
-			dashOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Outer.svg';
-			dashOuterSvg.onload = function(){
-				loadedAssets++;
-				initParts();			
-			};
-
-			dashInnerSvg = new Image();
-			dashInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Inner.svg';
-			dashInnerSvg.onload = function(){
-				loadedAssets++;
-				initParts();
-			};
-
-			dotOuterSvg = new Image();
-			dotOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Outer.svg';
-			dotOuterSvg.onload = function(){
-				loadedAssets++;
-				initParts();			
-			};
-
-			dotInnerSvg = new Image();
-			dotInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Inner.svg';
-			dotInnerSvg.onload = function(){
-				loadedAssets++;
-				initParts();
-			};
-		}
-
-		loadAssets();
-
-
-		function initParts(){
-
-			if(loadedAssets === requiredAssets){
-
-				RodParticle = (function(){
-					this.width = 60;
-					this.height = 15;
-					this.draw = function(xPos, yPos, degrees){
-						canvasCtx.save();
-						canvasCtx.translate(xPos, yPos);
-						canvasCtx.rotate(degrees * Math.PI/180);
-						canvasCtx.drawImage(rodDashSvg, 0, 0);	
-						canvasCtx.drawImage(rodOuterSvg, 0, 0);
-						canvasCtx.drawImage(rodInnerSvg, 0, 4);
-						canvasCtx.restore();
-					};
-				});
-
-				DashParticle = (function(){
-					this.width = 27;
-					this.height = 15;
-					this.draw = function(xPos, yPos, degrees){
-						canvasCtx.save();
-						canvasCtx.translate(xPos, yPos);
-						canvasCtx.rotate(degrees * Math.PI/180);	
-						canvasCtx.drawImage(dashOuterSvg, 0, 0);
-						canvasCtx.drawImage(dashInnerSvg, 0, 0.5);
-						canvasCtx.restore();
-					};
-				});
-
-				DotParticle = (function(){
-					this.width = 15;
-					this.height = 15;
-					this.draw = function(xPos, yPos, degrees){
-						canvasCtx.save();
-						canvasCtx.translate(xPos, yPos);
-						canvasCtx.rotate(degrees * Math.PI/180);	
-						canvasCtx.drawImage(dotOuterSvg, 0, 0);
-						canvasCtx.drawImage(dotInnerSvg, 0, 0.5);
-						canvasCtx.restore();
-					};
-				});
-
-				draw();
-			}
-		}
-
-
 		function draw(){
 			var rodPart = new RodParticle();
 			var dashPart = new DashParticle();
@@ -163,7 +50,7 @@ function indiTest01(dataArray, bufferLength){
 			dotPart.draw(canvWidth*0.75, canvHeight*0.75, 0);
 			dotPart.draw(canvWidth*0.75 + dotPart.width, canvHeight*0.75, 0);
 		}		
-
+		draw();
 	}
 
 
