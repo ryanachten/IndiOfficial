@@ -35,13 +35,14 @@ var rodDashSvg, rodOuterSvg, rodInnerSvg,
 
 var RodParticle, DashParticle, DotParticle; //anon funct objects
 
+var canvas;
 
 function init(){
 
 	audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 	analyser = audioCtx.createAnalyser();
 	
-	var canvas = document.querySelector("#visualiser");
+	canvas = document.querySelector("#visualiser");
 		
 	if(canvas.getContext){
 		canvas.width = $(window).width();

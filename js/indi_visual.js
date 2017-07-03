@@ -165,6 +165,9 @@ function chladniPlate(dataArray, bufferLength){
 		};
 	});
 
+	//Runtime UI stuff		
+	var visSettings	= document.getElementById('vis-settings');
+		visSettings.style.display = 'block';
 	
 	var nodeDampingInput = document.createElement('input');
 		nodeDampingInput.type = 'range';
@@ -172,7 +175,7 @@ function chladniPlate(dataArray, bufferLength){
 		nodeDampingInput.className = 'vis-setting';
 		nodeDampingInput.min = 0;
 		nodeDampingInput.max = 100;
-		nodeDampingInput.value = 10; //need to be /100 for 0.8
+		nodeDampingInput.value = 5; //need to be /100 for 0.8
 		var nodeDampingLabel = document.createElement('label');
 			nodeDampingLabel.htmlFor = 'nodeDampingInput';
 			nodeDampingLabel.innerHTML = 'Node Damping';
@@ -272,7 +275,7 @@ function chladniPlate(dataArray, bufferLength){
 		attractStrengthInput.className = 'vis-setting';
 		attractStrengthInput.min = 0;
 		attractStrengthInput.max = 200;
-		attractStrengthInput.value = 100;
+		attractStrengthInput.value = 37;
 		var attractStrengthLabel = document.createElement('label');
 			attractStrengthLabel.htmlFor = 'attractStrengthInput';
 			attractStrengthLabel.innerHTML = 'Attraction Strength';
@@ -290,6 +293,26 @@ function chladniPlate(dataArray, bufferLength){
 			attractRampLabel.innerHTML = 'Attraction Ramp';
 			attractRampLabel.className = 'vis-setting';
 
+		basicDiv.appendChild(basicModeLabel);
+		basicDiv.appendChild(basicModeInput);
+		basicDiv.appendChild(basicModePaddel);
+		smoothDiv.appendChild(smoothModeLabel);
+		smoothDiv.appendChild(smoothModeInput);
+		smoothDiv.appendChild(smoothModePaddel);
+		twistDiv.appendChild(twistModeLabel);
+		twistDiv.appendChild(twistModeInput);
+		twistDiv.appendChild(twistModePaddel);
+	visSettings.appendChild(basicDiv);
+	visSettings.appendChild(smoothDiv);
+	visSettings.appendChild(twistDiv);
+	visSettings.appendChild(nodeDampingLabel);
+	visSettings.appendChild(nodeDampingInput);
+	visSettings.appendChild(attractRadiusLabel);
+	visSettings.appendChild(attractRadiusInput);
+	visSettings.appendChild(attractStrengthLabel);
+	visSettings.appendChild(attractStrengthInput);
+	visSettings.appendChild(attractRampLabel);
+	visSettings.appendChild(attractRampInput);
 
 	var xCount = 15;
 	var yCount = 15;

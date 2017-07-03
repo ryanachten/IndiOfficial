@@ -1,0 +1,61 @@
+h2{
+	font-family: 'Roboto', sans-serif;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 2px;
+	font-size: 1em;
+	margin-bottom: 5px;
+    /*margin-top: 20px;*/
+}
+h3{
+	font-family: 'Roboto', sans-serif;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 2px;
+	font-size: 0.8em;
+	margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+body{
+	margin: 0px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+header{
+	width: 100%;
+	background: #FAF5F3;
+	box-shadow: 0 0 5px 0 rgba(0,0,0,0.50);
+	position: absolute;
+}
+#top-nav{
+	margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: lowercase;
+}
+.top-nav-link{
+ 	padding: 0 20px;
+    font-size: 15px;
+ 	color: #413D3B;
+ 	text-transform: uppercase;
+ 	text-decoration: none;
+ 	letter-spacing: 3px;
+}
+#indi-logo{
+	vertical-align: middle;
+	margin: 0 30px;
+}
+
+
+#ui-panel{
+	display: none;
+	position: absolute;
+    z-index: 1;
+    background-color: rgba(255,255,255, 0.9);
+    padding: 10px;
+    margin: 20px;
+    margin-top: 100px;
+    width: 300px;
+}
