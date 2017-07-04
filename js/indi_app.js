@@ -63,23 +63,62 @@ function init(){
 		var drawVisual;
 
 		//Microphone access
-		navigator.getUserMedia (
-			{
-				audio: true
-			},
-			function(stream) {
-				source = audioCtx.createMediaStreamSource(stream);
-				source.connect(analyser);
+			// navigator.getUserMedia (
+			// 	{
+			// 		audio: true
+			// 	},
+			// 	function(stream) {
+			// 		source = audioCtx.createMediaStreamSource(stream);
+			// 		source.connect(analyser);
 
-				// visualise(defaultVisMode);
-				loadAssets();
-			  },
+			// 		// visualise(defaultVisMode);
+			// 		loadAssets();
+			// 	  },
 
-			function(err) {
-				console.log('The following gUM error occured: ' + err);
-			}
-		);
+			// 	function(err) {
+			// 		console.log('The following gUM error occured: ' + err);
+			// 	}
+			// );
+
+
+		// window.onload = init;
+		var context;
+		var bufferLoader;
+
+		function init() {
+		  // Fix up prefixing
+		  window.AudioContext = window.AudioContext || window.webkitAudioContext;
+		  context = new AudioContext();
+
+		  bufferLoader = new BufferLoader(
+		    context,
+		    [
+		      'https://raw.githubusercontent.com/ryanachten/IndiOfficial/master/audio/Chrysaora_Colorata.mp3',
+		      // 'audio/Chrysaora_Colorata.mp3',
+		    ],
+		    finishedLoading
+		    );
+
+		  bufferLoader.load();
+		}
+		init();
+
+		function finishedLoading(bufferList) {
+		  // Create two sources and play them both together.
+		  var source1 = context.createBufferSource();
+		  var source2 = context.createBufferSource();
+		  source1.buffer = bufferList[0];
+		  // source2.buffer = bufferList[1];
+
+		  source1.connect(context.destination);
+		  source2.connect(context.destination);
+		  source1.start(0);
+		  source2.start(0);
+		}
 	}
+
+		
+
 }
 init();
 
