@@ -6,7 +6,10 @@ function waveForm(dataArray, bufferLength){
 
 	function draw(){
 		drawVisual = requestAnimationFrame(draw); //this keeps looping the drawing function once it has started
-		analyser.getByteTimeDomainData(dataArray); //retrieve the data and copy it into our array
+		
+		var dataArray = new Uint8Array(fftSampleSize); 
+    	fft.getByteTimeDomainData(dataArray);
+
 		canvasCtx.fillStyle = bgColor;
 		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
 
@@ -15,10 +18,10 @@ function waveForm(dataArray, bufferLength){
 			canvasCtx.beginPath();
 
 		//width of ea. segment = canv.w / arraylength
-		var sliceWidth = canvWidth * 1.0 / bufferLength;
+		var sliceWidth = canvWidth * 1.0 / dataArray.length; //bufferLength;
 			var x = 0; //position to move to to draw ea. line segment
 
-		for(var i=0; i <bufferLength; i++){
+		for(var i=0; i <dataArray.length; i++){
 			var v = dataArray[i] / 128.0; //128.0 height based on the data point value form the array
 			canvasCtx.strokeStyle = 'hsl('+ dataArray[i]*5 +',80%,70%)';
 			var y = v * canvHeight/2;
@@ -373,7 +376,9 @@ function chladniPlate(dataArray, bufferLength){
 			attractor.mode = 'basic';
 		}
 		
-		analyser.getByteFrequencyData(dataArray);
+		var dataArray = new Uint8Array(fftSampleSize); 
+    	fft.getByteTimeDomainData(dataArray);
+
 		var da = dataArray[0];
 
 		attractor.strength = Math.random()* (da * (attractStrengthInput.value/100));

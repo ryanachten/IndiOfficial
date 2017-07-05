@@ -19,7 +19,7 @@
 // 	analyser.smoothingTimeConstant = smoothingRange.value/100;
 // }
 
-var audioCtx, analyser;
+// var audioCtx, analyser;
 
 var defaultVisMode = 'chladniPlate';
 var canvWidth, canvHeight;
@@ -37,11 +37,68 @@ var RodParticle, DashParticle, DotParticle; //anon funct objects
 
 var canvas;
 
-function init(){
+var drawVisual;
 
-	audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-	analyser = audioCtx.createAnalyser();
-	
+var bufferLength;
+var dataArray;
+
+var audioCtx; //audio context
+var buffer; //audio buffer
+var fft; //fft audio node
+var fftSampleSize = 128; //used to be 256 - put back?
+var audioSetup = false; //is audio setup?
+
+// init sound system
+function initSound(){
+
+	try{
+		audioCtx = new AudioContext();
+		
+		loadSoundFile();
+	}
+	catch(e){
+		alert("it seems your browser doesn't support webaudio - try another browser");
+	}
+}
+window.addEventListener('load', initSound, false); //swap out for jQ?
+
+function loadSoundFile(){
+	var request = new XMLHttpRequest();
+	request.open('GET',
+				'https://raw.githubusercontent.com/ryanachten/IndiOfficial/master/audio/Chrysaora_Colorata.mp3'
+				,true);
+	request.responseType = "arraybuffer";
+	request.onload = function(){
+		// decode loaded data
+		audioCtx.decodeAudioData(request.response, function(buf){
+			buffer = buf;
+			setupAudioNodes();
+			setupCanvas();
+		});
+	};	
+	request.send();
+}
+
+function setupAudioNodes(){
+
+	// create source node from buffer
+	var source = audioCtx.createBufferSource();
+	source.buffer = buffer;
+
+	//create FFT
+	fft = audioCtx.createAnalyser();
+	fft.fftSize = fftSampleSize;
+
+	//chain connections
+	source.connect(fft);
+	fft.connect(audioCtx.destination); //final output node (speakers)
+
+	source.start(0); //might want to expose this for start/pause control
+
+	setup = true;
+}
+
+function setupCanvas(){
 	canvas = document.querySelector("#visualiser");
 		
 	if(canvas.getContext){
@@ -59,69 +116,9 @@ function init(){
 		canvasCtx.fillStyle = bgColor;
 		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
 
-		
-		var drawVisual;
-
-		//Microphone access
-			// navigator.getUserMedia (
-			// 	{
-			// 		audio: true
-			// 	},
-			// 	function(stream) {
-			// 		source = audioCtx.createMediaStreamSource(stream);
-			// 		source.connect(analyser);
-
-			// 		// visualise(defaultVisMode);
-			// 		loadAssets();
-			// 	  },
-
-			// 	function(err) {
-			// 		console.log('The following gUM error occured: ' + err);
-			// 	}
-			// );
-
-
-		// window.onload = init;
-		var context;
-		var bufferLoader;
-
-		function init() {
-		  // Fix up prefixing
-		  window.AudioContext = window.AudioContext || window.webkitAudioContext;
-		  context = new AudioContext();
-
-		  bufferLoader = new BufferLoader(
-		    context,
-		    [
-		      'https://raw.githubusercontent.com/ryanachten/IndiOfficial/master/audio/Chrysaora_Colorata.mp3',
-		      // 'audio/Chrysaora_Colorata.mp3',
-		    ],
-		    finishedLoading
-		    );
-
-		  bufferLoader.load();
-		}
-		init();
-
-		function finishedLoading(bufferList) {
-		  // Create two sources and play them both together.
-		  var source1 = context.createBufferSource();
-		  var source2 = context.createBufferSource();
-		  source1.buffer = bufferList[0];
-		  // source2.buffer = bufferList[1];
-
-		  source1.connect(context.destination);
-		  source2.connect(context.destination);
-		  source1.start(0);
-		  source2.start(0);
-		}
+		loadAssets();
 	}
-
-		
-
 }
-init();
-
 
 function loadAssets(){			
 
@@ -175,7 +172,6 @@ function loadAssets(){
 	};
 }
 
-
 function initParts(){
 
 	if(loadedAssets === requiredAssets){
@@ -224,12 +220,11 @@ function initParts(){
 	}
 }
 
-
 function visualise(visMode){
 
-	var dataBuffer = getBuffer(256);
-	var bufferLength = dataBuffer.buffer;
-	var dataArray = dataBuffer.data;
+	// var dataBuffer = getBuffer(256);
+	// var bufferLength = dataBuffer.buffer;
+	// var dataArray = dataBuffer.data;
 
 	console.log(visMode);
 	if(visMode === 'BarGraph'){
@@ -239,7 +234,7 @@ function visualise(visMode){
 		indiTest01(dataArray, bufferLength);
 	}
 	else if(visMode === 'WaveForm'){
-		waveForm(dataArray, bufferLength);
+		waveForm();
 	}
 	else if(visMode === 'chladniPlate'){
 		chladniPlate(dataArray, bufferLength);
@@ -248,51 +243,3 @@ function visualise(visMode){
 		visOff();
 	}
 }
-
-
-function getBuffer(fftSize){
-	analyser.fftSize = 256; //1024
-	var bufferLength = analyser.frequencyBinCount;
-	console.log(bufferLength);
-	var dataArray = new Uint8Array(bufferLength);
-	var dataBuffer = {
-		"buffer" : bufferLength,
-		"data" : dataArray
-	}
-	return dataBuffer;
-}
-
-
-function changeVisualMode(visualMode){
-	window.cancelAnimationFrame(drawVisual);
-	drawVisual = undefined;
-	
-	removeVisualSettings();
-	document.getElementById('vis-settings').style.display = 'none';
-	
-	visualise(visualMode);
-}
-
-
-
-function visOff(){
-	canvasCtx.clearRect(0,0,canvWidth, canvHeight);
-	canvasCtx.fillStyle = bgColor;
-	canvasCtx.fillRect(0,0,canvWidth, canvHeight);
-}
-
-
-function removeVisualSettings(){
-	var visSettings	= document.getElementsByClassName('vis-setting');
-	if(visSettings.length == 0){
-		return;
-	}
-	$('.vis-setting').remove();
-}
-
-$(window).resize(function(){
-	canvas.width = $(window).width();
-	canvas.height = $(window).height();
-	canvWidth = canvas.width;
-	canvHeight = canvas.height;
-});
