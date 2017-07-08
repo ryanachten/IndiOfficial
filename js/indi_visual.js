@@ -40,22 +40,6 @@ function waveForm(dataArray, bufferLength){
 		draw();
 }
 
-function indiTest01(dataArray, bufferLength){
-
-		function draw(){
-			var rodPart = new RodParticle();
-			var dashPart = new DashParticle();
-			var dotPart = new DotParticle();
-			rodPart.draw(canvWidth/2, canvHeight/2, 0);
-			rodPart.draw(canvWidth/2, canvHeight/2 + rodPart.height, 0);
-			dashPart.draw(canvWidth/4, canvHeight/4, 0);
-			dashPart.draw(canvWidth/4, canvHeight/4 + dashPart.height, 0);
-			dotPart.draw(canvWidth*0.75, canvHeight*0.75, 0);
-			dotPart.draw(canvWidth*0.75 + dotPart.width, canvHeight*0.75, 0);
-		}		
-		draw();
-	}
-
 
 function chladniPlate(dataArray, bufferLength){
 
@@ -324,6 +308,10 @@ function chladniPlate(dataArray, bufferLength){
 
 	var nodeDamping;
 	var attractor, nodes;
+
+	$(window ).resize(function() {
+  		init();
+	});
 
 	function init(){
 

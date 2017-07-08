@@ -48,6 +48,11 @@ header{
 	margin: 0 30px;
 }
 
+#container{
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+}
 
 #ui-panel{
 	display: none;
