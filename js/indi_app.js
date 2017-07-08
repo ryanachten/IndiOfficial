@@ -21,7 +21,7 @@
 
 // var audioCtx, analyser;
 
-var defaultVisMode = 'chladniPlate';
+var defaultVisMode = 'nodeAttraction';
 var currentVis = defaultVisMode;
 var canvWidth, canvHeight;
 var canvasCtx;
@@ -239,6 +239,9 @@ function visualise(visMode){
 	}
 	else if(visMode === 'chladniPlate'){
 		chladniPlate(dataArray, bufferLength);
+	}
+	else if(visMode === 'nodeAttraction'){
+		nodeAttraction(dataArray, bufferLength);
 	}
 	else if(visMode === 'Off'){
 		visOff();
