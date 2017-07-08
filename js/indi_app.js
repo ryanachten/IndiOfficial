@@ -46,7 +46,7 @@ var dataArray;
 var audioCtx; //audio context
 var buffer; //audio buffer
 var fft; //fft audio node
-var fftSampleSize = 128; //used to be 256 - put back?
+var fftSampleSize = 256; //used to be 256 - put back?
 var audioSetup = false; //is audio setup?
 
 // init sound system
@@ -106,7 +106,6 @@ function setupCanvas(){
 	if(canvas.getContext){
 		canvas.width = $(window).width();
 		var topNavHeight = $('header').height()
-		console.log('topNavHeight ' + topNavHeight);
 		canvas.height = $(window).height() -topNavHeight;
 		canvWidth = canvas.width;
 		canvHeight = canvas.height;
