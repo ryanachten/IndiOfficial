@@ -103,6 +103,7 @@ function setupCanvas(){
 		
 	if(canvas.getContext){
 		canvas.width = $(window).width();
+		// var topNavHeight = $(window).height()
 		canvas.height = $(window).height();
 		canvWidth = canvas.width;
 		canvHeight = canvas.height;
@@ -182,9 +183,9 @@ function initParts(){
 			this.draw = function(xPos, yPos, radians){
 				canvasCtx.save();
 				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(radians);
+				canvasCtx.rotate(radians);				
 				canvasCtx.drawImage(rodDashSvg, 0, 0);	
-				canvasCtx.drawImage(rodOuterSvg, 0, 0);
+				canvasCtx.drawImage(rodOuterSvg, 0, 0);		
 				canvasCtx.drawImage(rodInnerSvg, 0, 4);
 				canvasCtx.restore();
 			};
@@ -197,6 +198,8 @@ function initParts(){
 				canvasCtx.save();
 				canvasCtx.translate(xPos, yPos);
 				canvasCtx.rotate(radians);	
+				canvasCtx.shadowColor = 'rgba(149, 229, 220, 1)';
+				canvasCtx.shadowBlur = 20;
 				canvasCtx.drawImage(dashOuterSvg, 0, 0);
 				canvasCtx.drawImage(dashInnerSvg, 0, 0.5);
 				canvasCtx.restore();
