@@ -49,13 +49,13 @@ header{
 }
 
 #ui-panel{
-	display: none;
+	/*display: none;*/
 	position: absolute;
     z-index: 1;
     background-color: rgba(255,255,255, 0.9);
     padding: 10px;
-    margin: 20px;
-    margin-top: 100px;
+    margin-left: 40px;
+    margin-top: 150px;
     width: 300px;
 }
 
