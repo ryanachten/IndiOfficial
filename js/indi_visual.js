@@ -301,8 +301,8 @@ function chladniPlate(dataArray, bufferLength){
 	visSettings.appendChild(attractRampLabel);
 	visSettings.appendChild(attractRampInput);
 
-	var xCount = 15;
-	var yCount = 15;
+	var xCount = canvWidth/100; //15;
+	var yCount = canvHeight/100; //15;
 	var gridStepX = canvWidth/xCount;
 	var gridStepY = canvHeight/yCount;
 
@@ -314,6 +314,9 @@ function chladniPlate(dataArray, bufferLength){
 	});
 
 	function init(){
+
+		xCount = canvWidth/100; //15;
+		yCount = canvHeight/100; //15;
 
 		attractor = new Attractor(canvWidth/2, canvHeight/2);
 		nodes = [];
