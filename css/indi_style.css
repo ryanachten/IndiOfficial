@@ -48,14 +48,6 @@ header{
 	margin: 0 30px;
 }
 
-/*#container{
-    position: absolute;
-    bottom: 0;
-    z-index: -1;
-}*/
-
-
-
 #ui-panel{
 	display: none;
 	position: absolute;
@@ -67,11 +59,13 @@ header{
     width: 300px;
 }
 
-#visualiser{
+#visualiser, #container{
 	position: absolute;
     bottom: 0;
     z-index: -1;
 }
+
+
 
 @media screen and (max-width: 800px) {
 	#indi-logo{
