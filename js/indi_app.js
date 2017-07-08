@@ -105,7 +105,8 @@ function setupCanvas(){
 		
 	if(canvas.getContext){
 		canvas.width = $(window).width();
-		var topNavHeight = $('#top-nav').height()
+		var topNavHeight = $('header').height()
+		console.log('topNavHeight ' + topNavHeight);
 		canvas.height = $(window).height() -topNavHeight;
 		canvWidth = canvas.width;
 		canvHeight = canvas.height;
