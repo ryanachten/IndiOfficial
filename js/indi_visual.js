@@ -447,6 +447,11 @@ function chladniPlate(dataArray, bufferLength){
 
 function nodeAttraction(dataArray, bufferLength){
 
+	var rodPart = new RodParticle();
+	var dashPart = new DashParticle();
+	var dotPart = new DotParticle();
+
+
 	var Attractor = (function(x, y){
 
 		this.x = x;
@@ -475,6 +480,7 @@ function nodeAttraction(dataArray, bufferLength){
 
 	var Node = (function(x, y){
 
+		this.type = null;
 		this.minX = 5;
 		this.minY = 5;
 		this.maxX = canvWidth-5;
@@ -538,7 +544,7 @@ function nodeAttraction(dataArray, bufferLength){
 		nodeDampingInput.className = 'vis-setting';
 		nodeDampingInput.min = 0;
 		nodeDampingInput.max = 100;
-		nodeDampingInput.value = 40; //need to be /100 for 0.8
+		nodeDampingInput.value = 8; //need to be /100 for 0.8
 		var nodeDampingLabel = document.createElement('label');
 			nodeDampingLabel.htmlFor = 'nodeDampingInput';
 			nodeDampingLabel.innerHTML = 'Node Damping';
@@ -565,7 +571,7 @@ function nodeAttraction(dataArray, bufferLength){
 		attractRadiusInput.className = 'vis-setting';
 		attractRadiusInput.min = 0;
 		attractRadiusInput.max = 500;
-		attractRadiusInput.value = 200;
+		attractRadiusInput.value = 420;
 		var attractRadiusLabel = document.createElement('label');
 			attractRadiusLabel.htmlFor = 'attractRadiusInput';
 			attractRadiusLabel.innerHTML = 'Attraction Radius';
@@ -581,7 +587,7 @@ function nodeAttraction(dataArray, bufferLength){
 		attractStrengthInput.className = 'vis-setting';
 		attractStrengthInput.min = -50;
 		attractStrengthInput.max = 50;
-		attractStrengthInput.value = -10;
+		attractStrengthInput.value = -5;
 		var attractStrengthLabel = document.createElement('label');
 			attractStrengthLabel.htmlFor = 'attractStrengthInput';
 			attractStrengthLabel.innerHTML = 'Attraction Strength';
@@ -624,8 +630,8 @@ function nodeAttraction(dataArray, bufferLength){
 	visSettings.appendChild(nodeDampingInput);
 
 
-	var xCount = canvWidth/10;
-	var yCount = canvHeight/10;
+	var xCount = canvWidth/75;
+	var yCount = canvHeight/75;
 	var nodeCount = xCount * yCount;
 	var nodes;
 	var node_Damping = nodeDampingInput.value/100;
@@ -636,7 +642,15 @@ function nodeAttraction(dataArray, bufferLength){
 	var attractNode;
 	var attractNode_MaxVelocity;
 
+
+	$(window ).resize(function() {
+  		init();
+	});
+
 	function init(){
+
+		xCount = canvWidth/75;
+		yCount = canvHeight/75;
 
 		nodes = [];
 		var gridSizeX = canvWidth/xCount;
@@ -649,6 +663,10 @@ function nodeAttraction(dataArray, bufferLength){
 				var node = new Node(xPos, yPos);
 					node.setBoundary(0,0, canvWidth, canvHeight);
 					node.setDamping(node_Damping);
+				var rand = Math.floor(Math.random()*3);
+					if(rand === 0) node.type = 'rod';
+					else if(rand === 1) node.type = 'dash';
+					else if(rand === 2) node.type = 'dot';
 				nodes.push(node);
 			}
 		}
@@ -674,7 +692,7 @@ function nodeAttraction(dataArray, bufferLength){
 
 		var dataArray = new Uint8Array(fftSampleSize); 
 		fft.getByteTimeDomainData(dataArray);
-		
+
 		// analyser.getByteFrequencyData(dataArray);
 		var da = dataArray[0];
 
@@ -731,20 +749,30 @@ function nodeAttraction(dataArray, bufferLength){
 			attractor.attract(nodes[i]);
 			nodes[i].update();
 			
-			canvasCtx.beginPath();
-			canvasCtx.arc(nodes[i].x, nodes[i].y, 2, 0, Math.PI*2);
-			canvasCtx.closePath();
+			// canvasCtx.beginPath();
+			// canvasCtx.arc(nodes[i].x, nodes[i].y, 2, 0, Math.PI*2);
+			// canvasCtx.closePath();
 
-			var rand = Math.floor(Math.random()*2);
-			if(i%5 === 0){
-				canvasCtx.fillStyle = 'hsl(282, 100%, 50%)';
-			}else if(i%3 === 0){
-				canvasCtx.fillStyle = 'hsl(332, 100%, 50%)';
-			}else{
-				canvasCtx.fillStyle = 'hsl(182, 100%, 50%)';
+			// var rand = Math.floor(Math.random()*2);
+			// if(i%5 === 0){
+			// 	canvasCtx.fillStyle = 'hsl(282, 100%, 50%)';
+			// }else if(i%3 === 0){
+			// 	canvasCtx.fillStyle = 'hsl(332, 100%, 50%)';
+			// }else{
+			// 	canvasCtx.fillStyle = 'hsl(182, 100%, 50%)';
+			// }
+
+			// canvasCtx.fill();
+
+			var theta = Math.atan2(attractor.y - nodes[i].y, attractor.x -nodes[i].x)
+
+			if(nodes[i].type === 'rod'){
+				rodPart.draw(nodes[i].x, nodes[i].y, theta);
+			}else if(nodes[i].type === 'dash'){
+				dashPart.draw(nodes[i].x, nodes[i].y, theta);
+			}else if(nodes[i].type === 'dot'){
+				dotPart.draw(nodes[i].x, nodes[i].y, theta);
 			}
-
-			canvasCtx.fill();
 		}
 	}
 
