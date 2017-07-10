@@ -45,7 +45,10 @@ header{
 }
 #indi-logo{
 	vertical-align: middle;
-	margin: 0 30px;
+	/*margin: 0 30px;*/
+}
+#indi-logo-link{
+	padding: 0px;
 }
 
 #ui-panel{
@@ -71,6 +74,6 @@ header{
 	#indi-logo{
 		width: 100%;
 		max-height: 100px;
-		margin: 0px;
+		/*margin: 0px;*/
 	}
 }
