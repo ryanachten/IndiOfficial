@@ -852,7 +852,7 @@ function lissajousFigure(dataArray, bufferLength){
 			pointCountInput.id = 'pointCountInput';
 			pointCountInput.className = 'vis-setting';
 			pointCountInput.min = 10;
-			pointCountInput.max = 1000;
+			pointCountInput.max = 300;
 			pointCountInput.value = 50;
 			pointCountInput.addEventListener("change", function(){
 					init();			
