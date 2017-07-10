@@ -587,7 +587,7 @@ function nodeAttraction(dataArray, bufferLength){
 		attractStrengthInput.className = 'vis-setting';
 		attractStrengthInput.min = -50;
 		attractStrengthInput.max = 50;
-		attractStrengthInput.value = -5;
+		attractStrengthInput.value = -42;
 		var attractStrengthLabel = document.createElement('label');
 			attractStrengthLabel.htmlFor = 'attractStrengthInput';
 			attractStrengthLabel.innerHTML = 'Attraction Strength';
@@ -599,7 +599,7 @@ function nodeAttraction(dataArray, bufferLength){
 		attractRampInput.className = 'vis-setting';
 		attractRampInput.min = 0;
 		attractRampInput.max = 1000;
-		attractRampInput.value = 200; //need to be /100 for 0.2
+		attractRampInput.value = 640; //need to be /100 for 0.2
 		var attractRampLabel = document.createElement('label');
 			attractRampLabel.htmlFor = 'attractRampInput';
 			attractRampLabel.innerHTML = 'Attraction Ramp';
@@ -724,12 +724,12 @@ function nodeAttraction(dataArray, bufferLength){
 			canvasCtx.beginPath();
 			canvasCtx.arc(attractNode.x, attractNode.y, 5, 0, Math.PI*2);
 			canvasCtx.closePath();
-			canvasCtx.fillStyle = 'red';
+			canvasCtx.fillStyle = 'black';
 			canvasCtx.fill();
 			canvasCtx.beginPath();
 			canvasCtx.arc(attractNode.x, attractNode.y, attractor.radius, 0, Math.PI*2);
 			canvasCtx.closePath();
-			canvasCtx.strokeStyle = 'red';
+			canvasCtx.strokeStyle = 'black';
 			canvasCtx.stroke();
 		}
 
@@ -803,4 +803,268 @@ function nodeAttraction(dataArray, bufferLength){
 			draw();
 		}
 	}
+}
+
+function lissajousFigure(dataArray, bufferLength){
+
+		//Runtime UI stuff
+		var visSettings	= document.getElementById('vis-settings');
+			visSettings.style.display = 'block';
+
+		var freqXInput = document.createElement('input');
+			freqXInput.type = 'range';
+			freqXInput.id = 'freqXInput';
+			freqXInput.className = 'vis-setting';
+			freqXInput.min = 1;
+			freqXInput.max = 70;
+			freqXInput.value = 40;
+			var freqXLabel = document.createElement('label');
+				freqXLabel.htmlFor = 'freqXInput';
+				freqXLabel.className = 'vis-setting';
+				freqXLabel.innerHTML = 'Freq X';
+
+		var freqYInput = document.createElement('input');
+			freqYInput.type = 'range';
+			freqYInput.id = 'freqYInput';
+			freqYInput.className = 'vis-setting';
+			freqYInput.min = 1;
+			freqYInput.max = 70;
+			freqYInput.value = 40;
+			var freqYLabel = document.createElement('label');
+				freqYLabel.htmlFor = 'freqYInput';
+				freqYLabel.className = 'vis-setting';
+				freqYLabel.innerHTML = 'Freq Y';
+
+		var phiInput = document.createElement('input');
+			phiInput.type = 'range';
+			phiInput.id = 'phiInput';
+			phiInput.className = 'vis-setting';
+			phiInput.min = 1;
+			phiInput.max = 360;
+			phiInput.value = 95;
+			var phiLabel = document.createElement('label');
+				phiLabel.htmlFor = 'phiInput';
+				phiLabel.className = 'vis-setting';
+				phiLabel.innerHTML = 'Phi';
+
+		var pointCountInput = document.createElement('input');
+			pointCountInput.type = 'range';
+			pointCountInput.id = 'pointCountInput';
+			pointCountInput.className = 'vis-setting';
+			pointCountInput.min = 10;
+			pointCountInput.max = 1000;
+			pointCountInput.value = 50;
+			pointCountInput.addEventListener("change", function(){
+					init();			
+				});
+		var pointCountLabel = document.createElement('label');
+			pointCountLabel.htmlFor = 'pointCountInput';
+			pointCountLabel.className = 'vis-setting';
+			pointCountLabel.innerHTML = 'Point Count';
+
+		var modFreqXInput = document.createElement('input');
+			modFreqXInput.type = 'range';
+			modFreqXInput.id = 'modFreqXInput';
+			modFreqXInput.className = 'vis-setting';
+			modFreqXInput.min = 1;
+			modFreqXInput.max = 70;
+			modFreqXInput.value = 40;
+		var modFreqXLabel = document.createElement('label');
+			modFreqXLabel.htmlFor = 'modFreqXInput';
+			modFreqXLabel.className = 'vis-setting';
+			modFreqXLabel.innerHTML = 'Mod Freq X';
+
+		var modFreqYInput = document.createElement('input');
+			modFreqYInput.type = 'range';
+			modFreqYInput.id = 'modFreqYInput';
+			modFreqYInput.className = 'vis-setting';
+			modFreqYInput.min = 1;
+			modFreqYInput.max = 70;
+			modFreqYInput.value = 40;
+		var modFreqYLabel = document.createElement('label');
+			modFreqYLabel.htmlFor = 'modFreqYInput';
+			modFreqYLabel.className = 'vis-setting';
+			modFreqYLabel.innerHTML = 'Mod Freq Y';
+
+		var modulatedDiv = document.createElement('div');
+				modulatedDiv.className = 'vis-setting';
+			var modulatedCheck = document.createElement('input');
+				modulatedCheck.id = 'modulatedCheck';
+				modulatedCheck.type = 'checkbox';
+				modulatedCheck.className = 'vis-setting switch-input';
+				modulatedCheck.checked = false;
+				modulatedCheck.addEventListener("change", function(){
+					init();			
+				});
+			var modulatedPaddel = document.createElement('label');
+				modulatedPaddel.className = 'vis-setting switch-paddle';
+				modulatedPaddel.htmlFor = 'modulatedCheck';
+			var modulatedLabel = document.createElement('label');
+				modulatedLabel.htmlFor = 'modulatedCheck';
+				modulatedLabel.innerHTML = 'Modulated';
+				modulatedLabel.className = 'vis-setting';
+
+			modulatedDiv.appendChild(modulatedLabel);
+			modulatedDiv.appendChild(modulatedCheck);
+			modulatedDiv.appendChild(modulatedPaddel);
+		visSettings.appendChild(modulatedDiv);
+		visSettings.appendChild(pointCountLabel);
+		visSettings.appendChild(pointCountInput);
+		visSettings.appendChild(phiLabel);
+		visSettings.appendChild(phiInput);
+		visSettings.appendChild(freqXLabel);
+		visSettings.appendChild(freqXInput);
+		visSettings.appendChild(freqYLabel);
+		visSettings.appendChild(freqYInput);
+
+		visSettings.appendChild(modFreqXLabel);
+		visSettings.appendChild(modFreqXInput);
+		visSettings.appendChild(modFreqYLabel);
+		visSettings.appendChild(modFreqYInput);
+
+		var pointCount;
+		var freqX, freqY;
+		var phi, angle;
+		var x, y;
+		var margin = 50;
+
+		var modFreqX = 2;
+		var modFreqY = 4;
+		var modPhi = 0;
+
+		var w, maxDist;
+		var oldX, oldY;
+
+		var factorX = canvWidth/2 - margin;
+		var factorY = canvHeight/2 - margin;
+
+		var modulated;
+
+		var particleArray;
+
+		var rodPart = new RodParticle();
+		var dashPart = new DashParticle();
+		var dotPart = new DotParticle();
+
+		function init(){
+			canvasCtx.clearRect(0,0, canvWidth, canvHeight);
+			canvasCtx.fillStyle = bgColor;
+			canvasCtx.fillRect(0,0, canvWidth, canvHeight);
+
+			if(modulatedCheck.checked){
+				modulated = true;
+			}else{
+				modulated = false;
+			}
+			canvasCtx.strokeStyle = 'black';
+			pointCount = parseInt(pointCountInput.value);
+			freqX = parseInt(freqXInput.value);
+			freqY = parseInt(freqYInput.value);
+			phi = parseInt(phiInput.value);
+
+			particleArray = [];
+			for(var i = 0; i < pointCount; i++){
+				var type;
+				var rand = Math.floor(Math.random()*3);
+					if(rand === 0) type = 'rod';
+					else if(rand === 1) type = 'dash';
+					else if(rand === 2) type = 'dot';
+
+				var particle = {
+					type: type,
+					x: null,
+					y: null
+				}
+				particleArray.push(particle);
+			}
+
+			startAnimating(15);
+		}
+		init();
+
+
+		function draw(){
+
+			canvasCtx.clearRect(0,0, canvWidth, canvHeight);
+			canvasCtx.fillStyle = bgColor;
+			canvasCtx.fillRect(0,0, canvWidth, canvHeight);
+
+			var dataArray = new Uint8Array(fftSampleSize); 
+			fft.getByteTimeDomainData(dataArray);
+			var da = dataArray[0];
+
+
+			var logda = (Math.log(da) / Math.log(2));
+			if(isFinite(logda) && logda !== 0){
+				freqX = logda * parseInt(freqXInput.value);
+				freqY = logda * parseInt(freqYInput.value);
+				modFreqX = logda * parseInt(modFreqXInput.value);
+				modFreqY = logda * parseInt(modFreqYInput.value);
+				phi = parseInt(phiInput.value) - logda;
+			}
+
+
+			for(var i = 0; i < particleArray.length; i++){
+				angle = map_range(i, 0,pointCount, 0,Math.PI*2);
+
+				if(modulated){
+					x = Math.sin(angle*freqX + (Math.PI/180)*phi * Math.cos(angle *modFreqX));
+					y = Math.sin(angle*freqY) * Math.cos(angle * modFreqY);
+				}else{
+					x = Math.sin(angle*freqX + (Math.PI/180)*phi); //lissajous
+					y = Math.sin(angle*freqY); //lissajous
+				}			
+
+				particleArray[i].x =  x * factorX + canvWidth/2;
+				particleArray[i].y = y * factorY + canvHeight/2;
+
+				var pointerPart = particleArray[i-1];
+				if(typeof pointerPart === 'undefined'){
+					pointerPart = {
+						x: canvWidth/2,
+						y: canvHeight/2
+					};
+				}
+
+				var theta = Math.atan2(pointerPart.y - particleArray[i].y, pointerPart.x -particleArray[i].x)
+				if(particleArray[i].type === 'rod') rodPart.draw(
+					particleArray[i].x, particleArray[i].y, theta);
+				else if(particleArray[i].type === 'dash') dashPart.draw(
+					particleArray[i].x, particleArray[i].y, theta);
+				else if(particleArray[i].type === 'dot')
+					dotPart.draw(particleArray[i].x, particleArray[i].y, theta);
+
+			}
+		}
+
+		function map_range(value, low1, high1, low2, high2) {
+			return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+		}
+
+		var stop = false;
+		var frameCount = 0;
+		var fps, fpsInterval, startTime, now, then, elapsed;
+
+		function startAnimating(fps){
+			fpsInterval = 1000/fps;
+			then = Date.now();
+			startTime = then;
+			animate();
+		}
+
+		function animate(){
+			if(stop){
+				return;
+			}
+			drawVisual = requestAnimationFrame(animate);
+
+			now = Date.now();
+			elapsed = now - then;
+
+			if(elapsed > fpsInterval){
+				then = now - (elapsed % fpsInterval);
+
+				draw();
+			}
+		}
 }

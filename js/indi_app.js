@@ -21,7 +21,7 @@
 
 // var audioCtx, analyser;
 
-var defaultVisMode = 'nodeAttraction';
+var defaultVisMode = 'lissajousFigure';
 var currentVis = defaultVisMode;
 var canvWidth, canvHeight;
 var canvasCtx;
@@ -105,7 +105,7 @@ function setupCanvas(){
 		
 	if(canvas.getContext){
 		canvas.width = $(window).width();
-		var topNavHeight = $('header').height()
+		var topNavHeight = $('header').height();
 		canvas.height = $(window).height() -topNavHeight;
 		canvWidth = canvas.width;
 		canvHeight = canvas.height;
@@ -234,7 +234,7 @@ function visualise(visMode){
 	else if(visMode === 'indiTest01'){
 		indiTest01(dataArray, bufferLength);
 	}
-	else if(visMode === 'WaveForm'){
+	else if(visMode === 'waveForm'){
 		waveForm();
 	}
 	else if(visMode === 'chladniPlate'){
@@ -242,6 +242,9 @@ function visualise(visMode){
 	}
 	else if(visMode === 'nodeAttraction'){
 		nodeAttraction(dataArray, bufferLength);
+	}
+	else if(visMode === 'lissajousFigure'){
+		lissajousFigure(dataArray, bufferLength);
 	}
 	else if(visMode === 'Off'){
 		visOff();
