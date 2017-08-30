@@ -1,13 +1,13 @@
 function waveForm(dataArray, bufferLength){
 
-	//analyser.fftSize = 1024; //defines Fast Fourier Transform rate 
+	//analyser.fftSize = 1024; //defines Fast Fourier Transform rate
 
 	canvasCtx.clearRect(0,0,canvWidth,canvHeight); //reset canvas for new vis
 
 	function draw(){
 		drawVisual = requestAnimationFrame(draw); //this keeps looping the drawing function once it has started
-		
-		var dataArray = new Uint8Array(fftSampleSize); 
+
+		var dataArray = new Uint8Array(fftSampleSize);
     	fft.getByteTimeDomainData(dataArray);
 
 		canvasCtx.fillStyle = bgColor;
@@ -83,7 +83,7 @@ function chladniPlate(dataArray, bufferLength){
 				default:
 					f = null;
 			}
-			
+
 			//apply force
 			if(this.mode !== 'twirl'){
 				node.velocity.x += dx * f;
@@ -152,10 +152,10 @@ function chladniPlate(dataArray, bufferLength){
 		};
 	});
 
-	//Runtime UI stuff		
+	//Runtime UI stuff
 	var visSettings	= document.getElementById('vis-settings');
 		visSettings.style.display = 'block';
-	
+
 	var nodeDampingInput = document.createElement('input');
 		nodeDampingInput.type = 'range';
 		nodeDampingInput.id = 'nodeDampingInput';
@@ -182,7 +182,7 @@ function chladniPlate(dataArray, bufferLength){
 		var basicModePaddel = document.createElement('label');
 			basicModePaddel.className = 'vis-setting switch-paddle';
 			basicModePaddel.htmlFor = 'basicModeInput';
-	
+
 	var smoothDiv = document.createElement('div');
 		smoothDiv.className = 'vis-setting switch';
 		var smoothModeInput = document.createElement('input');
@@ -211,7 +211,7 @@ function chladniPlate(dataArray, bufferLength){
 			twistModeLabel.innerHTML = 'Twist Mode';
 		var twistModePaddel = document.createElement('label');
 			twistModePaddel.className = 'vis-setting switch-paddle';
-			twistModePaddel.htmlFor = 'twistModeInput';	
+			twistModePaddel.htmlFor = 'twistModeInput';
 
 	var lineDiv = document.createElement('div');
 		lineDiv.className = 'vis-setting switch';
@@ -228,7 +228,7 @@ function chladniPlate(dataArray, bufferLength){
 		var lineModePaddel = document.createElement('label');
 			lineModePaddel.className = 'vis-setting switch-paddle';
 			lineModePaddel.htmlFor = 'lineModeInput';
-	
+
 	var circleDiv = document.createElement('div');
 		circleDiv.className = 'vis-setting switch';
 		var circleModeInput = document.createElement('input');
@@ -243,7 +243,7 @@ function chladniPlate(dataArray, bufferLength){
 		var circleModePaddel = document.createElement('label');
 			circleModePaddel.className = 'vis-setting switch-paddle';
 			circleModePaddel.htmlFor = 'circleModeInput';
-				
+
 	var attractRadiusInput = document.createElement('input');
 		attractRadiusInput.type = 'range';
 		attractRadiusInput.id = 'attractRadiusInput';
@@ -333,7 +333,7 @@ function chladniPlate(dataArray, bufferLength){
 	function initGrid(){
 
 		var xPos, yPos;
-		
+
 			for(var x = 0; x < xCount; x++){
 				for(var y = 0; y < yCount; y++){
 				xPos = gridStepX *x;
@@ -366,8 +366,8 @@ function chladniPlate(dataArray, bufferLength){
 		}else{
 			attractor.mode = 'basic';
 		}
-		
-		var dataArray = new Uint8Array(fftSampleSize); 
+
+		var dataArray = new Uint8Array(fftSampleSize);
 		fft.getByteTimeDomainData(dataArray);
 
 		var da = dataArray[0];
@@ -408,7 +408,7 @@ function chladniPlate(dataArray, bufferLength){
 				// var theta = Math.atan2(canvHeight/2 - nodes[i].y, canvWidth/2 -nodes[i].x); //point towards centre
 				// var theta = Math.atan2(nodes[i+1].y - nodes[i].y, nodes[i+1].x -nodes[i].x); //point towards neighbour
 				// canvasCtx.lineTo((Math.cos(theta)*5) + nodes[i].x, (Math.sin(theta)*5) +nodes[i].y);
-				
+
 				if(i+2 < nodes.length-1) i++;
 			}
 			canvasCtx.closePath();
@@ -564,7 +564,7 @@ function nodeAttraction(dataArray, bufferLength){
 			showAttractNodeLabel.htmlFor = 'showAttractNode';
 			showAttractNodeLabel.innerHTML = 'Show Attractor';
 			showAttractNodeLabel.className = 'vis-setting';
-		
+
 	var attractRadiusInput = document.createElement('input');
 		attractRadiusInput.type = 'range';
 		attractRadiusInput.id = 'attractRadiusInput';
@@ -635,10 +635,10 @@ function nodeAttraction(dataArray, bufferLength){
 	var nodeCount = xCount * yCount;
 	var nodes;
 	var node_Damping = nodeDampingInput.value/100;
-	
+
 	var attractor;
 	var attractor_MaxRamp, attractor_Radius, attractor_Strength;
-	
+
 	var attractNode;
 	var attractNode_MaxVelocity;
 
@@ -684,13 +684,13 @@ function nodeAttraction(dataArray, bufferLength){
 			attractNode.velocity.y = attractMaxVelocityInput.value/2;
 
 		startAnimating(10);
-	}	
+	}
 	init();
 
 
 	function draw(){
 
-		var dataArray = new Uint8Array(fftSampleSize); 
+		var dataArray = new Uint8Array(fftSampleSize);
 		fft.getByteTimeDomainData(dataArray);
 
 		// analyser.getByteFrequencyData(dataArray);
@@ -740,15 +740,15 @@ function nodeAttraction(dataArray, bufferLength){
 		attractor.ramp = Math.random()*attractor_MaxRamp;
 		if(Math.floor(Math.random()*2) === 1) attractor.ramp*=-1;
 
-		
+
 
 		for(var i = 0; i < nodes.length; i++){
-			
+
 			node_Damping = nodeDampingInput.value/100;
 			nodes[i].setDamping(node_Damping);
 			attractor.attract(nodes[i]);
 			nodes[i].update();
-			
+
 			// canvasCtx.beginPath();
 			// canvasCtx.arc(nodes[i].x, nodes[i].y, 2, 0, Math.PI*2);
 			// canvasCtx.closePath();
@@ -855,7 +855,7 @@ function lissajousFigure(dataArray, bufferLength){
 			pointCountInput.max = 300;
 			pointCountInput.value = 50;
 			pointCountInput.addEventListener("change", function(){
-					init();			
+					init();
 				});
 			var pointCountLabel = document.createElement('label');
 				pointCountLabel.htmlFor = 'pointCountInput';
@@ -887,7 +887,7 @@ function lissajousFigure(dataArray, bufferLength){
 				modFreqYLabel.innerHTML = 'Mod Freq Y';
 
 		var modulatedDiv = document.createElement('div');
-			
+
 
 			modulatedDiv.className = 'vis-setting';
 			var modulatedCheck = document.createElement('input');
@@ -896,7 +896,7 @@ function lissajousFigure(dataArray, bufferLength){
 				modulatedCheck.className = 'vis-setting switch-input';
 				modulatedCheck.checked = false;
 				modulatedCheck.addEventListener("change", function(){
-					init();			
+					init();
 				});
 			var modulatedPaddel = document.createElement('label');
 				modulatedPaddel.className = 'vis-setting switch-paddle';
@@ -1007,7 +1007,7 @@ function lissajousFigure(dataArray, bufferLength){
 			canvasCtx.fillStyle = bgColor;
 			canvasCtx.fillRect(0,0, canvWidth, canvHeight);
 
-			var dataArray = new Uint8Array(fftSampleSize); 
+			var dataArray = new Uint8Array(fftSampleSize);
 			fft.getByteTimeDomainData(dataArray);
 			var da = dataArray[0];
 
@@ -1042,34 +1042,22 @@ function lissajousFigure(dataArray, bufferLength){
 				}else{
 					x = Math.sin(angle*freqX + (Math.PI/180)*phi); //lissajous
 					y = Math.sin(angle*freqY); //lissajous
-				}			
+				}
 
 				particleArray[i].x =  x * factorX + canvWidth/2;
 				particleArray[i].y = y * factorY + canvHeight/2;
 
 				var pointerPart = particleArray[i-1];
-				if(i === 0){ //typeof pointerPart === 'undefined'
-					// console.log(particleArray.length);
-					pointerPart = particleArray[particleArray.length-1];
-					// console.log('i: ' + i);
-					// debugger;
+
+				if(i !== 0){ //HACK prevents the 'stray' from occur due to index length issue
+					var theta = Math.atan2(pointerPart.y - particleArray[i].y, pointerPart.x -particleArray[i].x);
+					if(particleArray[i].type === 'rod')
+						rodPart.draw(particleArray[i].x, particleArray[i].y, theta);
+					else if(particleArray[i].type === 'dash')
+						dashPart.draw(particleArray[i].x, particleArray[i].y, theta);
+					else if(particleArray[i].type === 'dot')
+						dotPart.draw(particleArray[i].x, particleArray[i].y, theta);
 				}
-				// if(typeof pointerPart === 'undefined'){
-				//         pointerPart = {
-				//                 x: canvWidth/2,
-				//                 y: canvHeight/2
-				//         };
-				//        }
-
-
-				var theta = Math.atan2(pointerPart.y - particleArray[i].y, pointerPart.x -particleArray[i].x)
-				if(particleArray[i].type === 'rod') rodPart.draw(
-					particleArray[i].x, particleArray[i].y, theta);
-				else if(particleArray[i].type === 'dash') dashPart.draw(
-					particleArray[i].x, particleArray[i].y, theta);
-				else if(particleArray[i].type === 'dot')
-					dotPart.draw(particleArray[i].x, particleArray[i].y, theta);
-
 			}
 		}
 
