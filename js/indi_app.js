@@ -1,5 +1,5 @@
-var defaultVisMode = 'waveForm';
-var currentVis = defaultVisMode;
+var defaultVisMode = 'lissajousFigure';
+var drawVisual;
 var canvWidth, canvHeight;
 var canvas, canvasCtx;
 var bgColor;
@@ -11,8 +11,6 @@ var rodDashSvg, rodOuterSvg, rodInnerSvg,
 	dotOuterSvg, dotInnerSvg; //svg assets
 
 var RodParticle, DashParticle, DotParticle; //anon funct objects
-
-var drawVisual;
 
 
 function loadSoundFile(){ //TODO - move this into _audio.js and replace with promise
@@ -150,7 +148,7 @@ function initParts(){
 			};
 		});
 
-		visualise(currentVis);
+		visualise(defaultVisMode);
 	}
 }
 

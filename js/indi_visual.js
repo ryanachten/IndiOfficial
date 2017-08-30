@@ -370,7 +370,7 @@ function chladniPlate(dataArray, bufferLength){
 		fft.getByteTimeDomainData(dataArray);
 
 		var da = dataArray[0];
-		
+
 		attractor.strength = Math.random()* (da * (attractStrengthInput.value/100));
 		if(Math.floor(Math.random()*2) === 1) attractor.strength *= -1;
 		attractor.radius = Math.random()* (da*attractRadiusInput.value);
@@ -629,8 +629,8 @@ function nodeAttraction(dataArray, bufferLength){
 	visSettings.appendChild(nodeDampingInput);
 
 
-	var xCount = canvWidth/75;
-	var yCount = canvHeight/75;
+	var xCount = canvWidth/100;
+	var yCount = canvHeight/100;
 	var nodeCount = xCount * yCount;
 	var nodes;
 	var node_Damping = nodeDampingInput.value/100;
@@ -810,133 +810,24 @@ function lissajousFigure(dataArray, bufferLength){
 	var visSettings	= document.getElementById('vis-settings');
 	visSettings.style.display = 'block';
 
-	var freqXDiv = document.createElement('div');
-	freqXDiv.className = 'vis-setting';
-	var freqXInput = document.createElement('input');
-	freqXInput.type = 'range';
-	freqXInput.id = 'freqXInput';
-	freqXInput.className = 'vis-setting';
-	freqXInput.min = 1;
-	freqXInput.max = 70;
-	freqXInput.value = 40;
-	var freqXLabel = document.createElement('label');
-	freqXLabel.htmlFor = 'freqXInput';
-	freqXLabel.className = 'vis-setting';
-	freqXLabel.innerHTML = 'Freq X';
+	var gui = new dat.GUI();
+	var guiObj = {
+		phi: 95,
+		pointCount: 50,
+		freqX: 40,
+		freqY: 40,
+		modulated: false,
+		modFreqX: 40,
+		modFreqY: 40,
 
-	var freqYDiv = document.createElement('div');
-	freqYDiv.className = 'vis-setting';
-	var freqYInput = document.createElement('input');
-	freqYInput.type = 'range';
-	freqYInput.id = 'freqYInput';
-	freqYInput.className = 'vis-setting';
-	freqYInput.min = 1;
-	freqYInput.max = 70;
-	freqYInput.value = 40;
-	var freqYLabel = document.createElement('label');
-	freqYLabel.htmlFor = 'freqYInput';
-	freqYLabel.className = 'vis-setting';
-	freqYLabel.innerHTML = 'Freq Y';
-
-	var phiDiv = document.createElement('div');
-	phiDiv.className = 'vis-setting';
-	var phiInput = document.createElement('input');
-	phiInput.type = 'range';
-	phiInput.id = 'phiInput';
-	phiInput.className = 'vis-setting';
-	phiInput.min = 1;
-	phiInput.max = 360;
-	phiInput.value = 95;
-	var phiLabel = document.createElement('label');
-	phiLabel.htmlFor = 'phiInput';
-	phiLabel.className = 'vis-setting';
-	phiLabel.innerHTML = 'Phi';
-
-	var pointCountDiv = document.createElement('div');
-	pointCountDiv.className = 'vis-setting';
-	var pointCountInput = document.createElement('input');
-	pointCountInput.type = 'range';
-	pointCountInput.id = 'pointCountInput';
-	pointCountInput.className = 'vis-setting';
-	pointCountInput.min = 10;
-	pointCountInput.max = 300;
-	pointCountInput.value = 50;
-	pointCountInput.addEventListener("change", function(){
-		init();
-	});
-	var pointCountLabel = document.createElement('label');
-	pointCountLabel.htmlFor = 'pointCountInput';
-	pointCountLabel.className = 'vis-setting';
-	pointCountLabel.innerHTML = 'Point Count';
-
-	var modFreqXDiv = document.createElement('div');
-	modFreqXDiv.className = 'vis-setting';
-	var modFreqXInput = document.createElement('input');
-	modFreqXInput.type = 'range';
-	modFreqXInput.id = 'modFreqXInput';
-	modFreqXInput.className = 'vis-setting';
-	modFreqXInput.min = 1;
-	modFreqXInput.max = 70;
-	modFreqXInput.value = 40;
-	var modFreqXLabel = document.createElement('label');
-	modFreqXLabel.htmlFor = 'modFreqXInput';
-	modFreqXLabel.className = 'vis-setting';
-	modFreqXLabel.innerHTML = 'Mod Freq X';
-
-	var modFreqYDiv = document.createElement('div');
-	modFreqYDiv.className = 'vis-setting';
-	var modFreqYInput = document.createElement('input');
-	modFreqYInput.type = 'range';
-	modFreqYInput.id = 'modFreqYInput';
-	modFreqYInput.className = 'vis-setting';
-	modFreqYInput.min = 1;
-	modFreqYInput.max = 70;
-	modFreqYInput.value = 40;
-	var modFreqYLabel = document.createElement('label');
-	modFreqYLabel.htmlFor = 'modFreqYInput';
-	modFreqYLabel.className = 'vis-setting';
-	modFreqYLabel.innerHTML = 'Mod Freq Y';
-
-	var modulatedDiv = document.createElement('div');
-	modulatedDiv.className = 'vis-setting';
-	var modulatedCheck = document.createElement('input');
-	modulatedCheck.id = 'modulatedCheck';
-	modulatedCheck.type = 'checkbox';
-	modulatedCheck.className = 'vis-setting switch-input';
-	modulatedCheck.checked = false;
-	modulatedCheck.addEventListener("change", function(){
-		init();
-	});
-	var modulatedPaddel = document.createElement('label');
-	modulatedPaddel.className = 'vis-setting switch-paddle';
-	modulatedPaddel.htmlFor = 'modulatedCheck';
-	var modulatedLabel = document.createElement('label');
-	modulatedLabel.htmlFor = 'modulatedCheck';
-	modulatedLabel.innerHTML = 'Modulated';
-	modulatedLabel.className = 'vis-setting';
-
-	modulatedDiv.appendChild(modulatedLabel);
-	modulatedDiv.appendChild(modulatedCheck);
-	modulatedDiv.appendChild(modulatedPaddel);
-	visSettings.appendChild(modulatedDiv);
-	pointCountDiv.appendChild(pointCountLabel);
-	pointCountDiv.appendChild(pointCountInput);
-	visSettings.appendChild(pointCountDiv);
-	visSettings.appendChild(phiLabel);
-	visSettings.appendChild(phiInput);
-	freqXDiv.appendChild(freqXLabel);
-	freqXDiv.appendChild(freqXInput);
-	freqYDiv.appendChild(freqYLabel);
-	freqYDiv.appendChild(freqYInput);
-	visSettings.appendChild(freqXDiv);
-	visSettings.appendChild(freqYDiv);
-	modFreqXDiv.appendChild(modFreqXLabel);
-	modFreqXDiv.appendChild(modFreqXInput);
-	visSettings.appendChild(modFreqXDiv);
-	modFreqYDiv.appendChild(modFreqYLabel);
-	modFreqYDiv.appendChild(modFreqYInput);
-	visSettings.appendChild(modFreqYDiv);
-
+	};
+	gui.add(guiObj, "pointCount").min(1).max(300).onChange(init);
+	gui.add(guiObj, "phi").min(1).max(360);
+	gui.add(guiObj, "freqX").min(1).max(70);
+	gui.add(guiObj, "freqY").min(1).max(70);
+	gui.add(guiObj, "modulated").onChange(init);
+	gui.add(guiObj, "modFreqX").min(1).max(70);
+	gui.add(guiObj, "modFreqY").min(1).max(70);
 
 	var pointCount;
 	var freqX, freqY;
@@ -967,16 +858,16 @@ function lissajousFigure(dataArray, bufferLength){
 		canvasCtx.fillStyle = bgColor;
 		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
 
-		if(modulatedCheck.checked){
+		if(guiObj.modulated){
 			modulated = true;
 		}else{
 			modulated = false;
 		}
 		canvasCtx.strokeStyle = 'black';
-		pointCount = parseInt(pointCountInput.value);
-		freqX = parseInt(freqXInput.value);
-		freqY = parseInt(freqYInput.value);
-		phi = parseInt(phiInput.value);
+		pointCount = parseInt(guiObj.pointCount);
+		freqX = parseInt(guiObj.freqX);
+		freqY = parseInt(guiObj.freqY);
+		phi = parseInt(guiObj.phi);
 
 		particleArray = [];
 		for(var i = 0; i < pointCount; i++){
@@ -1012,11 +903,11 @@ function lissajousFigure(dataArray, bufferLength){
 
 		var logda = (Math.log(da) / Math.log(2));
 		if(isFinite(logda) && logda !== 0){
-			freqX = logda * parseInt(freqXInput.value);
-			freqY = logda * parseInt(freqYInput.value);
-			modFreqX = logda * parseInt(modFreqXInput.value);
-			modFreqY = logda * parseInt(modFreqYInput.value);
-			phi = parseInt(phiInput.value) - logda;
+			freqX = logda * parseInt(guiObj.freqX);
+			freqY = logda * parseInt(guiObj.freqY);
+			modFreqX = logda * parseInt(guiObj.modFreqX);
+			modFreqY = logda * parseInt(guiObj.modFreqY);
+			phi = parseInt(guiObj.phi) - logda;
 		}
 
 

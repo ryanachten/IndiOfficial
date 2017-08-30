@@ -4,6 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Indi Official</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.5/dat.gui.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/indi_style.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
@@ -22,13 +23,13 @@
 	</header>
 
 	<div id="ui-panel">
-		<div class="">
-				<button type="button" name="chladniPlate" class="visMode-button">chladniPlate</button>
-				<button type="button" name="nodeAttraction" class="visMode-button">nodeAttraction</button>
-				<button type="button" name="lissajousFigure" class="visMode-button">lissajousFigure</button>
-		</div>
 		<div class="ui-section" id="visual-options">
 			<h2>Visualisation:</h2>
+			<div class="">
+					<button type="button" name="chladniPlate" class="visMode-button">chladniPlate</button>
+					<button type="button" name="nodeAttraction" class="visMode-button">nodeAttraction</button>
+					<button type="button" name="lissajousFigure" class="visMode-button">lissajousFigure</button>
+			</div>
 			<div id="vis-settings" class="ui-section">
 				<h3 id="vissettings-header">Visual Settings:</h3>
 			</div>
