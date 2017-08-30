@@ -156,10 +156,6 @@ function initParts(){
 
 function visualise(visMode){
 
-	// var dataBuffer = getBuffer(256);
-	// var bufferLength = dataBuffer.buffer;
-	// var dataArray = dataBuffer.data;
-
 	console.log(visMode);
 	if(visMode === 'BarGraph'){
 		barGraph(dataArray, bufferLength);

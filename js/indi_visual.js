@@ -8,18 +8,18 @@ function waveForm(dataArray, bufferLength){
 		drawVisual = requestAnimationFrame(draw); //this keeps looping the drawing function once it has started
 
 		var dataArray = new Uint8Array(fftSampleSize);
-    	fft.getByteTimeDomainData(dataArray);
+		fft.getByteTimeDomainData(dataArray);
 
 		canvasCtx.fillStyle = bgColor;
 		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
 
 		//line width and color
 		canvasCtx.lineWidth = 2;
-			canvasCtx.beginPath();
+		canvasCtx.beginPath();
 
 		//width of ea. segment = canv.w / arraylength
 		var sliceWidth = canvWidth * 1.0 / dataArray.length; //bufferLength;
-			var x = 0; //position to move to to draw ea. line segment
+		var x = 0; //position to move to to draw ea. line segment
 
 		for(var i=0; i <dataArray.length; i++){
 			var v = dataArray[i] / 128.0; //128.0 height based on the data point value form the array
@@ -35,11 +35,10 @@ function waveForm(dataArray, bufferLength){
 		}
 
 		canvasCtx.lineTo(canvWidth, canvWidth/2);
-			canvasCtx.stroke();
+		canvasCtx.stroke();
 	}
-		draw();
+	draw();
 }
-
 
 function chladniPlate(dataArray, bufferLength){
 
@@ -60,28 +59,28 @@ function chladniPlate(dataArray, bufferLength){
 			var dx = this.x - node.x;
 			var dy = this.y - node.y;
 			var d = Math.sqrt(
-					Math.pow(dx, 2) + Math.pow(dy, 2)
-				);
+				Math.pow(dx, 2) + Math.pow(dy, 2)
+			);
 			var f = 0;
 
 			switch(this.mode){
 				case 'basic':
-					if(d > 0 && d < this.radius){
-						//calc force
-						var s = d/this.radius;
-						f = (1 / Math.pow(s, 0.5*this.ramp) -1);
-						f = this.strength * f / this.radius;
-					}
-					break;
+				if(d > 0 && d < this.radius){
+					//calc force
+					var s = d/this.radius;
+					f = (1 / Math.pow(s, 0.5*this.ramp) -1);
+					f = this.strength * f / this.radius;
+				}
+				break;
 				case 'smooth': // Fallthrough
 				case 'twirl':
-					if(d > 0 && d < this.radius){
-						var s = Math.pow(d/this.radius, 1/this.ramp);
-						f = s * 9 * this.strength * (1 / (s + 1) + ((s-3) /4)) /d;
-					}
-					break;
+				if(d > 0 && d < this.radius){
+					var s = Math.pow(d/this.radius, 1/this.ramp);
+					f = s * 9 * this.strength * (1 / (s + 1) + ((s-3) /4)) /d;
+				}
+				break;
 				default:
-					f = null;
+				f = null;
 			}
 
 			//apply force
@@ -156,7 +155,7 @@ function chladniPlate(dataArray, bufferLength){
 	var visSettings	= document.getElementById('vis-settings');
 		visSettings.style.display = 'block';
 
-	var nodeDampingInput = document.createElement('input');
+		var nodeDampingInput = document.createElement('input');
 		nodeDampingInput.type = 'range';
 		nodeDampingInput.id = 'nodeDampingInput';
 		nodeDampingInput.className = 'vis-setting';
@@ -164,87 +163,87 @@ function chladniPlate(dataArray, bufferLength){
 		nodeDampingInput.max = 100;
 		nodeDampingInput.value = 5; //need to be /100 for 0.8
 		var nodeDampingLabel = document.createElement('label');
-			nodeDampingLabel.htmlFor = 'nodeDampingInput';
-			nodeDampingLabel.innerHTML = 'Node Damping';
-			nodeDampingLabel.className = 'vis-setting';
+		nodeDampingLabel.htmlFor = 'nodeDampingInput';
+		nodeDampingLabel.innerHTML = 'Node Damping';
+		nodeDampingLabel.className = 'vis-setting';
 
-	var basicDiv = document.createElement('div');
+		var basicDiv = document.createElement('div');
 		basicDiv.className = 'vis-setting switch';
 		var basicModeInput = document.createElement('input');
-			basicModeInput.id = 'basicModeInput';
-			basicModeInput.type = 'radio';
-			basicModeInput.name = 'attractMode';
-			basicModeInput.className = 'vis-setting switch-input';
+		basicModeInput.id = 'basicModeInput';
+		basicModeInput.type = 'radio';
+		basicModeInput.name = 'attractMode';
+		basicModeInput.className = 'vis-setting switch-input';
 		var basicModeLabel = document.createElement('label');
-			basicModeLabel.htmlFor = 'basicModeInput';
-			basicModeLabel.innerHTML = 'Basic Mode';
-			basicModeLabel.className = 'vis-setting';
+		basicModeLabel.htmlFor = 'basicModeInput';
+		basicModeLabel.innerHTML = 'Basic Mode';
+		basicModeLabel.className = 'vis-setting';
 		var basicModePaddel = document.createElement('label');
-			basicModePaddel.className = 'vis-setting switch-paddle';
-			basicModePaddel.htmlFor = 'basicModeInput';
+		basicModePaddel.className = 'vis-setting switch-paddle';
+		basicModePaddel.htmlFor = 'basicModeInput';
 
-	var smoothDiv = document.createElement('div');
+		var smoothDiv = document.createElement('div');
 		smoothDiv.className = 'vis-setting switch';
 		var smoothModeInput = document.createElement('input');
-			smoothModeInput.id = 'smoothModeInput';
-			smoothModeInput.type = 'radio';
-			smoothModeInput.name = 'attractMode';
-			smoothModeInput.className = 'vis-setting switch-input';
-			smoothModeInput.checked = true;
+		smoothModeInput.id = 'smoothModeInput';
+		smoothModeInput.type = 'radio';
+		smoothModeInput.name = 'attractMode';
+		smoothModeInput.className = 'vis-setting switch-input';
+		smoothModeInput.checked = true;
 		var smoothModeLabel = document.createElement('label');
-			smoothModeLabel.htmlFor = 'smoothModeInput';
-			smoothModeLabel.innerHTML = 'Smooth Mode';
+		smoothModeLabel.htmlFor = 'smoothModeInput';
+		smoothModeLabel.innerHTML = 'Smooth Mode';
 		var smoothModePaddel = document.createElement('label');
-			smoothModePaddel.className = 'vis-setting switch-paddle';
-			smoothModePaddel.htmlFor = 'smoothModeInput';
+		smoothModePaddel.className = 'vis-setting switch-paddle';
+		smoothModePaddel.htmlFor = 'smoothModeInput';
 
-	var twistDiv = document.createElement('div');
+		var twistDiv = document.createElement('div');
 		twistDiv.className = 'vis-setting switch';
 		var twistModeInput = document.createElement('input');
-			twistModeInput.id = 'twistModeInput';
-			twistModeInput.type = 'radio';
-			twistModeInput.name = 'attractMode';
-			twistModeInput.className = 'vis-setting switch-input';
-			// twistModeInput.checked = true;
+		twistModeInput.id = 'twistModeInput';
+		twistModeInput.type = 'radio';
+		twistModeInput.name = 'attractMode';
+		twistModeInput.className = 'vis-setting switch-input';
+		// twistModeInput.checked = true;
 		var twistModeLabel = document.createElement('label');
-			twistModeLabel.htmlFor = 'twistModeInput';
-			twistModeLabel.innerHTML = 'Twist Mode';
+		twistModeLabel.htmlFor = 'twistModeInput';
+		twistModeLabel.innerHTML = 'Twist Mode';
 		var twistModePaddel = document.createElement('label');
-			twistModePaddel.className = 'vis-setting switch-paddle';
-			twistModePaddel.htmlFor = 'twistModeInput';
+		twistModePaddel.className = 'vis-setting switch-paddle';
+		twistModePaddel.htmlFor = 'twistModeInput';
 
-	var lineDiv = document.createElement('div');
+		var lineDiv = document.createElement('div');
 		lineDiv.className = 'vis-setting switch';
 		var lineModeInput = document.createElement('input');
-			lineModeInput.id = 'lineModeInput';
-			lineModeInput.type = 'radio';
-			lineModeInput.name = 'drawMode';
-			lineModeInput.className = 'vis-setting switch-input';
-			lineModeInput.checked = true;
+		lineModeInput.id = 'lineModeInput';
+		lineModeInput.type = 'radio';
+		lineModeInput.name = 'drawMode';
+		lineModeInput.className = 'vis-setting switch-input';
+		lineModeInput.checked = true;
 		var lineModeLabel = document.createElement('label');
-			lineModeLabel.htmlFor = 'lineModeInput';
-			lineModeLabel.innerHTML = 'Draw Lines';
-			lineModeLabel.className = 'vis-setting';
+		lineModeLabel.htmlFor = 'lineModeInput';
+		lineModeLabel.innerHTML = 'Draw Lines';
+		lineModeLabel.className = 'vis-setting';
 		var lineModePaddel = document.createElement('label');
-			lineModePaddel.className = 'vis-setting switch-paddle';
-			lineModePaddel.htmlFor = 'lineModeInput';
+		lineModePaddel.className = 'vis-setting switch-paddle';
+		lineModePaddel.htmlFor = 'lineModeInput';
 
-	var circleDiv = document.createElement('div');
+		var circleDiv = document.createElement('div');
 		circleDiv.className = 'vis-setting switch';
 		var circleModeInput = document.createElement('input');
-			circleModeInput.id = 'circleModeInput';
-			circleModeInput.type = 'radio';
-			circleModeInput.name = 'drawMode';
-			circleModeInput.className = 'vis-setting switch-input';
+		circleModeInput.id = 'circleModeInput';
+		circleModeInput.type = 'radio';
+		circleModeInput.name = 'drawMode';
+		circleModeInput.className = 'vis-setting switch-input';
 		var circleModeLabel = document.createElement('label');
-			circleModeLabel.htmlFor = 'circleModeInput';
-			circleModeLabel.innerHTML = 'Draw Circles';
-			circleModeLabel.className = 'vis-setting';
+		circleModeLabel.htmlFor = 'circleModeInput';
+		circleModeLabel.innerHTML = 'Draw Circles';
+		circleModeLabel.className = 'vis-setting';
 		var circleModePaddel = document.createElement('label');
-			circleModePaddel.className = 'vis-setting switch-paddle';
-			circleModePaddel.htmlFor = 'circleModeInput';
+		circleModePaddel.className = 'vis-setting switch-paddle';
+		circleModePaddel.htmlFor = 'circleModeInput';
 
-	var attractRadiusInput = document.createElement('input');
+		var attractRadiusInput = document.createElement('input');
 		attractRadiusInput.type = 'range';
 		attractRadiusInput.id = 'attractRadiusInput';
 		attractRadiusInput.className = 'vis-setting';
@@ -252,11 +251,11 @@ function chladniPlate(dataArray, bufferLength){
 		attractRadiusInput.max = 20;
 		attractRadiusInput.value = attractRadiusInput.max/2;
 		var attractRadiusLabel = document.createElement('label');
-			attractRadiusLabel.htmlFor = 'attractRadiusInput';
-			attractRadiusLabel.innerHTML = 'Attraction Radius';
-			attractRadiusLabel.className = 'vis-setting';
+		attractRadiusLabel.htmlFor = 'attractRadiusInput';
+		attractRadiusLabel.innerHTML = 'Attraction Radius';
+		attractRadiusLabel.className = 'vis-setting';
 
-	var attractStrengthInput = document.createElement('input');
+		var attractStrengthInput = document.createElement('input');
 		attractStrengthInput.type = 'range';
 		attractStrengthInput.id = 'attractStrengthInput';
 		attractStrengthInput.className = 'vis-setting';
@@ -264,11 +263,11 @@ function chladniPlate(dataArray, bufferLength){
 		attractStrengthInput.max = 200;
 		attractStrengthInput.value = 37;
 		var attractStrengthLabel = document.createElement('label');
-			attractStrengthLabel.htmlFor = 'attractStrengthInput';
-			attractStrengthLabel.innerHTML = 'Attraction Strength';
-			attractStrengthLabel.className = 'vis-setting';
+		attractStrengthLabel.htmlFor = 'attractStrengthInput';
+		attractStrengthLabel.innerHTML = 'Attraction Strength';
+		attractStrengthLabel.className = 'vis-setting';
 
-	var attractRampInput = document.createElement('input');
+		var attractRampInput = document.createElement('input');
 		attractRampInput.type = 'range';
 		attractRampInput.id = 'attractRampInput';
 		attractRampInput.className = 'vis-setting';
@@ -276,9 +275,9 @@ function chladniPlate(dataArray, bufferLength){
 		attractRampInput.max = 5;
 		attractRampInput.value = 1; //need to be /100 for 0.2
 		var attractRampLabel = document.createElement('label');
-			attractRampLabel.htmlFor = 'attractRampInput';
-			attractRampLabel.innerHTML = 'Attraction Ramp';
-			attractRampLabel.className = 'vis-setting';
+		attractRampLabel.htmlFor = 'attractRampInput';
+		attractRampLabel.innerHTML = 'Attraction Ramp';
+		attractRampLabel.className = 'vis-setting';
 
 		basicDiv.appendChild(basicModeLabel);
 		basicDiv.appendChild(basicModeInput);
@@ -289,17 +288,17 @@ function chladniPlate(dataArray, bufferLength){
 		twistDiv.appendChild(twistModeLabel);
 		twistDiv.appendChild(twistModeInput);
 		twistDiv.appendChild(twistModePaddel);
-	visSettings.appendChild(basicDiv);
-	visSettings.appendChild(smoothDiv);
-	visSettings.appendChild(twistDiv);
-	visSettings.appendChild(nodeDampingLabel);
-	visSettings.appendChild(nodeDampingInput);
-	visSettings.appendChild(attractRadiusLabel);
-	visSettings.appendChild(attractRadiusInput);
-	visSettings.appendChild(attractStrengthLabel);
-	visSettings.appendChild(attractStrengthInput);
-	visSettings.appendChild(attractRampLabel);
-	visSettings.appendChild(attractRampInput);
+		visSettings.appendChild(basicDiv);
+		visSettings.appendChild(smoothDiv);
+		visSettings.appendChild(twistDiv);
+		visSettings.appendChild(nodeDampingLabel);
+		visSettings.appendChild(nodeDampingInput);
+		visSettings.appendChild(attractRadiusLabel);
+		visSettings.appendChild(attractRadiusInput);
+		visSettings.appendChild(attractStrengthLabel);
+		visSettings.appendChild(attractStrengthInput);
+		visSettings.appendChild(attractRampLabel);
+		visSettings.appendChild(attractRampInput);
 
 	var xCount = canvWidth/100; //15;
 	var yCount = canvHeight/100; //15;
@@ -310,7 +309,7 @@ function chladniPlate(dataArray, bufferLength){
 	var attractor, nodes;
 
 	$(window ).resize(function() {
-  		init();
+		init();
 	});
 
 	function init(){
@@ -334,19 +333,19 @@ function chladniPlate(dataArray, bufferLength){
 
 		var xPos, yPos;
 
-			for(var x = 0; x < xCount; x++){
-				for(var y = 0; y < yCount; y++){
+		for(var x = 0; x < xCount; x++){
+			for(var y = 0; y < yCount; y++){
 				xPos = gridStepX *x;
 				yPos = gridStepY *y;
 
 				var node = new Node(xPos, yPos);
-					node.velocity.x = 0; //??
-					node.velocity.y = 0; //??
-					node.damping = nodeDamping;
+				node.velocity.x = 0; //??
+				node.velocity.y = 0; //??
+				node.damping = nodeDamping;
 				var rand = Math.floor(Math.random()*3);
-					if(rand === 0) node.type = 'rod';
-					else if(rand === 1) node.type = 'dash';
-					else if(rand === 2) node.type = 'dot';
+				if(rand === 0) node.type = 'rod';
+				else if(rand === 1) node.type = 'dash';
+				else if(rand === 2) node.type = 'dot';
 
 				nodes.push(node);
 			}
@@ -371,9 +370,9 @@ function chladniPlate(dataArray, bufferLength){
 		fft.getByteTimeDomainData(dataArray);
 
 		var da = dataArray[0];
-
+		
 		attractor.strength = Math.random()* (da * (attractStrengthInput.value/100));
-			if(Math.floor(Math.random()*2) === 1) attractor.strength *= -1;
+		if(Math.floor(Math.random()*2) === 1) attractor.strength *= -1;
 		attractor.radius = Math.random()* (da*attractRadiusInput.value);
 
 		attractor.ramp = Math.random()*attractRampInput.value;
@@ -464,8 +463,8 @@ function nodeAttraction(dataArray, bufferLength){
 			var dx = this.x - node.x;
 			var dy = this.y - node.y;
 			var d = Math.sqrt(
-					Math.pow(dx, 2) + Math.pow(dy, 2)
-				);
+				Math.pow(dx, 2) + Math.pow(dy, 2)
+			);
 			if(d > 0 && d < this.radius){
 				//calc force
 				var s = d/this.radius;
@@ -536,86 +535,86 @@ function nodeAttraction(dataArray, bufferLength){
 
 	//Runtime UI stuff
 	var visSettings	= document.getElementById('vis-settings');
-		visSettings.style.display = 'block';
+	visSettings.style.display = 'block';
 
 	var nodeDampingInput = document.createElement('input');
-		nodeDampingInput.type = 'range';
-		nodeDampingInput.id = 'nodeDampingInput';
-		nodeDampingInput.className = 'vis-setting';
-		nodeDampingInput.min = 0;
-		nodeDampingInput.max = 100;
-		nodeDampingInput.value = 8; //need to be /100 for 0.8
-		var nodeDampingLabel = document.createElement('label');
-			nodeDampingLabel.htmlFor = 'nodeDampingInput';
-			nodeDampingLabel.innerHTML = 'Node Damping';
-			nodeDampingLabel.className = 'vis-setting';
+	nodeDampingInput.type = 'range';
+	nodeDampingInput.id = 'nodeDampingInput';
+	nodeDampingInput.className = 'vis-setting';
+	nodeDampingInput.min = 0;
+	nodeDampingInput.max = 100;
+	nodeDampingInput.value = 8; //need to be /100 for 0.8
+	var nodeDampingLabel = document.createElement('label');
+	nodeDampingLabel.htmlFor = 'nodeDampingInput';
+	nodeDampingLabel.innerHTML = 'Node Damping';
+	nodeDampingLabel.className = 'vis-setting';
 
 	var showAttractNodeDiv = document.createElement('div');
-		showAttractNodeDiv.className = 'vis-setting';
-		var showAttractNode = document.createElement('input');
-			showAttractNode.id = 'showAttractNode';
-			showAttractNode.type = 'checkbox';
-			showAttractNode.className = 'vis-setting switch-input';
-			showAttractNode.checked = false;
-		var showAttractNodePaddel = document.createElement('label');
-			showAttractNodePaddel.className = 'vis-setting switch-paddle';
-			showAttractNodePaddel.htmlFor = 'showAttractNode';
-		var showAttractNodeLabel = document.createElement('label');
-			showAttractNodeLabel.htmlFor = 'showAttractNode';
-			showAttractNodeLabel.innerHTML = 'Show Attractor';
-			showAttractNodeLabel.className = 'vis-setting';
+	showAttractNodeDiv.className = 'vis-setting';
+	var showAttractNode = document.createElement('input');
+	showAttractNode.id = 'showAttractNode';
+	showAttractNode.type = 'checkbox';
+	showAttractNode.className = 'vis-setting switch-input';
+	showAttractNode.checked = false;
+	var showAttractNodePaddel = document.createElement('label');
+	showAttractNodePaddel.className = 'vis-setting switch-paddle';
+	showAttractNodePaddel.htmlFor = 'showAttractNode';
+	var showAttractNodeLabel = document.createElement('label');
+	showAttractNodeLabel.htmlFor = 'showAttractNode';
+	showAttractNodeLabel.innerHTML = 'Show Attractor';
+	showAttractNodeLabel.className = 'vis-setting';
 
 	var attractRadiusInput = document.createElement('input');
-		attractRadiusInput.type = 'range';
-		attractRadiusInput.id = 'attractRadiusInput';
-		attractRadiusInput.className = 'vis-setting';
-		attractRadiusInput.min = 0;
-		attractRadiusInput.max = 500;
-		attractRadiusInput.value = 420;
-		var attractRadiusLabel = document.createElement('label');
-			attractRadiusLabel.htmlFor = 'attractRadiusInput';
-			attractRadiusLabel.innerHTML = 'Attraction Radius';
-			attractRadiusLabel.className = 'vis-setting';
+	attractRadiusInput.type = 'range';
+	attractRadiusInput.id = 'attractRadiusInput';
+	attractRadiusInput.className = 'vis-setting';
+	attractRadiusInput.min = 0;
+	attractRadiusInput.max = 500;
+	attractRadiusInput.value = 420;
+	var attractRadiusLabel = document.createElement('label');
+	attractRadiusLabel.htmlFor = 'attractRadiusInput';
+	attractRadiusLabel.innerHTML = 'Attraction Radius';
+	attractRadiusLabel.className = 'vis-setting';
 
-		showAttractNodeDiv.appendChild(showAttractNodeLabel);
-		showAttractNodeDiv.appendChild(showAttractNode)
-		showAttractNodeDiv.appendChild(showAttractNodePaddel);
+	showAttractNodeDiv.appendChild(showAttractNodeLabel);
+	showAttractNodeDiv.appendChild(showAttractNode)
+	showAttractNodeDiv.appendChild(showAttractNodePaddel);
 
 	var attractStrengthInput = document.createElement('input');
-		attractStrengthInput.type = 'range';
-		attractStrengthInput.id = 'attractStrengthInput';
-		attractStrengthInput.className = 'vis-setting';
-		attractStrengthInput.min = -50;
-		attractStrengthInput.max = 50;
-		attractStrengthInput.value = -42;
-		var attractStrengthLabel = document.createElement('label');
-			attractStrengthLabel.htmlFor = 'attractStrengthInput';
-			attractStrengthLabel.innerHTML = 'Attraction Strength';
-			attractStrengthLabel.className = 'vis-setting';
+	attractStrengthInput.type = 'range';
+	attractStrengthInput.id = 'attractStrengthInput';
+	attractStrengthInput.className = 'vis-setting';
+	attractStrengthInput.min = -50;
+	attractStrengthInput.max = 50;
+	attractStrengthInput.value = -42;
+	var attractStrengthLabel = document.createElement('label');
+	attractStrengthLabel.htmlFor = 'attractStrengthInput';
+	attractStrengthLabel.innerHTML = 'Attraction Strength';
+	attractStrengthLabel.className = 'vis-setting';
 
 	var attractRampInput = document.createElement('input');
-		attractRampInput.type = 'range';
-		attractRampInput.id = 'attractRampInput';
-		attractRampInput.className = 'vis-setting';
-		attractRampInput.min = 0;
-		attractRampInput.max = 1000;
-		attractRampInput.value = 640; //need to be /100 for 0.2
-		var attractRampLabel = document.createElement('label');
-			attractRampLabel.htmlFor = 'attractRampInput';
-			attractRampLabel.innerHTML = 'Attraction Ramp';
-			attractRampLabel.className = 'vis-setting';
+	attractRampInput.type = 'range';
+	attractRampInput.id = 'attractRampInput';
+	attractRampInput.className = 'vis-setting';
+	attractRampInput.min = 0;
+	attractRampInput.max = 1000;
+	attractRampInput.value = 640; //need to be /100 for 0.2
+	var attractRampLabel = document.createElement('label');
+	attractRampLabel.htmlFor = 'attractRampInput';
+	attractRampLabel.innerHTML = 'Attraction Ramp';
+	attractRampLabel.className = 'vis-setting';
 
 	var attractMaxVelocityInput = document.createElement('input');
-		attractMaxVelocityInput.type = 'range';
-		attractMaxVelocityInput.id = 'attractRadiusInput';
-		attractMaxVelocityInput.className = 'vis-setting';
-		attractMaxVelocityInput.min = 0;
-		attractMaxVelocityInput.max = 20;
-		attractMaxVelocityInput.value = 15;
-		var attractMaxVelocityLabel = document.createElement('label');
-			attractMaxVelocityLabel.htmlFor = 'attractRadiusInput';
-			attractMaxVelocityLabel.innerHTML = 'Attract Node Velocity';
-			attractMaxVelocityLabel.className = 'vis-setting';
+	attractMaxVelocityInput.type = 'range';
+	attractMaxVelocityInput.id = 'attractRadiusInput';
+	attractMaxVelocityInput.className = 'vis-setting';
+	attractMaxVelocityInput.min = 0;
+	attractMaxVelocityInput.max = 20;
+	attractMaxVelocityInput.value = 15;
+	var attractMaxVelocityLabel = document.createElement('label');
+	attractMaxVelocityLabel.htmlFor = 'attractRadiusInput';
+	attractMaxVelocityLabel.innerHTML = 'Attract Node Velocity';
+	attractMaxVelocityLabel.className = 'vis-setting';
 
 	visSettings.appendChild(showAttractNodeDiv);
 	visSettings.appendChild(attractRadiusLabel);
@@ -644,7 +643,7 @@ function nodeAttraction(dataArray, bufferLength){
 
 
 	$(window ).resize(function() {
-  		init();
+		init();
 	});
 
 	function init(){
@@ -661,27 +660,27 @@ function nodeAttraction(dataArray, bufferLength){
 				var xPos = x*gridSizeX;
 				var yPos = y*gridSizeY;
 				var node = new Node(xPos, yPos);
-					node.setBoundary(0,0, canvWidth, canvHeight);
-					node.setDamping(node_Damping);
+				node.setBoundary(0,0, canvWidth, canvHeight);
+				node.setDamping(node_Damping);
 				var rand = Math.floor(Math.random()*3);
-					if(rand === 0) node.type = 'rod';
-					else if(rand === 1) node.type = 'dash';
-					else if(rand === 2) node.type = 'dot';
+				if(rand === 0) node.type = 'rod';
+				else if(rand === 1) node.type = 'dash';
+				else if(rand === 2) node.type = 'dot';
 				nodes.push(node);
 			}
 		}
 
 		attractor = new Attractor(canvWidth/2, canvHeight/2);
-			attractor.radius = attractRadiusInput.value;
-			attractor.strength = attractStrengthInput.value;
-			attractor.ramp = attractRampInput.value/100;
+		attractor.radius = attractRadiusInput.value;
+		attractor.strength = attractStrengthInput.value;
+		attractor.ramp = attractRampInput.value/100;
 
 		attractNode = new Node(canvWidth/2, canvHeight/2);
-			attractNode.setBoundary(0,0, canvWidth, canvHeight);
-			attractNode.setDamping(0);
+		attractNode.setBoundary(0,0, canvWidth, canvHeight);
+		attractNode.setDamping(0);
 
-			attractNode.velocity.x = attractMaxVelocityInput.value/2;
-			attractNode.velocity.y = attractMaxVelocityInput.value/2;
+		attractNode.velocity.x = attractMaxVelocityInput.value/2;
+		attractNode.velocity.y = attractMaxVelocityInput.value/2;
 
 		startAnimating(10);
 	}
@@ -807,259 +806,276 @@ function nodeAttraction(dataArray, bufferLength){
 
 function lissajousFigure(dataArray, bufferLength){
 
-		//Runtime UI stuff
-		var visSettings	= document.getElementById('vis-settings');
-			visSettings.style.display = 'block';
+	//Runtime UI stuff
+	var visSettings	= document.getElementById('vis-settings');
+	visSettings.style.display = 'block';
 
-		var freqXInput = document.createElement('input');
-			freqXInput.type = 'range';
-			freqXInput.id = 'freqXInput';
-			freqXInput.className = 'vis-setting';
-			freqXInput.min = 1;
-			freqXInput.max = 70;
-			freqXInput.value = 40;
-			var freqXLabel = document.createElement('label');
-				freqXLabel.htmlFor = 'freqXInput';
-				freqXLabel.className = 'vis-setting';
-				freqXLabel.innerHTML = 'Freq X';
+	var freqXDiv = document.createElement('div');
+	freqXDiv.className = 'vis-setting';
+	var freqXInput = document.createElement('input');
+	freqXInput.type = 'range';
+	freqXInput.id = 'freqXInput';
+	freqXInput.className = 'vis-setting';
+	freqXInput.min = 1;
+	freqXInput.max = 70;
+	freqXInput.value = 40;
+	var freqXLabel = document.createElement('label');
+	freqXLabel.htmlFor = 'freqXInput';
+	freqXLabel.className = 'vis-setting';
+	freqXLabel.innerHTML = 'Freq X';
 
-		var freqYInput = document.createElement('input');
-			freqYInput.type = 'range';
-			freqYInput.id = 'freqYInput';
-			freqYInput.className = 'vis-setting';
-			freqYInput.min = 1;
-			freqYInput.max = 70;
-			freqYInput.value = 40;
-			var freqYLabel = document.createElement('label');
-				freqYLabel.htmlFor = 'freqYInput';
-				freqYLabel.className = 'vis-setting';
-				freqYLabel.innerHTML = 'Freq Y';
+	var freqYDiv = document.createElement('div');
+	freqYDiv.className = 'vis-setting';
+	var freqYInput = document.createElement('input');
+	freqYInput.type = 'range';
+	freqYInput.id = 'freqYInput';
+	freqYInput.className = 'vis-setting';
+	freqYInput.min = 1;
+	freqYInput.max = 70;
+	freqYInput.value = 40;
+	var freqYLabel = document.createElement('label');
+	freqYLabel.htmlFor = 'freqYInput';
+	freqYLabel.className = 'vis-setting';
+	freqYLabel.innerHTML = 'Freq Y';
 
-		var phiInput = document.createElement('input');
-			phiInput.type = 'range';
-			phiInput.id = 'phiInput';
-			phiInput.className = 'vis-setting';
-			phiInput.min = 1;
-			phiInput.max = 360;
-			phiInput.value = 95;
-			var phiLabel = document.createElement('label');
-				phiLabel.htmlFor = 'phiInput';
-				phiLabel.className = 'vis-setting';
-				phiLabel.innerHTML = 'Phi';
+	var phiDiv = document.createElement('div');
+	phiDiv.className = 'vis-setting';
+	var phiInput = document.createElement('input');
+	phiInput.type = 'range';
+	phiInput.id = 'phiInput';
+	phiInput.className = 'vis-setting';
+	phiInput.min = 1;
+	phiInput.max = 360;
+	phiInput.value = 95;
+	var phiLabel = document.createElement('label');
+	phiLabel.htmlFor = 'phiInput';
+	phiLabel.className = 'vis-setting';
+	phiLabel.innerHTML = 'Phi';
 
-		var pointCountInput = document.createElement('input');
-			pointCountInput.type = 'range';
-			pointCountInput.id = 'pointCountInput';
-			pointCountInput.className = 'vis-setting';
-			pointCountInput.min = 10;
-			pointCountInput.max = 300;
-			pointCountInput.value = 50;
-			pointCountInput.addEventListener("change", function(){
-					init();
-				});
-		var pointCountLabel = document.createElement('label');
-			pointCountLabel.htmlFor = 'pointCountInput';
-			pointCountLabel.className = 'vis-setting';
-			pointCountLabel.innerHTML = 'Point Count';
-
-		var modFreqXInput = document.createElement('input');
-			modFreqXInput.type = 'range';
-			modFreqXInput.id = 'modFreqXInput';
-			modFreqXInput.className = 'vis-setting';
-			modFreqXInput.min = 1;
-			modFreqXInput.max = 70;
-			modFreqXInput.value = 40;
-		var modFreqXLabel = document.createElement('label');
-			modFreqXLabel.htmlFor = 'modFreqXInput';
-			modFreqXLabel.className = 'vis-setting';
-			modFreqXLabel.innerHTML = 'Mod Freq X';
-
-		var modFreqYInput = document.createElement('input');
-			modFreqYInput.type = 'range';
-			modFreqYInput.id = 'modFreqYInput';
-			modFreqYInput.className = 'vis-setting';
-			modFreqYInput.min = 1;
-			modFreqYInput.max = 70;
-			modFreqYInput.value = 40;
-		var modFreqYLabel = document.createElement('label');
-			modFreqYLabel.htmlFor = 'modFreqYInput';
-			modFreqYLabel.className = 'vis-setting';
-			modFreqYLabel.innerHTML = 'Mod Freq Y';
-
-		var modulatedDiv = document.createElement('div');
-				modulatedDiv.className = 'vis-setting';
-			var modulatedCheck = document.createElement('input');
-				modulatedCheck.id = 'modulatedCheck';
-				modulatedCheck.type = 'checkbox';
-				modulatedCheck.className = 'vis-setting switch-input';
-				modulatedCheck.checked = false;
-				modulatedCheck.addEventListener("change", function(){
-					init();
-				});
-			var modulatedPaddel = document.createElement('label');
-				modulatedPaddel.className = 'vis-setting switch-paddle';
-				modulatedPaddel.htmlFor = 'modulatedCheck';
-			var modulatedLabel = document.createElement('label');
-				modulatedLabel.htmlFor = 'modulatedCheck';
-				modulatedLabel.innerHTML = 'Modulated';
-				modulatedLabel.className = 'vis-setting';
-
-			modulatedDiv.appendChild(modulatedLabel);
-			modulatedDiv.appendChild(modulatedCheck);
-			modulatedDiv.appendChild(modulatedPaddel);
-		visSettings.appendChild(modulatedDiv);
-		visSettings.appendChild(pointCountLabel);
-		visSettings.appendChild(pointCountInput);
-		visSettings.appendChild(phiLabel);
-		visSettings.appendChild(phiInput);
-		visSettings.appendChild(freqXLabel);
-		visSettings.appendChild(freqXInput);
-		visSettings.appendChild(freqYLabel);
-		visSettings.appendChild(freqYInput);
-
-		visSettings.appendChild(modFreqXLabel);
-		visSettings.appendChild(modFreqXInput);
-		visSettings.appendChild(modFreqYLabel);
-		visSettings.appendChild(modFreqYInput);
-
-		var pointCount;
-		var freqX, freqY;
-		var phi, angle;
-		var x, y;
-		var margin = 50;
-
-		var modFreqX = 2;
-		var modFreqY = 4;
-		var modPhi = 0;
-
-		var w, maxDist;
-		var oldX, oldY;
-
-		var factorX = canvWidth/2 - margin;
-		var factorY = canvHeight/2 - margin;
-
-		var modulated;
-
-		var particleArray;
-
-		var rodPart = new RodParticle();
-		var dashPart = new DashParticle();
-		var dotPart = new DotParticle();
-
-		function init(){
-			canvasCtx.clearRect(0,0, canvWidth, canvHeight);
-			canvasCtx.fillStyle = bgColor;
-			canvasCtx.fillRect(0,0, canvWidth, canvHeight);
-
-			if(modulatedCheck.checked){
-				modulated = true;
-			}else{
-				modulated = false;
-			}
-			canvasCtx.strokeStyle = 'black';
-			pointCount = parseInt(pointCountInput.value);
-			freqX = parseInt(freqXInput.value);
-			freqY = parseInt(freqYInput.value);
-			phi = parseInt(phiInput.value);
-
-			particleArray = [];
-			for(var i = 0; i < pointCount; i++){
-				var type;
-				var rand = Math.floor(Math.random()*3);
-					if(rand === 0) type = 'rod';
-					else if(rand === 1) type = 'dash';
-					else if(rand === 2) type = 'dot';
-
-				var particle = {
-					type: type,
-					x: null,
-					y: null
-				}
-				particleArray.push(particle);
-			}
-
-			startAnimating(15);
-		}
+	var pointCountDiv = document.createElement('div');
+	pointCountDiv.className = 'vis-setting';
+	var pointCountInput = document.createElement('input');
+	pointCountInput.type = 'range';
+	pointCountInput.id = 'pointCountInput';
+	pointCountInput.className = 'vis-setting';
+	pointCountInput.min = 10;
+	pointCountInput.max = 300;
+	pointCountInput.value = 50;
+	pointCountInput.addEventListener("change", function(){
 		init();
+	});
+	var pointCountLabel = document.createElement('label');
+	pointCountLabel.htmlFor = 'pointCountInput';
+	pointCountLabel.className = 'vis-setting';
+	pointCountLabel.innerHTML = 'Point Count';
+
+	var modFreqXDiv = document.createElement('div');
+	modFreqXDiv.className = 'vis-setting';
+	var modFreqXInput = document.createElement('input');
+	modFreqXInput.type = 'range';
+	modFreqXInput.id = 'modFreqXInput';
+	modFreqXInput.className = 'vis-setting';
+	modFreqXInput.min = 1;
+	modFreqXInput.max = 70;
+	modFreqXInput.value = 40;
+	var modFreqXLabel = document.createElement('label');
+	modFreqXLabel.htmlFor = 'modFreqXInput';
+	modFreqXLabel.className = 'vis-setting';
+	modFreqXLabel.innerHTML = 'Mod Freq X';
+
+	var modFreqYDiv = document.createElement('div');
+	modFreqYDiv.className = 'vis-setting';
+	var modFreqYInput = document.createElement('input');
+	modFreqYInput.type = 'range';
+	modFreqYInput.id = 'modFreqYInput';
+	modFreqYInput.className = 'vis-setting';
+	modFreqYInput.min = 1;
+	modFreqYInput.max = 70;
+	modFreqYInput.value = 40;
+	var modFreqYLabel = document.createElement('label');
+	modFreqYLabel.htmlFor = 'modFreqYInput';
+	modFreqYLabel.className = 'vis-setting';
+	modFreqYLabel.innerHTML = 'Mod Freq Y';
+
+	var modulatedDiv = document.createElement('div');
+	modulatedDiv.className = 'vis-setting';
+	var modulatedCheck = document.createElement('input');
+	modulatedCheck.id = 'modulatedCheck';
+	modulatedCheck.type = 'checkbox';
+	modulatedCheck.className = 'vis-setting switch-input';
+	modulatedCheck.checked = false;
+	modulatedCheck.addEventListener("change", function(){
+		init();
+	});
+	var modulatedPaddel = document.createElement('label');
+	modulatedPaddel.className = 'vis-setting switch-paddle';
+	modulatedPaddel.htmlFor = 'modulatedCheck';
+	var modulatedLabel = document.createElement('label');
+	modulatedLabel.htmlFor = 'modulatedCheck';
+	modulatedLabel.innerHTML = 'Modulated';
+	modulatedLabel.className = 'vis-setting';
+
+	modulatedDiv.appendChild(modulatedLabel);
+	modulatedDiv.appendChild(modulatedCheck);
+	modulatedDiv.appendChild(modulatedPaddel);
+	visSettings.appendChild(modulatedDiv);
+	pointCountDiv.appendChild(pointCountLabel);
+	pointCountDiv.appendChild(pointCountInput);
+	visSettings.appendChild(pointCountDiv);
+	visSettings.appendChild(phiLabel);
+	visSettings.appendChild(phiInput);
+	freqXDiv.appendChild(freqXLabel);
+	freqXDiv.appendChild(freqXInput);
+	freqYDiv.appendChild(freqYLabel);
+	freqYDiv.appendChild(freqYInput);
+	visSettings.appendChild(freqXDiv);
+	visSettings.appendChild(freqYDiv);
+	modFreqXDiv.appendChild(modFreqXLabel);
+	modFreqXDiv.appendChild(modFreqXInput);
+	visSettings.appendChild(modFreqXDiv);
+	modFreqYDiv.appendChild(modFreqYLabel);
+	modFreqYDiv.appendChild(modFreqYInput);
+	visSettings.appendChild(modFreqYDiv);
 
 
-		function draw(){
+	var pointCount;
+	var freqX, freqY;
+	var phi, angle;
+	var x, y;
+	var margin = 50;
 
-			canvasCtx.clearRect(0,0, canvWidth, canvHeight);
-			canvasCtx.fillStyle = bgColor;
-			canvasCtx.fillRect(0,0, canvWidth, canvHeight);
+	var modFreqX = 2;
+	var modFreqY = 4;
+	var modPhi = 0;
 
-			var dataArray = new Uint8Array(fftSampleSize);
-			fft.getByteTimeDomainData(dataArray);
-			var da = dataArray[0];
+	var w, maxDist;
+	var oldX, oldY;
 
+	var factorX = canvWidth/2 - margin;
+	var factorY = canvHeight/2 - margin;
 
-			var logda = (Math.log(da) / Math.log(2));
-			if(isFinite(logda) && logda !== 0){
-				freqX = logda * parseInt(freqXInput.value);
-				freqY = logda * parseInt(freqYInput.value);
-				modFreqX = logda * parseInt(modFreqXInput.value);
-				modFreqY = logda * parseInt(modFreqYInput.value);
-				phi = parseInt(phiInput.value) - logda;
+	var modulated;
+
+	var particleArray;
+
+	var rodPart = new RodParticle();
+	var dashPart = new DashParticle();
+	var dotPart = new DotParticle();
+
+	function init(){
+		canvasCtx.clearRect(0,0, canvWidth, canvHeight);
+		canvasCtx.fillStyle = bgColor;
+		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
+
+		if(modulatedCheck.checked){
+			modulated = true;
+		}else{
+			modulated = false;
+		}
+		canvasCtx.strokeStyle = 'black';
+		pointCount = parseInt(pointCountInput.value);
+		freqX = parseInt(freqXInput.value);
+		freqY = parseInt(freqYInput.value);
+		phi = parseInt(phiInput.value);
+
+		particleArray = [];
+		for(var i = 0; i < pointCount; i++){
+			var type;
+			var rand = Math.floor(Math.random()*3);
+			if(rand === 0) type = 'rod';
+			else if(rand === 1) type = 'dash';
+			else if(rand === 2) type = 'dot';
+
+			var particle = {
+				type: type,
+				x: null,
+				y: null
 			}
-
-
-			for(var i = 0; i < particleArray.length; i++){
-				angle = map_range(i, 0,pointCount, 0,Math.PI*2);
-
-				if(modulated){
-					x = Math.sin(angle*freqX + (Math.PI/180)*phi * Math.cos(angle *modFreqX));
-					y = Math.sin(angle*freqY) * Math.cos(angle * modFreqY);
-				}else{
-					x = Math.sin(angle*freqX + (Math.PI/180)*phi); //lissajous
-					y = Math.sin(angle*freqY); //lissajous
-				}
-
-				particleArray[i].x =  x * factorX + canvWidth/2;
-				particleArray[i].y = y * factorY + canvHeight/2;
-
-				var pointerPart = particleArray[i-1];
-
-				if(i !== 0){ //HACK prevents the 'stray' from occur due to index length issue
-					var theta = Math.atan2(pointerPart.y - particleArray[i].y, pointerPart.x -particleArray[i].x);
-					if(particleArray[i].type === 'rod')
-						rodPart.draw(particleArray[i].x, particleArray[i].y, theta);
-					else if(particleArray[i].type === 'dash')
-						dashPart.draw(particleArray[i].x, particleArray[i].y, theta);
-					else if(particleArray[i].type === 'dot')
-						dotPart.draw(particleArray[i].x, particleArray[i].y, theta);
-				}
-			}
+			particleArray.push(particle);
 		}
 
-		function map_range(value, low1, high1, low2, high2) {
-			return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+		startAnimating(15);
+	}
+	init();
+
+
+	function draw(){
+
+		canvasCtx.clearRect(0,0, canvWidth, canvHeight);
+		canvasCtx.fillStyle = bgColor;
+		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
+
+		var dataArray = new Uint8Array(fftSampleSize);
+		fft.getByteTimeDomainData(dataArray);
+		var da = dataArray[0];
+
+
+		var logda = (Math.log(da) / Math.log(2));
+		if(isFinite(logda) && logda !== 0){
+			freqX = logda * parseInt(freqXInput.value);
+			freqY = logda * parseInt(freqYInput.value);
+			modFreqX = logda * parseInt(modFreqXInput.value);
+			modFreqY = logda * parseInt(modFreqYInput.value);
+			phi = parseInt(phiInput.value) - logda;
 		}
 
-		var stop = false;
-		var frameCount = 0;
-		var fps, fpsInterval, startTime, now, then, elapsed;
 
-		function startAnimating(fps){
-			fpsInterval = 1000/fps;
-			then = Date.now();
-			startTime = then;
-			animate();
-		}
+		for(var i = 0; i < particleArray.length; i++){
+			angle = map_range(i, 0,pointCount, 0,Math.PI*2);
 
-		function animate(){
-			if(stop){
-				return;
+			if(modulated){
+				x = Math.sin(angle*freqX + (Math.PI/180)*phi * Math.cos(angle *modFreqX));
+				y = Math.sin(angle*freqY) * Math.cos(angle * modFreqY);
+			}else{
+				x = Math.sin(angle*freqX + (Math.PI/180)*phi); //lissajous
+				y = Math.sin(angle*freqY); //lissajous
 			}
-			drawVisual = requestAnimationFrame(animate);
 
-			now = Date.now();
-			elapsed = now - then;
+			particleArray[i].x =  x * factorX + canvWidth/2;
+			particleArray[i].y = y * factorY + canvHeight/2;
 
-			if(elapsed > fpsInterval){
-				then = now - (elapsed % fpsInterval);
+			var pointerPart = particleArray[i-1];
 
-				draw();
-			}
+			if(i !== 0){ //HACK prevents the 'stray' from occur due to index length issue
+			var theta = Math.atan2(pointerPart.y - particleArray[i].y, pointerPart.x -particleArray[i].x);
+			if(particleArray[i].type === 'rod')
+			rodPart.draw(particleArray[i].x, particleArray[i].y, theta);
+			else if(particleArray[i].type === 'dash')
+			dashPart.draw(particleArray[i].x, particleArray[i].y, theta);
+			else if(particleArray[i].type === 'dot')
+			dotPart.draw(particleArray[i].x, particleArray[i].y, theta);
 		}
+	}
+}
+
+function map_range(value, low1, high1, low2, high2) {
+	return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+}
+
+var stop = false;
+var frameCount = 0;
+var fps, fpsInterval, startTime, now, then, elapsed;
+
+function startAnimating(fps){
+	fpsInterval = 1000/fps;
+	then = Date.now();
+	startTime = then;
+	animate();
+}
+
+function animate(){
+	if(stop){
+		return;
+	}
+	drawVisual = requestAnimationFrame(animate);
+
+	now = Date.now();
+	elapsed = now - then;
+
+	if(elapsed > fpsInterval){
+		then = now - (elapsed % fpsInterval);
+
+		draw();
+	}
+}
 }
