@@ -1,4 +1,4 @@
-var defaultVisMode = 'lissajousFigure';
+var defaultVisMode = 'waveForm';
 var currentVis = defaultVisMode;
 var canvWidth, canvHeight;
 var canvas, canvasCtx;
@@ -157,13 +157,7 @@ function initParts(){
 function visualise(visMode){
 
 	console.log(visMode);
-	if(visMode === 'BarGraph'){
-		barGraph(dataArray, bufferLength);
-	}
-	else if(visMode === 'indiTest01'){
-		indiTest01(dataArray, bufferLength);
-	}
-	else if(visMode === 'waveForm'){
+	if(visMode === 'waveForm'){
 		waveForm();
 	}
 	else if(visMode === 'chladniPlate'){
@@ -179,6 +173,23 @@ function visualise(visMode){
 		visOff();
 	}
 }
+
+
+function removeVisualSettings(){
+	var visSettings	= $('.vis-setting');
+	if(visSettings.length == 0){
+		return;
+	}
+	$(visSettings).remove();
+}
+
+$('.visMode-button').click((button)=>{
+	window.cancelAnimationFrame(drawVisual);
+	drawVisual = undefined;
+	removeVisualSettings();
+	visualise(button.target.name);
+});
+
 
 $(window ).resize(function() {
   setupCanvas();
