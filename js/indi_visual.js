@@ -857,10 +857,10 @@ function lissajousFigure(dataArray, bufferLength){
 			pointCountInput.addEventListener("change", function(){
 					init();
 				});
-			var pointCountLabel = document.createElement('label');
-				pointCountLabel.htmlFor = 'pointCountInput';
-				pointCountLabel.className = 'vis-setting';
-				pointCountLabel.innerHTML = 'Point Count';
+		var pointCountLabel = document.createElement('label');
+			pointCountLabel.htmlFor = 'pointCountInput';
+			pointCountLabel.className = 'vis-setting';
+			pointCountLabel.innerHTML = 'Point Count';
 
 		var modFreqXInput = document.createElement('input');
 			modFreqXInput.type = 'range';
@@ -869,10 +869,10 @@ function lissajousFigure(dataArray, bufferLength){
 			modFreqXInput.min = 1;
 			modFreqXInput.max = 70;
 			modFreqXInput.value = 40;
-			var modFreqXLabel = document.createElement('label');
-				modFreqXLabel.htmlFor = 'modFreqXInput';
-				modFreqXLabel.className = 'vis-setting';
-				modFreqXLabel.innerHTML = 'Mod Freq X';
+		var modFreqXLabel = document.createElement('label');
+			modFreqXLabel.htmlFor = 'modFreqXInput';
+			modFreqXLabel.className = 'vis-setting';
+			modFreqXLabel.innerHTML = 'Mod Freq X';
 
 		var modFreqYInput = document.createElement('input');
 			modFreqYInput.type = 'range';
@@ -881,15 +881,13 @@ function lissajousFigure(dataArray, bufferLength){
 			modFreqYInput.min = 1;
 			modFreqYInput.max = 70;
 			modFreqYInput.value = 40;
-			var modFreqYLabel = document.createElement('label');
-				modFreqYLabel.htmlFor = 'modFreqYInput';
-				modFreqYLabel.className = 'vis-setting';
-				modFreqYLabel.innerHTML = 'Mod Freq Y';
+		var modFreqYLabel = document.createElement('label');
+			modFreqYLabel.htmlFor = 'modFreqYInput';
+			modFreqYLabel.className = 'vis-setting';
+			modFreqYLabel.innerHTML = 'Mod Freq Y';
 
 		var modulatedDiv = document.createElement('div');
-
-
-			modulatedDiv.className = 'vis-setting';
+				modulatedDiv.className = 'vis-setting';
 			var modulatedCheck = document.createElement('input');
 				modulatedCheck.id = 'modulatedCheck';
 				modulatedCheck.type = 'checkbox';
@@ -909,19 +907,6 @@ function lissajousFigure(dataArray, bufferLength){
 			modulatedDiv.appendChild(modulatedLabel);
 			modulatedDiv.appendChild(modulatedCheck);
 			modulatedDiv.appendChild(modulatedPaddel);
-
-		var radiusInput = document.createElement('input');
-			radiusInput.type = 'range';
-			radiusInput.id = 'radiusInput';
-			radiusInput.className = 'vis-setting';
-			radiusInput.min = 1;
-			radiusInput.max = canvWidth/2 > canvHeight/2 ? canvHeight/2 : canvWidth/2;
-			radiusInput.value = radiusInput.max/2;
-			var radiusLabel = document.createElement('label');
-				radiusLabel.htmlFor = 'radiusInput';
-				radiusLabel.className = 'vis-setting';
-				radiusLabel.innerHTML = 'Radius';
-
 		visSettings.appendChild(modulatedDiv);
 		visSettings.appendChild(pointCountLabel);
 		visSettings.appendChild(pointCountInput);
@@ -937,9 +922,6 @@ function lissajousFigure(dataArray, bufferLength){
 		visSettings.appendChild(modFreqYLabel);
 		visSettings.appendChild(modFreqYInput);
 
-		visSettings.appendChild(radiusLabel);
-		visSettings.appendChild(radiusInput);
-
 		var pointCount;
 		var freqX, freqY;
 		var phi, angle;
@@ -953,8 +935,8 @@ function lissajousFigure(dataArray, bufferLength){
 		var w, maxDist;
 		var oldX, oldY;
 
-		var factorX = canvWidth/4;
-		var factorY = canvHeight/4;
+		var factorX = canvWidth/2 - margin;
+		var factorY = canvHeight/2 - margin;
 
 		var modulated;
 
@@ -1012,25 +994,14 @@ function lissajousFigure(dataArray, bufferLength){
 			var da = dataArray[0];
 
 
-			var logda = da;//(Math.log(da) / Math.log(2));
+			var logda = (Math.log(da) / Math.log(2));
 			if(isFinite(logda) && logda !== 0){
 				freqX = logda * parseInt(freqXInput.value);
-				// freqY = logda * parseInt(freqYInput.value);
+				freqY = logda * parseInt(freqYInput.value);
 				modFreqX = logda * parseInt(modFreqXInput.value);
 				modFreqY = logda * parseInt(modFreqYInput.value);
 				phi = parseInt(phiInput.value) - logda;
-				factorX = parseInt(radiusInput.value);
-				factorY = parseInt(radiusInput.value);
 			}
-			// else{
-			// 	freqX = parseInt(freqXInput.value);
-			// 	// freqY = logda * parseInt(freqYInput.value);
-			// 	modFreqX = parseInt(modFreqXInput.value);
-			// 	modFreqY = parseInt(modFreqYInput.value);
-			// 	phi = parseInt(phiInput.value);
-			// 	// factorX = parseInt(radiusInput.value);
-			// 	// factorY = parseInt(radiusInput.value);
-			// }
 
 
 			for(var i = 0; i < particleArray.length; i++){
