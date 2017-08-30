@@ -1,69 +1,21 @@
-// var fftInput = document.getElementById("fft-input");
-// fftInput.onchange = function(){
-// 	window.cancelAnimationFrame(drawVisual);
-// 	visualise(visualisationMode.value);
-// }
-
-// var minDb = document.getElementById("min-db-input");
-// minDb.onchange = function(){
-// 	analyser.minDecibels = minDb.value;
-// }
-// var maxDb = document.getElementById("max-db-input");
-// maxDb.onchange = function(){
-// 	analyser.maxDecibels = maxDb.value;
-// }
-
-// var smoothingRange = document.getElementById("smoothing-input");
-// smoothingRange.onchange = function(){
-// 	// console.log("val: " + smoothingRange.value);
-// 	analyser.smoothingTimeConstant = smoothingRange.value/100;
-// }
-
-// var audioCtx, analyser;
-
 var defaultVisMode = 'lissajousFigure';
 var currentVis = defaultVisMode;
 var canvWidth, canvHeight;
-var canvasCtx;
+var canvas, canvasCtx;
 var bgColor;
 
-var requiredAssets = 7; //not the best approach
-								//	- subject to falability if not updated
+var requiredAssets = 7; //HACK - subject to falability if not updated
 var loadedAssets = 0;
-var rodDashSvg, rodOuterSvg, rodInnerSvg, 
+var rodDashSvg, rodOuterSvg, rodInnerSvg,
 	dashOuterSvg, dashInnerSvg,
 	dotOuterSvg, dotInnerSvg; //svg assets
 
 var RodParticle, DashParticle, DotParticle; //anon funct objects
 
-var canvas;
-
 var drawVisual;
 
-var bufferLength;
-var dataArray;
 
-var audioCtx; //audio context
-var buffer; //audio buffer
-var fft; //fft audio node
-var fftSampleSize = 256; //used to be 256 - put back?
-var audioSetup = false; //is audio setup?
-
-// init sound system
-function initSound(){
-
-	try{
-		audioCtx = new AudioContext();
-		
-		loadSoundFile();
-	}
-	catch(e){
-		alert("it seems your browser doesn't support webaudio - try another browser");
-	}
-}
-window.addEventListener('load', initSound, false); //swap out for jQ?
-
-function loadSoundFile(){
+function loadSoundFile(){ //TODO - move this into _audio.js and replace with promise
 	var request = new XMLHttpRequest();
 	request.open('GET',
 				'https://raw.githubusercontent.com/ryanachten/IndiOfficial/master/audio/Chrysaora_Colorata.mp3'
@@ -77,32 +29,13 @@ function loadSoundFile(){
 			setupCanvas();
 			loadAssets();
 		});
-	};	
+	};
 	request.send();
-}
-
-function setupAudioNodes(){
-
-	// create source node from buffer
-	var source = audioCtx.createBufferSource();
-	source.buffer = buffer;
-
-	//create FFT
-	fft = audioCtx.createAnalyser();
-	fft.fftSize = fftSampleSize;
-
-	//chain connections
-	source.connect(fft);
-	fft.connect(audioCtx.destination); //final output node (speakers)
-
-	source.start(0); //might want to expose this for start/pause control
-
-	setup = true;
 }
 
 function setupCanvas(){
 	canvas = document.querySelector("#visualiser");
-		
+
 	if(canvas.getContext){
 		canvas.width = $(window).width();
 		var topNavHeight = $('header').height();
@@ -121,20 +54,20 @@ function setupCanvas(){
 	}
 }
 
-function loadAssets(){			
+function loadAssets(){
 
 	rodDashSvg = new Image();
 	rodDashSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Dash.svg';
 	rodDashSvg.onload = function(){
 		loadedAssets++;
-		initParts();			
+		initParts();
 	};
 
 	rodOuterSvg = new Image();
 	rodOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Outer.svg';
 	rodOuterSvg.onload = function(){
 		loadedAssets++;
-		initParts();			
+		initParts();
 	};
 
 	rodInnerSvg = new Image();
@@ -148,7 +81,7 @@ function loadAssets(){
 	dashOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Outer.svg';
 	dashOuterSvg.onload = function(){
 		loadedAssets++;
-		initParts();			
+		initParts();
 	};
 
 	dashInnerSvg = new Image();
@@ -162,7 +95,7 @@ function loadAssets(){
 	dotOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Outer.svg';
 	dotOuterSvg.onload = function(){
 		loadedAssets++;
-		initParts();			
+		initParts();
 	};
 
 	dotInnerSvg = new Image();
@@ -183,9 +116,9 @@ function initParts(){
 			this.draw = function(xPos, yPos, radians){
 				canvasCtx.save();
 				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(radians);				
-				canvasCtx.drawImage(rodDashSvg, 0, 0);	
-				canvasCtx.drawImage(rodOuterSvg, 0, 0);		
+				canvasCtx.rotate(radians);
+				canvasCtx.drawImage(rodDashSvg, 0, 0);
+				canvasCtx.drawImage(rodOuterSvg, 0, 0);
 				canvasCtx.drawImage(rodInnerSvg, 0, 4);
 				canvasCtx.restore();
 			};
@@ -197,7 +130,7 @@ function initParts(){
 			this.draw = function(xPos, yPos, radians){
 				canvasCtx.save();
 				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(radians);	
+				canvasCtx.rotate(radians);
 				canvasCtx.drawImage(dashOuterSvg, 0, 0);
 				canvasCtx.drawImage(dashInnerSvg, 0, 0.5);
 				canvasCtx.restore();
@@ -210,7 +143,7 @@ function initParts(){
 			this.draw = function(xPos, yPos, radians){
 				canvasCtx.save();
 				canvasCtx.translate(xPos, yPos);
-				canvasCtx.rotate(radians);	
+				canvasCtx.rotate(radians);
 				canvasCtx.drawImage(dotOuterSvg, 0, 0);
 				canvasCtx.drawImage(dotInnerSvg, 0, 0.5);
 				canvasCtx.restore();
@@ -229,7 +162,7 @@ function visualise(visMode){
 
 	console.log(visMode);
 	if(visMode === 'BarGraph'){
-		barGraph(dataArray, bufferLength); 
+		barGraph(dataArray, bufferLength);
 	}
 	else if(visMode === 'indiTest01'){
 		indiTest01(dataArray, bufferLength);
