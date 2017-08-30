@@ -1,4 +1,4 @@
-var defaultVisMode = 'lissajousFigure';
+var defaultVisMode = 'nodeAttraction';
 var drawVisual;
 var canvWidth, canvHeight;
 var canvas, canvasCtx;
