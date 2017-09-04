@@ -1,4 +1,4 @@
-var defaultVisMode = 'chladniPlate';
+var defaultVisMode = $('.active-visual').val();
 var drawVisual;
 var canvWidth, canvHeight;
 var canvas, canvasCtx;
@@ -173,11 +173,13 @@ function visualise(visMode){
 }
 
 
-$('.visMode-button').click((button)=>{
+$('.visMode-button').click(function(button){
 	window.cancelAnimationFrame(drawVisual);
 	drawVisual = undefined;
 	$('#visdat-gui').remove();
-	visualise(button.target.name);
+	$('.active-visual').removeClass('active-visual');
+	$(button.target).addClass('active-visual');
+	visualise(button.target.value);
 });
 
 

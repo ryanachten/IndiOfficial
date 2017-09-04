@@ -69,6 +69,22 @@ header{
     z-index: -1;
 }
 
+button.visMode-button{
+	border: none;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	background-color: #9f9b99;
+	cursor: pointer;
+}
+
+button.visMode-button.active-visual{
+	background-color: #ffabab;
+}
+
 .dg.main .close-button.close-bottom {
     position: relative;
 }

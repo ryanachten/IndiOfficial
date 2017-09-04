@@ -51,14 +51,12 @@ function chladniPlate(dataArray, bufferLength){
 	var guiObj = {
 		nodeDamping: 5,
 		attractMode: 'smooth',
-		drawMode: 'line',
 		attractRadius: 10,
 		attractStrength: 37,
 		attractRamp: 1
 	};
 
 	gui.add(guiObj, "attractMode", ['basic', 'smooth', 'twirl']);
-	gui.add(guiObj, "drawMode", ['line', 'circle']);
 	gui.add(guiObj, "nodeDamping").min(0).max(20);
 	gui.add(guiObj, "attractRadius").min(0).max(20);
 	gui.add(guiObj, "attractStrength").min(0).max(200);
