@@ -44,7 +44,9 @@ function chladniPlate(dataArray, bufferLength){
 
 	//Runtime UI stuff
 	var gui = new dat.GUI({ autoPlace: false });
+	gui.domElement.id = 'dat-gui';
 	var visSettings	= $('#vis-settings');
+	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
 		nodeDamping: 5,
@@ -61,8 +63,6 @@ function chladniPlate(dataArray, bufferLength){
 	gui.add(guiObj, "attractRadius").min(0).max(20);
 	gui.add(guiObj, "attractStrength").min(0).max(200);
 	gui.add(guiObj, "attractRamp").min(0.1).max(5);
-
-	visSettings.show().append(gui.domElement);
 
 	var rodPart = new RodParticle();
 	var dashPart = new DashParticle();
@@ -319,10 +319,28 @@ function chladniPlate(dataArray, bufferLength){
 
 function nodeAttraction(dataArray, bufferLength){
 
+	var gui = new dat.GUI({ autoPlace: false });
+	gui.domElement.id = 'dat-gui';
+	var visSettings	= $('#vis-settings');
+	visSettings.show().append(gui.domElement);
+
+	var guiObj = {
+		showAttactionNode: false,
+		nodeDamping: 8,
+		attractRadius: 420,
+		attractStrength: -42,
+		attractRamp: 640,
+		maxVelocity: 15,
+	};
+	gui.add(guiObj, "showAttactionNode");
+	gui.add(guiObj, "nodeDamping").min(0).max(100);
+	gui.add(guiObj, "attractRadius").min(0).max(500);
+	gui.add(guiObj, "attractRamp").min(0).max(1000);
+	gui.add(guiObj, "maxVelocity").min(0).max(20);
+
 	var rodPart = new RodParticle();
 	var dashPart = new DashParticle();
 	var dotPart = new DotParticle();
-
 
 	var Attractor = (function(x, y){
 
@@ -405,21 +423,6 @@ function nodeAttraction(dataArray, bufferLength){
 			this.damping = newDamping;
 		};
 	});
-
-	var gui = new dat.GUI();
-	var guiObj = {
-		showAttactionNode: false,
-		nodeDamping: 8,
-		attractRadius: 420,
-		attractStrength: -42,
-		attractRamp: 640,
-		maxVelocity: 15,
-	};
-	gui.add(guiObj, "showAttactionNode");
-	gui.add(guiObj, "nodeDamping").min(0).max(100);
-	gui.add(guiObj, "attractRadius").min(0).max(500);
-	gui.add(guiObj, "attractRamp").min(0).max(1000);
-	gui.add(guiObj, "maxVelocity").min(0).max(20);
 
 	var xCount = canvWidth/100;
 	var yCount = canvHeight/100;
@@ -599,10 +602,11 @@ function nodeAttraction(dataArray, bufferLength){
 function lissajousFigure(dataArray, bufferLength){
 
 	//Runtime UI stuff
-	var visSettings	= document.getElementById('vis-settings');
-	visSettings.style.display = 'block';
+	var gui = new dat.GUI({ autoPlace: false });
+	gui.domElement.id = 'dat-gui';
+	var visSettings	= $('#vis-settings');
+	visSettings.show().append(gui.domElement);
 
-	var gui = new dat.GUI();
 	var guiObj = {
 		phi: 95,
 		pointCount: 50,

@@ -174,11 +174,8 @@ function visualise(visMode){
 
 
 function removeVisualSettings(){
-	var visSettings	= $('.vis-setting');
-	if(visSettings.length == 0){
-		return;
-	}
-	$(visSettings).remove();
+	var datgui = $('#dat-gui')
+	datgui.remove();
 }
 
 $('.visMode-button').click((button)=>{
