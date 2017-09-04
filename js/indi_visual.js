@@ -42,6 +42,28 @@ function waveForm(dataArray, bufferLength){
 
 function chladniPlate(dataArray, bufferLength){
 
+	//Runtime UI stuff
+	var gui = new dat.GUI({ autoPlace: false });
+	var visSettings	= $('#vis-settings');
+
+	var guiObj = {
+		nodeDamping: 5,
+		attractMode: 'smooth',
+		drawMode: 'line',
+		attractRadius: 10,
+		attractStrength: 37,
+		attractRamp: 1
+	};
+
+	gui.add(guiObj, "attractMode", ['basic', 'smooth', 'twirl']);
+	gui.add(guiObj, "drawMode", ['line', 'circle']);
+	gui.add(guiObj, "nodeDamping").min(0).max(20);
+	gui.add(guiObj, "attractRadius").min(0).max(20);
+	gui.add(guiObj, "attractStrength").min(0).max(200);
+	gui.add(guiObj, "attractRamp").min(0.1).max(5);
+
+	visSettings.show().append(gui.domElement);
+
 	var rodPart = new RodParticle();
 	var dashPart = new DashParticle();
 	var dotPart = new DotParticle();
@@ -151,155 +173,6 @@ function chladniPlate(dataArray, bufferLength){
 		};
 	});
 
-	//Runtime UI stuff
-	var visSettings	= document.getElementById('vis-settings');
-		visSettings.style.display = 'block';
-
-		var nodeDampingInput = document.createElement('input');
-		nodeDampingInput.type = 'range';
-		nodeDampingInput.id = 'nodeDampingInput';
-		nodeDampingInput.className = 'vis-setting';
-		nodeDampingInput.min = 0;
-		nodeDampingInput.max = 100;
-		nodeDampingInput.value = 5; //need to be /100 for 0.8
-		var nodeDampingLabel = document.createElement('label');
-		nodeDampingLabel.htmlFor = 'nodeDampingInput';
-		nodeDampingLabel.innerHTML = 'Node Damping';
-		nodeDampingLabel.className = 'vis-setting';
-
-		var basicDiv = document.createElement('div');
-		basicDiv.className = 'vis-setting switch';
-		var basicModeInput = document.createElement('input');
-		basicModeInput.id = 'basicModeInput';
-		basicModeInput.type = 'radio';
-		basicModeInput.name = 'attractMode';
-		basicModeInput.className = 'vis-setting switch-input';
-		var basicModeLabel = document.createElement('label');
-		basicModeLabel.htmlFor = 'basicModeInput';
-		basicModeLabel.innerHTML = 'Basic Mode';
-		basicModeLabel.className = 'vis-setting';
-		var basicModePaddel = document.createElement('label');
-		basicModePaddel.className = 'vis-setting switch-paddle';
-		basicModePaddel.htmlFor = 'basicModeInput';
-
-		var smoothDiv = document.createElement('div');
-		smoothDiv.className = 'vis-setting switch';
-		var smoothModeInput = document.createElement('input');
-		smoothModeInput.id = 'smoothModeInput';
-		smoothModeInput.type = 'radio';
-		smoothModeInput.name = 'attractMode';
-		smoothModeInput.className = 'vis-setting switch-input';
-		smoothModeInput.checked = true;
-		var smoothModeLabel = document.createElement('label');
-		smoothModeLabel.htmlFor = 'smoothModeInput';
-		smoothModeLabel.innerHTML = 'Smooth Mode';
-		var smoothModePaddel = document.createElement('label');
-		smoothModePaddel.className = 'vis-setting switch-paddle';
-		smoothModePaddel.htmlFor = 'smoothModeInput';
-
-		var twistDiv = document.createElement('div');
-		twistDiv.className = 'vis-setting switch';
-		var twistModeInput = document.createElement('input');
-		twistModeInput.id = 'twistModeInput';
-		twistModeInput.type = 'radio';
-		twistModeInput.name = 'attractMode';
-		twistModeInput.className = 'vis-setting switch-input';
-		// twistModeInput.checked = true;
-		var twistModeLabel = document.createElement('label');
-		twistModeLabel.htmlFor = 'twistModeInput';
-		twistModeLabel.innerHTML = 'Twist Mode';
-		var twistModePaddel = document.createElement('label');
-		twistModePaddel.className = 'vis-setting switch-paddle';
-		twistModePaddel.htmlFor = 'twistModeInput';
-
-		var lineDiv = document.createElement('div');
-		lineDiv.className = 'vis-setting switch';
-		var lineModeInput = document.createElement('input');
-		lineModeInput.id = 'lineModeInput';
-		lineModeInput.type = 'radio';
-		lineModeInput.name = 'drawMode';
-		lineModeInput.className = 'vis-setting switch-input';
-		lineModeInput.checked = true;
-		var lineModeLabel = document.createElement('label');
-		lineModeLabel.htmlFor = 'lineModeInput';
-		lineModeLabel.innerHTML = 'Draw Lines';
-		lineModeLabel.className = 'vis-setting';
-		var lineModePaddel = document.createElement('label');
-		lineModePaddel.className = 'vis-setting switch-paddle';
-		lineModePaddel.htmlFor = 'lineModeInput';
-
-		var circleDiv = document.createElement('div');
-		circleDiv.className = 'vis-setting switch';
-		var circleModeInput = document.createElement('input');
-		circleModeInput.id = 'circleModeInput';
-		circleModeInput.type = 'radio';
-		circleModeInput.name = 'drawMode';
-		circleModeInput.className = 'vis-setting switch-input';
-		var circleModeLabel = document.createElement('label');
-		circleModeLabel.htmlFor = 'circleModeInput';
-		circleModeLabel.innerHTML = 'Draw Circles';
-		circleModeLabel.className = 'vis-setting';
-		var circleModePaddel = document.createElement('label');
-		circleModePaddel.className = 'vis-setting switch-paddle';
-		circleModePaddel.htmlFor = 'circleModeInput';
-
-		var attractRadiusInput = document.createElement('input');
-		attractRadiusInput.type = 'range';
-		attractRadiusInput.id = 'attractRadiusInput';
-		attractRadiusInput.className = 'vis-setting';
-		attractRadiusInput.min = 0;
-		attractRadiusInput.max = 20;
-		attractRadiusInput.value = attractRadiusInput.max/2;
-		var attractRadiusLabel = document.createElement('label');
-		attractRadiusLabel.htmlFor = 'attractRadiusInput';
-		attractRadiusLabel.innerHTML = 'Attraction Radius';
-		attractRadiusLabel.className = 'vis-setting';
-
-		var attractStrengthInput = document.createElement('input');
-		attractStrengthInput.type = 'range';
-		attractStrengthInput.id = 'attractStrengthInput';
-		attractStrengthInput.className = 'vis-setting';
-		attractStrengthInput.min = 0;
-		attractStrengthInput.max = 200;
-		attractStrengthInput.value = 37;
-		var attractStrengthLabel = document.createElement('label');
-		attractStrengthLabel.htmlFor = 'attractStrengthInput';
-		attractStrengthLabel.innerHTML = 'Attraction Strength';
-		attractStrengthLabel.className = 'vis-setting';
-
-		var attractRampInput = document.createElement('input');
-		attractRampInput.type = 'range';
-		attractRampInput.id = 'attractRampInput';
-		attractRampInput.className = 'vis-setting';
-		attractRampInput.min = 0.1;
-		attractRampInput.max = 5;
-		attractRampInput.value = 1; //need to be /100 for 0.2
-		var attractRampLabel = document.createElement('label');
-		attractRampLabel.htmlFor = 'attractRampInput';
-		attractRampLabel.innerHTML = 'Attraction Ramp';
-		attractRampLabel.className = 'vis-setting';
-
-		basicDiv.appendChild(basicModeLabel);
-		basicDiv.appendChild(basicModeInput);
-		basicDiv.appendChild(basicModePaddel);
-		smoothDiv.appendChild(smoothModeLabel);
-		smoothDiv.appendChild(smoothModeInput);
-		smoothDiv.appendChild(smoothModePaddel);
-		twistDiv.appendChild(twistModeLabel);
-		twistDiv.appendChild(twistModeInput);
-		twistDiv.appendChild(twistModePaddel);
-		visSettings.appendChild(basicDiv);
-		visSettings.appendChild(smoothDiv);
-		visSettings.appendChild(twistDiv);
-		visSettings.appendChild(nodeDampingLabel);
-		visSettings.appendChild(nodeDampingInput);
-		visSettings.appendChild(attractRadiusLabel);
-		visSettings.appendChild(attractRadiusInput);
-		visSettings.appendChild(attractStrengthLabel);
-		visSettings.appendChild(attractStrengthInput);
-		visSettings.appendChild(attractRampLabel);
-		visSettings.appendChild(attractRampInput);
-
 	var xCount = canvWidth/100; //15;
 	var yCount = canvHeight/100; //15;
 	var gridStepX = canvWidth/xCount;
@@ -327,7 +200,7 @@ function chladniPlate(dataArray, bufferLength){
 		startAnimating(30);
 
 	}
-	init();
+	init();//TODO: put back after ui changes
 
 	function initGrid(){
 
@@ -358,9 +231,9 @@ function chladniPlate(dataArray, bufferLength){
 		canvasCtx.fillStyle = bgColor;
 		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
 
-		if(smoothModeInput.checked){
+		if(guiObj.attractMode === 'smooth'){
 			attractor.mode = 'smooth';
-		}else if(twistModeInput.checked){
+		}else if(guiObj.attractMode === 'twirl'){
 			attractor.mode = 'twirl';
 		}else{
 			attractor.mode = 'basic';
@@ -371,16 +244,16 @@ function chladniPlate(dataArray, bufferLength){
 
 		var da = dataArray[0];
 
-		attractor.strength = Math.random()* (da * (attractStrengthInput.value/100));
+		attractor.strength = Math.random()* (da * (guiObj.attractStrength/100));
 		if(Math.floor(Math.random()*2) === 1) attractor.strength *= -1;
-		attractor.radius = Math.random()* (da*attractRadiusInput.value);
+		attractor.radius = Math.random()* (da*guiObj.attractRadius);
 
-		attractor.ramp = Math.random()*attractRampInput.value;
+		attractor.ramp = Math.random()*guiObj.attractRamp;
 
 		// nodeDamping = Math.random()*0.8;
 		// 	if(Math.floor(Math.random()*2) === 1) nodeDamping *= -1;
 
-		nodeDamping = nodeDampingInput.value/100; //non-random
+		nodeDamping = guiObj.nodeDamping/100; //non-random
 
 
 		for (var i = 0; i < nodes.length; i++) {
@@ -542,7 +415,7 @@ function nodeAttraction(dataArray, bufferLength){
 		attractRamp: 640,
 		maxVelocity: 15,
 	};
-	gui.add(guiObj, "showAttactionNode"); //TODO add event listener?
+	gui.add(guiObj, "showAttactionNode");
 	gui.add(guiObj, "nodeDamping").min(0).max(100);
 	gui.add(guiObj, "attractRadius").min(0).max(500);
 	gui.add(guiObj, "attractRamp").min(0).max(1000);

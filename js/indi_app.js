@@ -1,4 +1,4 @@
-var defaultVisMode = 'nodeAttraction';
+var defaultVisMode = 'chladniPlate';
 var drawVisual;
 var canvWidth, canvHeight;
 var canvas, canvasCtx;
