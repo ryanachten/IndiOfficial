@@ -173,15 +173,10 @@ function visualise(visMode){
 }
 
 
-function removeVisualSettings(){
-	var datgui = $('#dat-gui')
-	datgui.remove();
-}
-
 $('.visMode-button').click((button)=>{
 	window.cancelAnimationFrame(drawVisual);
 	drawVisual = undefined;
-	removeVisualSettings();
+	$('#visdat-gui').remove();
 	visualise(button.target.name);
 });
 

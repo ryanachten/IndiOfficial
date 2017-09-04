@@ -54,12 +54,13 @@ header{
 #ui-panel{
 	/*display: none;*/
 	position: absolute;
-    z-index: 1;
-    background-color: rgba(255,255,255, 0.9);
-    padding: 10px;
-    margin-left: 40px;
-    margin-top: 150px;
-    width: 300px;
+  z-index: 1;
+  background-color: rgba(255,255,255, 0.9);
+  padding: 20px;
+  margin-left: 40px;
+  margin-top: 150px;
+	text-align: center;
+    /*width: 300px;*/
 }
 
 #visualiser, #container{
@@ -68,6 +69,9 @@ header{
     z-index: -1;
 }
 
+.dg.main .close-button.close-bottom {
+    position: relative;
+}
 
 
 @media screen and (max-width: 800px) {
