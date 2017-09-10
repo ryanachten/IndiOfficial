@@ -431,12 +431,14 @@ function nodeAttraction(dataArray, bufferLength){
 	var attractor;
 	var attractor_MaxRamp, attractor_Radius, attractor_Strength;
 
-	var clientX, clientY;
+	var clientX = canvWidth/2;
+	var clientY = canvHeight/2;
 
 	$(window).mousemove(function(e){
 		if (typeof e.pageX !== 'undefined' && typeof e.pageY !== 'undefined'){
-			clientX = e.pageX;
-			clientY = e.pageY;
+			var rect = canvas.getBoundingClientRect();
+			clientX = e.pageX - rect.left;
+			clientY = e.pageY - rect.top;
 		}
 	})
 
