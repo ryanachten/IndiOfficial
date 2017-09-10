@@ -434,7 +434,6 @@ function nodeAttraction(dataArray, bufferLength){
 	var clientX, clientY;
 
 	$(window).mousemove(function(e){
-		console.log(e.pageX, e.pageY)
 		if (typeof e.pageX !== 'undefined' && typeof e.pageY !== 'undefined'){
 			clientX = e.pageX;
 			clientY = e.pageY;
