@@ -198,7 +198,7 @@ function chladniPlate(dataArray, bufferLength){
 		startAnimating(30);
 
 	}
-	init();//TODO: put back after ui changes
+	init();
 
 	function initGrid(){
 
@@ -431,11 +431,17 @@ function nodeAttraction(dataArray, bufferLength){
 	var attractor;
 	var attractor_MaxRamp, attractor_Radius, attractor_Strength;
 
-	var attractNode;
-	var attractNode_MaxVelocity;
+	var clientX, clientY;
 
+	$(window).mousemove(function(e){
+		console.log(e.pageX, e.pageY)
+		if (typeof e.pageX !== 'undefined' && typeof e.pageY !== 'undefined'){
+			clientX = e.pageX;
+			clientY = e.pageY;
+		}
+	})
 
-	$(window ).resize(function() {
+	$(window).resize(function() {
 		init();
 	});
 
@@ -468,13 +474,6 @@ function nodeAttraction(dataArray, bufferLength){
 		attractor.strength = guiObj.attractStrength;
 		attractor.ramp = guiObj.attractRamp/100;
 
-		attractNode = new Node(canvWidth/2, canvHeight/2);
-		attractNode.setBoundary(0,0, canvWidth, canvHeight);
-		attractNode.setDamping(0);
-
-		attractNode.velocity.x = guiObj.maxVelocity/2;
-		attractNode.velocity.y = guiObj.maxVelocity/2;
-
 		startAnimating(10);
 	}
 	init();
@@ -485,7 +484,6 @@ function nodeAttraction(dataArray, bufferLength){
 		var dataArray = new Uint8Array(fftSampleSize);
 		fft.getByteTimeDomainData(dataArray);
 
-		// analyser.getByteFrequencyData(dataArray);
 		var da = dataArray[0];
 
 		canvasCtx.clearRect(0,0, canvWidth,canvHeight);
@@ -494,44 +492,30 @@ function nodeAttraction(dataArray, bufferLength){
 
 		attractor_Radius = guiObj.attractRadius;
 		attractor_Strength = guiObj.attractStrength;
-		attractNode_MaxVelocity = guiObj.maxVelocity;
 		attractor_MaxRamp = da/guiObj.attractRamp;
 
 		attractor.strength = attractor_Strength;
 		attractor.radius = attractor_Radius;
 
-		//velocity cap
-		if(attractNode.velocity.x > attractNode_MaxVelocity) attractNode.velocity.x = attractNode_MaxVelocity;
-		if(attractNode.velocity.x < attractNode_MaxVelocity *-1) attractNode.velocity.x = attractNode_MaxVelocity*-1;
-		if(attractNode.velocity.y > attractNode_MaxVelocity) attractNode.velocity.y = attractNode_MaxVelocity;
-		if(attractNode.velocity.y < attractNode_MaxVelocity *-1) attractNode.velocity.y = attractNode_MaxVelocity*-1;
+		attractor.x = clientX;
+		attractor.y = clientY;
 
-		attractNode.velocity.x -= Math.random()*attractNode_MaxVelocity;
-		attractNode.velocity.y -= Math.random()*attractNode_MaxVelocity;
-		attractNode.velocity.x += Math.random()*attractNode_MaxVelocity;
-		attractNode.velocity.y += Math.random()*attractNode_MaxVelocity;
-
-		attractNode.update();
 		if(guiObj.showAttactionNode){
 			canvasCtx.beginPath();
-			canvasCtx.arc(attractNode.x, attractNode.y, 5, 0, Math.PI*2);
+			canvasCtx.arc(attractor.x, attractor.y, 5, 0, Math.PI*2);
 			canvasCtx.closePath();
 			canvasCtx.fillStyle = 'black';
 			canvasCtx.fill();
 			canvasCtx.beginPath();
-			canvasCtx.arc(attractNode.x, attractNode.y, attractor.radius, 0, Math.PI*2);
+			canvasCtx.arc(attractor.x, attractor.y, attractor.radius, 0, Math.PI*2);
 			canvasCtx.closePath();
 			canvasCtx.strokeStyle = 'black';
 			canvasCtx.stroke();
 		}
 
-		attractor.x = attractNode.x;
-		attractor.y = attractNode.y;
-
 
 		attractor.ramp = Math.random()*attractor_MaxRamp;
 		if(Math.floor(Math.random()*2) === 1) attractor.ramp*=-1;
-
 
 
 		for(var i = 0; i < nodes.length; i++){
@@ -540,21 +524,6 @@ function nodeAttraction(dataArray, bufferLength){
 			nodes[i].setDamping(node_Damping);
 			attractor.attract(nodes[i]);
 			nodes[i].update();
-
-			// canvasCtx.beginPath();
-			// canvasCtx.arc(nodes[i].x, nodes[i].y, 2, 0, Math.PI*2);
-			// canvasCtx.closePath();
-
-			// var rand = Math.floor(Math.random()*2);
-			// if(i%5 === 0){
-			// 	canvasCtx.fillStyle = 'hsl(282, 100%, 50%)';
-			// }else if(i%3 === 0){
-			// 	canvasCtx.fillStyle = 'hsl(332, 100%, 50%)';
-			// }else{
-			// 	canvasCtx.fillStyle = 'hsl(182, 100%, 50%)';
-			// }
-
-			// canvasCtx.fill();
 
 			var theta = Math.atan2(attractor.y - nodes[i].y, attractor.x -nodes[i].x)
 
