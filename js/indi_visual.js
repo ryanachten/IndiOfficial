@@ -576,10 +576,10 @@ function lissajousFigure(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
-		phi: 95,
-		pointCount: 50,
-		freqX: 40,
-		freqY: 40,
+		phi: 20,
+		pointCount: 49,
+		freqX: 25,
+		freqY: 50,
 		modulated: false,
 		modFreqX: 40,
 		modFreqY: 40
@@ -647,89 +647,89 @@ function lissajousFigure(dataArray, bufferLength){
 			}
 			particleArray.push(particle);
 		}
-
-		startAnimating(15);
+		console.log('pointCount', pointCount);
+		startAnimating(12);
 	}
 	init();
 
 
 	function draw(){
 
-		canvasCtx.clearRect(0,0, canvWidth, canvHeight);
-		canvasCtx.fillStyle = bgColor;
-		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
+			canvasCtx.clearRect(0,0, canvWidth, canvHeight);
+			canvasCtx.fillStyle = bgColor;
+			canvasCtx.fillRect(0,0, canvWidth, canvHeight);
 
-		var dataArray = new Uint8Array(fftSampleSize);
-		fft.getByteTimeDomainData(dataArray);
-		var da = dataArray[0];
-
-
-		var logda = (Math.log(da) / Math.log(2));
-		if(isFinite(logda) && logda !== 0){
-			freqX = logda * parseInt(guiObj.freqX);
-			freqY = logda * parseInt(guiObj.freqY);
-			modFreqX = logda * parseInt(guiObj.modFreqX);
-			modFreqY = logda * parseInt(guiObj.modFreqY);
-			phi = parseInt(guiObj.phi) - logda;
-		}
+			var dataArray = new Uint8Array(fftSampleSize);
+			fft.getByteTimeDomainData(dataArray);
+			var da = dataArray[0];
 
 
-		for(var i = 0; i < particleArray.length; i++){
-			angle = map_range(i, 0,pointCount, 0,Math.PI*2);
-
-			if(modulated){
-				x = Math.sin(angle*freqX + (Math.PI/180)*phi * Math.cos(angle *modFreqX));
-				y = Math.sin(angle*freqY) * Math.cos(angle * modFreqY);
-			}else{
-				x = Math.sin(angle*freqX + (Math.PI/180)*phi); //lissajous
-				y = Math.sin(angle*freqY); //lissajous
+			// var logda = (Math.log(da) / Math.log(1.5));
+			var logda = map_range(da, 0, 100, 0, 20);
+			if(isFinite(logda) && logda !== 0){
+				freqX = logda * parseInt(guiObj.freqX);
+				freqY = logda * 	parseInt(guiObj.freqY);
+				modFreqX = logda * parseInt(guiObj.modFreqX);
+				modFreqY = logda * parseInt(guiObj.modFreqY);
+				phi = parseInt(guiObj.phi) * logda;
 			}
 
-			particleArray[i].x =  x * factorX + canvWidth/2;
-			particleArray[i].y = y * factorY + canvHeight/2;
+			for(var i = 0; i < particleArray.length; i++){
+				angle = map_range(i, 0,pointCount, 0,Math.PI*2);
 
-			var pointerPart = particleArray[i-1];
+				if(modulated){
+					x = Math.sin(angle*freqX + (Math.PI/180)*phi * Math.cos(angle *modFreqX));
+					y = Math.sin(angle*freqY) * Math.cos(angle * modFreqY);
+				}else{
+					x = Math.sin(angle*freqX + (Math.PI/180)*phi); //lissajous
+					y = Math.sin(angle*freqY); //lissajous
+				}
 
-			if(i !== 0){ //HACK prevents the 'stray' from occur due to index length issue
-			var theta = Math.atan2(pointerPart.y - particleArray[i].y, pointerPart.x -particleArray[i].x);
-			if(particleArray[i].type === 'rod')
-			rodPart.draw(particleArray[i].x, particleArray[i].y, theta);
-			else if(particleArray[i].type === 'dash')
-			dashPart.draw(particleArray[i].x, particleArray[i].y, theta);
-			else if(particleArray[i].type === 'dot')
-			dotPart.draw(particleArray[i].x, particleArray[i].y, theta);
+				particleArray[i].x =  x * factorX + canvWidth/2;
+				particleArray[i].y = y * factorY + canvHeight/2;
+
+				var pointerPart = particleArray[i-1];
+
+				if(i !== 0){ //HACK prevents the 'stray' from occur due to index length issue
+				var theta = Math.atan2(pointerPart.y - particleArray[i].y, pointerPart.x -particleArray[i].x);
+				if(particleArray[i].type === 'rod')
+				rodPart.draw(particleArray[i].x, particleArray[i].y, theta);
+				else if(particleArray[i].type === 'dash')
+				dashPart.draw(particleArray[i].x, particleArray[i].y, theta);
+				else if(particleArray[i].type === 'dot')
+				dotPart.draw(particleArray[i].x, particleArray[i].y, theta);
+			}
 		}
 	}
-}
 
-function map_range(value, low1, high1, low2, high2) {
-	return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
-}
-
-var stop = false;
-var frameCount = 0;
-var fps, fpsInterval, startTime, now, then, elapsed;
-
-function startAnimating(fps){
-	fpsInterval = 1000/fps;
-	then = Date.now();
-	startTime = then;
-	animate();
-}
-
-function animate(){
-	if(stop){
-		return;
+	function map_range(value, low1, high1, low2, high2) {
+		return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
 	}
-	drawVisual = requestAnimationFrame(animate);
 
-	now = Date.now();
-	elapsed = now - then;
+	var stop = false;
+	var frameCount = 0;
+	var fps, fpsInterval, startTime, now, then, elapsed;
 
-	if(elapsed > fpsInterval){
-		then = now - (elapsed % fpsInterval);
-
-		draw();
+	function startAnimating(fps){
+		fpsInterval = 1000/fps;
+		then = Date.now();
+		startTime = then;
+		animate();
 	}
-}
+
+	function animate(){
+		if(stop){
+			return;
+		}
+		drawVisual = requestAnimationFrame(animate);
+
+		now = Date.now();
+		elapsed = now - then;
+
+		if(elapsed > fpsInterval){
+			then = now - (elapsed % fpsInterval);
+
+			draw();
+		}
+	}
 }
