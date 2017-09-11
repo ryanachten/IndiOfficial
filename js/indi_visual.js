@@ -578,19 +578,19 @@ function lissajousFigure(dataArray, bufferLength){
 	var guiObj = {
 		phi: 20,
 		pointCount: 49,
-		freqX: 25,
-		freqY: 50,
+		freqX: 4,
+		freqY: 1,
 		modulated: false,
-		modFreqX: 40,
-		modFreqY: 40
+		modFreqX: 1,
+		modFreqY: 4
 	};
 	gui.add(guiObj, "pointCount").min(1).max(300).onChange(init);
 	gui.add(guiObj, "phi").min(1).max(360);
-	gui.add(guiObj, "freqX").min(1).max(70);
-	gui.add(guiObj, "freqY").min(1).max(70);
+	gui.add(guiObj, "freqX").min(1).max(8);
+	gui.add(guiObj, "freqY").min(1).max(8);
 	gui.add(guiObj, "modulated").onChange(init);
-	gui.add(guiObj, "modFreqX").min(1).max(70);
-	gui.add(guiObj, "modFreqY").min(1).max(70);
+	gui.add(guiObj, "modFreqX").min(1).max(8);
+	gui.add(guiObj, "modFreqY").min(1).max(8);
 
 	var pointCount;
 	var freqX, freqY;
@@ -665,13 +665,38 @@ function lissajousFigure(dataArray, bufferLength){
 
 
 			// var logda = (Math.log(da) / Math.log(1.5));
-			var logda = map_range(da, 0, 100, 0, 20);
+			var logda = map_range(da, 0, 200, 0, 20);
+			// console.log('logda', logda);
 			if(isFinite(logda) && logda !== 0){
-				freqX = logda * parseInt(guiObj.freqX);
-				freqY = logda * 	parseInt(guiObj.freqY);
-				modFreqX = logda * parseInt(guiObj.modFreqX);
-				modFreqY = logda * parseInt(guiObj.modFreqY);
-				phi = parseInt(guiObj.phi) * logda;
+				// freqX = logda * parseInt(guiObj.freqX);
+				// freqY = logda + 	parseInt(guiObj.freqY);
+				// console.log('freqY', freqY);
+				freqX = guiObj.freqX;
+				freqY = guiObj.freqY;
+				modFreqX = guiObj.modFreqX;
+				modFreqY = guiObj.modFreqY;
+
+				// phi = guiObj.phi;
+
+				// Increment per animation frame
+				phi = guiObj.phi;
+				// console.log('phi', phi);
+				guiObj.phi = phi+logda;
+				if(guiObj.phi > 360)
+					guiObj.phi = 1;
+
+				freqX = guiObj.freqX;
+				// console.log('freqX', freqX)
+				guiObj.freqX = freqX+0.1;
+				if(guiObj.freqX > 5)
+					guiObj.freqX = 1;
+
+				freqY = guiObj.freqY;
+				// console.log('freqY', freqY)
+				guiObj.freqY = freqY+0.1;
+				if(guiObj.freqY > 5)
+					guiObj.freqY = 1;
+
 			}
 
 			for(var i = 0; i < particleArray.length; i++){
