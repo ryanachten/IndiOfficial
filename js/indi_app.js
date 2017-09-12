@@ -179,6 +179,7 @@ $('.visMode-button').click(function(button){
 	$('.active-visual').removeClass('active-visual');
 	$(this).addClass('active-visual');
 	window.cancelAnimationFrame(drawVisual);
+	canvasCtx.clearRect(0, 0, canvWidth, canvHeight);
 	drawVisual = undefined;
 	$('#visdat-gui').remove();
 	visualise($(this).val());
