@@ -72,9 +72,10 @@ header{
 
 button.visMode-button{
 	display: inline-block;
-	width: 80px;
+	width: 70px;
 	color: white;
 	background-color: #FAF5F3;
+	margin: 5px;
 	padding: 15px;
 	text-align: center;
 	/*text-decoration: none;*/
