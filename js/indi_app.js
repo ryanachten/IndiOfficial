@@ -54,50 +54,52 @@ function setupCanvas(){
 
 function loadAssets(){
 
+	var dashSvgDirectory = 'img/Indi_Web_DashParts';
+
 	rodDashSvg = new Image();
-	rodDashSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Dash.svg';
+	rodDashSvg.src = dashSvgDirectory + '/Indi_WebSvg_Long_Dash.svg';
 	rodDashSvg.onload = function(){
 		loadedAssets++;
 		initParts();
 	};
 
 	rodOuterSvg = new Image();
-	rodOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Outer.svg';
+	rodOuterSvg.src = dashSvgDirectory + '/Indi_WebSvg_Long_Outer.svg';
 	rodOuterSvg.onload = function(){
 		loadedAssets++;
 		initParts();
 	};
 
 	rodInnerSvg = new Image();
-	rodInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Long_Inner.svg';
+	rodInnerSvg.src = dashSvgDirectory + '/Indi_WebSvg_Long_Inner.svg';
 	rodInnerSvg.onload = function(){
 		loadedAssets++;
 		initParts();
 	};
 
 	dashOuterSvg = new Image();
-	dashOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Outer.svg';
+	dashOuterSvg.src = dashSvgDirectory + '/Indi_WebSvg_Short_Outer.svg';
 	dashOuterSvg.onload = function(){
 		loadedAssets++;
 		initParts();
 	};
 
 	dashInnerSvg = new Image();
-	dashInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Short_Inner.svg';
+	dashInnerSvg.src = dashSvgDirectory + '/Indi_WebSvg_Short_Inner.svg';
 	dashInnerSvg.onload = function(){
 		loadedAssets++;
 		initParts();
 	};
 
 	dotOuterSvg = new Image();
-	dotOuterSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Outer.svg';
+	dotOuterSvg.src = dashSvgDirectory + '/Indi_WebSvg_Dot_Outer.svg';
 	dotOuterSvg.onload = function(){
 		loadedAssets++;
 		initParts();
 	};
 
 	dotInnerSvg = new Image();
-	dotInnerSvg.src = 'img/Indi_Web_SVG_Optimised/Indi_WebSvg_Dot_Inner.svg';
+	dotInnerSvg.src = dashSvgDirectory + '/Indi_WebSvg_Dot_Inner.svg';
 	dotInnerSvg.onload = function(){
 		loadedAssets++;
 		initParts();
@@ -174,12 +176,12 @@ function visualise(visMode){
 
 
 $('.visMode-button').click(function(button){
+	$('.active-visual').removeClass('active-visual');
+	$(this).addClass('active-visual');
 	window.cancelAnimationFrame(drawVisual);
 	drawVisual = undefined;
 	$('#visdat-gui').remove();
-	$('.active-visual').removeClass('active-visual');
-	$(button.target).addClass('active-visual');
-	visualise(button.target.value);
+	visualise($(this).val());
 });
 
 

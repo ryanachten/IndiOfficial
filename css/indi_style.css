@@ -71,15 +71,21 @@ header{
 }
 
 button.visMode-button{
-	border: none;
-	color: white;
-	padding: 10px;
-	text-align: center;
-	text-decoration: none;
 	display: inline-block;
-	font-size: 12px;
-	background-color: #9f9b99;
+	width: 80px;
+	color: white;
+	background-color: #FAF5F3;
+	padding: 15px;
+	text-align: center;
+	/*text-decoration: none;*/
+	/*font-size: 12px;*/
+	border: 1px solid #9f9b99;
+	border-radius: 50%;
 	cursor: pointer;
+}
+
+.visMode-button img{
+	width: 100%;
 }
 
 button.visMode-button.active-visual{
