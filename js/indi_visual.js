@@ -50,9 +50,9 @@ function chladniPlate(dataArray, bufferLength){
 
 	var guiObj = {
 		nodeDamping: 5,
-		attractMode: 'smooth',
-		attractRadius: 10,
-		attractStrength: 37,
+		attractMode: 'basic',
+		attractRadius: 20,
+		attractStrength: 70,
 		attractRamp: 1
 	};
 
@@ -727,10 +727,6 @@ function lissajousFigure(dataArray, bufferLength){
 		}
 	}
 
-	function map_range(value, low1, high1, low2, high2) {
-		return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
-	}
-
 	var stop = false;
 	var frameCount = 0;
 	var fps, fpsInterval, startTime, now, then, elapsed;
@@ -757,4 +753,8 @@ function lissajousFigure(dataArray, bufferLength){
 			draw();
 		}
 	}
+}
+
+function map_range(value, low1, high1, low2, high2) {
+	return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
 }

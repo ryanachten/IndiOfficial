@@ -16,8 +16,8 @@ var RodParticle, DashParticle, DotParticle; //anon funct objects
 function loadSoundFile(){ //TODO - move this into _audio.js and replace with promise
 	var request = new XMLHttpRequest();
 	request.open('GET',
-				'https://raw.githubusercontent.com/ryanachten/IndiOfficial/master/audio/Chrysaora_Colorata.mp3'
-				// 'https://raw.githubusercontent.com/ryanachten/IndiOfficial/master/audio/Woman.mp3'
+				// 'https://raw.githubusercontent.com/ryanachten/IndiOfficial/master/audio/Chrysaora_Colorata.mp3'
+				'https://raw.githubusercontent.com/ryanachten/IndiOfficial/master/audio/Woman.mp3'
 				,true);
 	request.responseType = "arraybuffer";
 	request.onload = function(){
