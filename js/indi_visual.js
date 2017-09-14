@@ -238,9 +238,9 @@ function chladniPlate(dataArray, bufferLength){
 		fft.getByteTimeDomainData(dataArray);
 
 		var da = dataArray[0];
-		var logda = map_range(da, 10, 250, 0, 1);
+		var mapda = map_range(da, 10, 250, 0, 1);
 
-		attractor.strength = logda * guiObj.attractStrength;
+		attractor.strength = mapda * guiObj.attractStrength;
 		if(Math.floor(Math.random()*2) === 1) attractor.strength *= -1;
 
 		attractor.radius = Math.random()*guiObj.attractRadius;
@@ -658,6 +658,7 @@ function lissajousFigure(dataArray, bufferLength){
 
 			// var logda = (Math.log(da) / Math.log(1.5));
 			var logda = map_range(da, 0, 200, 0, 20);
+			var mapda = map_range(da, 10, 250, 0, 1);
 			// console.log('logda', logda);
 			if(isFinite(logda) && logda !== 0){
 				// freqX = logda * parseInt(guiObj.freqX);
@@ -671,9 +672,9 @@ function lissajousFigure(dataArray, bufferLength){
 				// phi = guiObj.phi;
 
 				// Increment per animation frame
-				phi = guiObj.phi;
+				phi = guiObj.phi * mapda;
 				// console.log('phi', phi);
-				guiObj.phi = phi+logda;
+				// guiObj.phi = phi+logda;
 				if(guiObj.phi > 360)
 					guiObj.phi = 1;
 
@@ -683,7 +684,7 @@ function lissajousFigure(dataArray, bufferLength){
 				if(guiObj.freqX > 5)
 					guiObj.freqX = 1;
 
-				freqY = guiObj.freqY;
+				freqY = guiObj.freqY + 0.1;
 				// console.log('freqY', freqY)
 				guiObj.freqY = freqY+0.1;
 				if(guiObj.freqY > 5)
