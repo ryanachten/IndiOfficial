@@ -32,7 +32,7 @@ function setupAudioNodes(){
 	var source = audioCtx.createBufferSource();
 	source.buffer = buffer;
 
-	//add init gain node for volume control
+	//init gain node for volume control
 	gainNode = audioCtx.createGain()
 
 	//create FFT

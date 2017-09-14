@@ -51,14 +51,14 @@ function chladniPlate(dataArray, bufferLength){
 	var guiObj = {
 		nodeDamping: 5,
 		attractMode: 'basic',
-		attractRadius: 20,
+		attractRadius: canvWidth*2,
 		attractStrength: 70,
 		attractRamp: 1
 	};
 
 	gui.add(guiObj, "attractMode", ['basic', 'smooth', 'twirl']);
 	gui.add(guiObj, "nodeDamping").min(0).max(20);
-	gui.add(guiObj, "attractRadius").min(0).max(20);
+	gui.add(guiObj, "attractRadius").min(0).max(canvWidth*4);
 	gui.add(guiObj, "attractStrength").min(0).max(200);
 	gui.add(guiObj, "attractRamp").min(0.1).max(5);
 
@@ -191,9 +191,6 @@ function chladniPlate(dataArray, bufferLength){
 		attractor = new Attractor(canvWidth/2, canvHeight/2);
 		nodes = [];
 
-		canvasCtx.lineWidth = 1;
-		canvasCtx.strokeStyle = 'black';
-
 		initGrid();
 		startAnimating(30);
 
@@ -241,15 +238,14 @@ function chladniPlate(dataArray, bufferLength){
 		fft.getByteTimeDomainData(dataArray);
 
 		var da = dataArray[0];
+		var logda = map_range(da, 10, 250, 0, 1);
 
-		attractor.strength = Math.random()* (da * (guiObj.attractStrength/100));
+		attractor.strength = logda * guiObj.attractStrength;
 		if(Math.floor(Math.random()*2) === 1) attractor.strength *= -1;
-		attractor.radius = Math.random()* (da*guiObj.attractRadius);
+
+		attractor.radius = Math.random()*guiObj.attractRadius;
 
 		attractor.ramp = Math.random()*guiObj.attractRamp;
-
-		// nodeDamping = Math.random()*0.8;
-		// 	if(Math.floor(Math.random()*2) === 1) nodeDamping *= -1;
 
 		nodeDamping = guiObj.nodeDamping/100; //non-random
 
