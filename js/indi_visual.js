@@ -269,12 +269,6 @@ function chladniPlate(dataArray, bufferLength){
 					dotPart.draw(nodes[i].x, nodes[i].y, theta);
 				}
 
-				// canvasCtx.moveTo(nodes[i].x, nodes[i].y);
-
-				// var theta = Math.atan2(canvHeight/2 - nodes[i].y, canvWidth/2 -nodes[i].x); //point towards centre
-				// var theta = Math.atan2(nodes[i+1].y - nodes[i].y, nodes[i+1].x -nodes[i].x); //point towards neighbour
-				// canvasCtx.lineTo((Math.cos(theta)*5) + nodes[i].x, (Math.sin(theta)*5) +nodes[i].y);
-
 				if(i+2 < nodes.length-1) i++;
 			}
 			canvasCtx.closePath();
@@ -321,16 +315,17 @@ function nodeAttraction(dataArray, bufferLength){
 	var guiObj = {
 		showAttactionNode: false,
 		nodeDamping: 8,
-		attractRadius: 420,
+		attractRadius: canvWidth,
 		attractStrength: -42,
-		attractRamp: 640,
+		attractRamp: 3,
 		maxVelocity: 15,
 	};
 	gui.add(guiObj, "showAttactionNode");
 	gui.add(guiObj, "nodeDamping").min(0).max(100);
-	gui.add(guiObj, "attractRadius").min(0).max(500);
-	gui.add(guiObj, "attractRamp").min(0).max(1000);
-	gui.add(guiObj, "maxVelocity").min(0).max(20);
+	gui.add(guiObj, "attractRadius").min(0).max(canvWidth*1.5);
+	gui.add(guiObj, "attractStrength").min(-100).max(100);
+	gui.add(guiObj, "attractRamp").min(0).max(6);
+	gui.add(guiObj, "maxVelocity").min(0).max(40);
 
 	var rodPart = new RodParticle();
 	var dashPart = new DashParticle();
@@ -482,14 +477,15 @@ function nodeAttraction(dataArray, bufferLength){
 		fft.getByteTimeDomainData(dataArray);
 
 		var da = dataArray[0];
+		var mapda = map_range(da, 10, 250, 0, 1);
 
 		canvasCtx.clearRect(0,0, canvWidth,canvHeight);
 		canvasCtx.fillStyle = bgColor;
 		canvasCtx.fillRect(0,0, canvWidth,canvHeight);
 
-		attractor_Radius = guiObj.attractRadius;
+		attractor_Radius = mapda * guiObj.attractRadius;
 		attractor_Strength = guiObj.attractStrength;
-		attractor_MaxRamp = da/guiObj.attractRamp;
+		attractor_MaxRamp = mapda / guiObj.attractRamp;
 
 		attractor.strength = attractor_Strength;
 		attractor.radius = attractor_Radius;
