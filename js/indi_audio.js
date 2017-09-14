@@ -5,6 +5,7 @@ var audioCtx; //audio context
 var buffer; //audio buffer
 var fft; //fft audio node
 var fftSampleSize = 256; //used to be 256 - put back?
+var gainNode; //used for volume control
 var audioSetup = false; //is audio setup?
 
 
@@ -31,13 +32,17 @@ function setupAudioNodes(){
 	var source = audioCtx.createBufferSource();
 	source.buffer = buffer;
 
+	//add init gain node for volume control
+	gainNode = audioCtx.createGain()
+
 	//create FFT
 	fft = audioCtx.createAnalyser();
 	fft.fftSize = fftSampleSize;
 
 	//chain connections
 	source.connect(fft);
-	fft.connect(audioCtx.destination); //final output node (speakers)
+	fft.connect(gainNode);
+	gainNode.connect(audioCtx.destination); //final output node (speakers)
 
 	source.start(0); //might want to expose this for start/pause control
 
