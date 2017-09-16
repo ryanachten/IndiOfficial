@@ -37,7 +37,11 @@ function setupAudioNodes(){
 
 	//create FFT
 	fft = audioCtx.createAnalyser();
+
+	// Add smoothing
+	fft.smoothingTimeConstant = 0.5;
 	fft.fftSize = fftSampleSize;
+
 
 	//chain connections
 	source.connect(fft);
