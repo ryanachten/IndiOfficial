@@ -222,10 +222,6 @@ function chladniPlate(dataArray, bufferLength){
 
 	function draw(){
 
-		canvasCtx.clearRect(0,0, canvWidth, canvHeight);
-		canvasCtx.fillStyle = bgColor;
-		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
-
 		if(guiObj.attractMode === 'smooth'){
 			attractor.mode = 'smooth';
 		}else if(guiObj.attractMode === 'twirl'){
@@ -239,6 +235,9 @@ function chladniPlate(dataArray, bufferLength){
 
 		var da = dataArray[0];
 		var mapda = map_range(da, 10, 250, 0, 1);
+
+		canvasCtx.clearRect(0,0, canvWidth, canvHeight);
+		renderBgColour(mapda);
 
 		attractor.strength = mapda * guiObj.attractStrength;
 		if(Math.floor(Math.random()*2) === 1) attractor.strength *= -1;
@@ -480,8 +479,7 @@ function nodeAttraction(dataArray, bufferLength){
 		var mapda = map_range(da, 10, 250, 0, 1);
 
 		canvasCtx.clearRect(0,0, canvWidth,canvHeight);
-		canvasCtx.fillStyle = bgColor;
-		canvasCtx.fillRect(0,0, canvWidth,canvHeight);
+		renderBgColour(mapda);
 
 		attractor_Radius = mapda * guiObj.attractRadius;
 		attractor_Strength = guiObj.attractStrength;
@@ -647,23 +645,19 @@ function lissajousFigure(dataArray, bufferLength){
 
 	function draw(){
 
-			canvasCtx.clearRect(0,0, canvWidth, canvHeight);
-			canvasCtx.fillStyle = bgColor;
-			canvasCtx.fillRect(0,0, canvWidth, canvHeight);
-
 			var dataArray = new Uint8Array(fftSampleSize);
 			fft.getByteTimeDomainData(dataArray);
 			var da = dataArray[0];
-
 
 			// var logda = (Math.log(da) / Math.log(1.5));
 			var logda = map_range(da, 0, 200, 0, 20);
 			var mapda = map_range(da, 10, 250, 0, 1);
 			// console.log('logda', logda);
 			if(isFinite(logda) && logda !== 0){
-				// freqX = logda * parseInt(guiObj.freqX);
-				// freqY = logda + 	parseInt(guiObj.freqY);
-				// console.log('freqY', freqY);
+
+				canvasCtx.clearRect(0,0, canvWidth, canvHeight);
+				renderBgColour(mapda);
+
 				freqX = guiObj.freqX;
 				freqY = guiObj.freqY;
 				modFreqX = guiObj.modFreqX;
@@ -750,4 +744,19 @@ function lissajousFigure(dataArray, bufferLength){
 
 function map_range(value, low1, high1, low2, high2) {
 	return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+}
+
+function renderBgColour(mapda){
+
+	bgColor = canvasCtx.createRadialGradient(canvWidth/2, canvHeight/2, 0, canvWidth/2, canvHeight/2, canvWidth/2);
+		// stop 1 to hsl(160, 40%, 75%)
+		var hue1 = 180+(mapda*180);
+		var sat1 = 20+(mapda*20);
+		var light1 = 85; //90-(mapda*10);
+
+		bgColor.addColorStop(1,"hsl("+hue1+","+sat1+"%, "+light1+"%)");
+		bgColor.addColorStop(0,"hsl(150, 0.5%, 95%)");
+
+		canvasCtx.fillStyle = bgColor;
+		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
 }
