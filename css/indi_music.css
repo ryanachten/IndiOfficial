@@ -1,0 +1,16 @@
+header{
+    position: inherit;
+    margin-top: 0;
+}
+
+/*#top-nav {
+  margin-top: 0;
+}*/
+
+#indi-header-logo{
+  display: block;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  /*margin-top: 150px;*/
+}
