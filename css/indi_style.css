@@ -22,6 +22,20 @@ body{
 	font-family: 'Roboto', sans-serif;
 }
 
+#loading-scene{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #FAF5F3;
+	z-index: 2;
+	text-align: center;
+}
+#loading-scene img{
+	display: block;
+	width: 80%;
+	max-width: 400px;
+	margin: 0 auto;
+}
 
 header{
 	width: 100%;
@@ -58,12 +72,10 @@ header{
   background-color: rgba(255,255,255, 0.9);
   padding: 20px;
   margin-left: 40px;
-  margin-top: 150px;
+  margin-top: 190px;
 	text-align: center;
     /*width: 300px;*/
 }
-
-
 
 #visualiser, #container{
 	position: absolute;

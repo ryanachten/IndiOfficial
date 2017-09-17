@@ -25,6 +25,8 @@ function loadSoundFile(){ //TODO - move this into _audio.js and replace with pro
 		audioCtx.decodeAudioData(request.response, function(buf){
 			buffer = buf;
 			setupAudioNodes();
+			// Hide loading scene
+			$('#loading-scene').fadeOut();
 			setupCanvas();
 			loadAssets();
 		});
