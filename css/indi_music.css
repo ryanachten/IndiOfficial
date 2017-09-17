@@ -1,16 +1,16 @@
+/*body{
+  background-image: radial-gradient(circle at center, white 0, #e290bb 100%);
+}*/
 header{
     position: inherit;
-    margin-top: 0;
+}
+main{
+  text-align: center;
+  margin-top: 40px;
 }
 
-/*#top-nav {
-  margin-top: 0;
-}*/
-
-#indi-header-logo{
-  display: block;
-  width: 80%;
-  max-width: 500px;
-  margin: 0 auto;
-  /*margin-top: 150px;*/
+.bandcamp-embed{
+  margin: 0 20px;
+  margin-bottom: 40px;
+  display: inline-block;
 }
