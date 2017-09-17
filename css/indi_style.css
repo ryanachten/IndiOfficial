@@ -20,6 +20,7 @@ h3{
 body{
 	margin: 0px;
 	font-family: 'Roboto', sans-serif;
+	background: #FAF5F3;
 }
 
 #loading-scene{
@@ -29,6 +30,7 @@ body{
 	background-color: #FAF5F3;
 	z-index: 2;
 	text-align: center;
+  padding-top: 40px;
 }
 #loading-scene img{
 	display: block;
@@ -44,14 +46,13 @@ header{
 	position: absolute;
 }
 #top-nav{
-	margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    text-transform: lowercase;
+  padding: 20px;
+  text-align: center;
+  text-transform: lowercase;
 }
 .top-nav-link{
  	padding: 0 20px;
-    font-size: 15px;
+  font-size: 15px;
  	color: #413D3B;
  	text-transform: uppercase;
  	text-decoration: none;
@@ -59,7 +60,8 @@ header{
 }
 #indi-logo{
 	vertical-align: middle;
-	/*margin: 0 30px;*/
+	width: 270px;
+	margin-right: 10px;
 }
 #indi-logo-link{
 	padding: 0px;
@@ -114,8 +116,9 @@ button.visMode-button.active-visual{
 
 @media screen and (max-width: 800px) {
 	#indi-logo{
-		width: 100%;
-		max-height: 100px;
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 30px;
 		/*margin: 0px;*/
 	}
 }
