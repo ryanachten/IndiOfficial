@@ -1,3 +1,16 @@
+body{
+	margin: 0px;
+	font-family: 'Roboto', sans-serif;
+	background: #FAF5F3;
+}
+h1{
+	font-family: 'Kelly Slab', cursive;
+	text-transform: lowercase;
+	font-size: 3em;
+	font-weight: normal;
+  margin-bottom: 20px;
+  color: #413D3B;
+}
 h2{
 	font-family: 'Roboto', sans-serif;
 	text-transform: uppercase;
@@ -5,7 +18,7 @@ h2{
 	letter-spacing: 2px;
 	font-size: 1em;
 	margin-bottom: 5px;
-    /*margin-top: 20px;*/
+  color: #413D3B;
 }
 h3{
 	font-family: 'Roboto', sans-serif;
@@ -14,37 +27,20 @@ h3{
 	letter-spacing: 2px;
 	font-size: 0.8em;
 	margin-bottom: 5px;
-    margin-top: 20px;
+  margin-top: 20px;
+	color: #413D3B;
 }
-
-body{
-	margin: 0px;
+p{
 	font-family: 'Roboto', sans-serif;
-	background: #FAF5F3;
+	color: #413D3B;
+	text-align: left;
+  line-height: 25px;
 }
-
-#loading-scene{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background-color: #FAF5F3;
-	z-index: 2;
-	text-align: center;
-  padding-top: 40px;
+hr{
+	width: 60%;
+	max-width: 500px;
+  margin: 20px auto 30px auto;
 }
-.loading-branding{
-	display: block;
-	width: 80%;
-	max-width: 400px;
-	margin: 0 auto;
-}
-#loading-message img, #loading-message h2{
-	display: inline;
-}
-#loading-message img{
-	transform: translateY(4px)
-}
-
 header{
 	width: 100%;
 	background: #FAF5F3;
@@ -71,52 +67,6 @@ header{
 }
 #indi-logo-link{
 	padding: 0px;
-}
-
-#ui-panel{
-	/*display: none;*/
-	position: absolute;
-  z-index: 1;
-  background-color: rgba(255,255,255, 0.9);
-  padding: 20px;
-  margin-left: 40px;
-  margin-top: 190px;
-	text-align: center;
-    /*width: 300px;*/
-}
-
-#visualiser, #container{
-	position: absolute;
-    bottom: 0;
-		left: 0;
-    z-index: -1;
-}
-
-button.visMode-button{
-	display: inline-block;
-	width: 70px;
-	color: white;
-	background-color: #FAF5F3;
-	margin: 5px;
-	padding: 15px;
-	text-align: center;
-	/*text-decoration: none;*/
-	/*font-size: 12px;*/
-	border: 1px solid #9f9b99;
-	border-radius: 50%;
-	cursor: pointer;
-}
-
-.visMode-button img{
-	width: 100%;
-}
-
-button.visMode-button.active-visual{
-	background-color: #ffabab;
-}
-
-.dg.main .close-button.close-bottom {
-    position: relative;
 }
 
 

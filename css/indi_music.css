@@ -9,6 +9,15 @@ main{
   margin-top: 40px;
 }
 
+#music-overview{
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.music-date-period{
+  margin-top: 40px;
+}
 .bandcamp-embed{
   margin: 0 20px;
   margin-bottom: 40px;
