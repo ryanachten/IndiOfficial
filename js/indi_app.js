@@ -26,7 +26,6 @@ function loadSoundFile(){ //TODO - move this into _audio.js and replace with pro
 			buffer = buf;
 			setupAudioNodes();
 			// Hide loading scene
-			$('#loading-scene').fadeOut();
 			setupCanvas();
 			loadAssets();
 		});
@@ -158,6 +157,8 @@ function initParts(){
 }
 
 function visualise(visMode){
+
+	$('#loading-scene').fadeOut();
 
 	console.log(visMode);
 	if(visMode === 'waveForm'){

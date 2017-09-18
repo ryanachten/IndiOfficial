@@ -32,11 +32,17 @@ body{
 	text-align: center;
   padding-top: 40px;
 }
-#loading-scene img{
+.loading-branding{
 	display: block;
 	width: 80%;
 	max-width: 400px;
 	margin: 0 auto;
+}
+#loading-message img, #loading-message h2{
+	display: inline;
+}
+#loading-message img{
+	transform: translateY(4px)
 }
 
 header{
