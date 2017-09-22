@@ -750,7 +750,7 @@ function renderBgColour(mapda){
 
 	bgColor = canvasCtx.createRadialGradient(canvWidth/2, canvHeight/2, 0, canvWidth/2, canvHeight/2, canvWidth/2);
 		// stop 1 to hsl(160, 40%, 75%)
-		var hue1 = 180+(mapda*180);
+		var hue1 = 200+(mapda*140);
 		var sat1 = 20+(mapda*20);
 		var light1 = 85; //90-(mapda*10);
 
