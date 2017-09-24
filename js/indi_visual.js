@@ -44,6 +44,7 @@ function chladniPlate(dataArray, bufferLength){
 
 	//Runtime UI stuff
 	var gui = new dat.GUI({ autoPlace: false });
+	gui.close();
 	gui.domElement.id = 'visdat-gui';
 	var visSettings	= $('#vis-settings');
 	visSettings.show().append(gui.domElement);
@@ -307,6 +308,7 @@ function chladniPlate(dataArray, bufferLength){
 function nodeAttraction(dataArray, bufferLength){
 
 	var gui = new dat.GUI({ autoPlace: false });
+	gui.close();
 	gui.domElement.id = 'visdat-gui';
 	var visSettings	= $('#vis-settings');
 	visSettings.show().append(gui.domElement);
@@ -561,6 +563,7 @@ function lissajousFigure(dataArray, bufferLength){
 
 	//Runtime UI stuff
 	var gui = new dat.GUI({ autoPlace: false });
+	gui.close();
 	gui.domElement.id = 'visdat-gui';
 	var visSettings	= $('#vis-settings');
 	visSettings.show().append(gui.domElement);
@@ -759,4 +762,4 @@ function renderBgColour(mapda){
 
 		canvasCtx.fillStyle = bgColor;
 		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
-} 
+}
