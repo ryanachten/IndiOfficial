@@ -759,4 +759,4 @@ function renderBgColour(mapda){
 
 		canvasCtx.fillStyle = bgColor;
 		canvasCtx.fillRect(0,0, canvWidth, canvHeight);
-}
+} 
