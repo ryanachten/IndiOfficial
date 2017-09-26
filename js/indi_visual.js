@@ -426,13 +426,30 @@ function nodeAttraction(dataArray, bufferLength){
 	var clientX = canvWidth/2;
 	var clientY = canvHeight/2;
 
+	// get attraction node to follow mouse input
 	$(window).mousemove(function(e){
 		if (typeof e.pageX !== 'undefined' && typeof e.pageY !== 'undefined'){
 			var rect = canvas.getBoundingClientRect();
 			clientX = e.pageX - rect.left;
 			clientY = e.pageY - rect.top;
 		}
-	})
+	});
+
+	canvas.addEventListener("touchmove", function (e) {
+		var touch = e.touches[0];
+		var rect = canvas.getBoundingClientRect();
+		clientX = touch.clientX - rect.left;
+		clientY = touch.clientY - rect.top;
+	  // console.log('touch', touch);
+	  });
+
+		// if (typeof e.pageX !== 'undefined' && typeof e.pageY !== 'undefined'){
+		// 	var rect = canvas.getBoundingClientRect();
+		// 	clientX = e.pageX - rect.left;
+		// 	clientY = e.pageY - rect.top;
+		// 	console.log('clientX', clientX, 'clientY', clientY);
+		// }
+	// });
 
 	$(window).resize(function() {
 		init();
