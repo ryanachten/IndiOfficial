@@ -180,9 +180,9 @@ function chladniPlate(dataArray, bufferLength){
 	var nodeDamping;
 	var attractor, nodes;
 
-	$(window ).resize(function() {
-		init();
-	});
+	// $(window ).resize(function() {
+	// 	init();
+	// });
 
 	function init(){
 
@@ -451,9 +451,9 @@ function nodeAttraction(dataArray, bufferLength){
 		// }
 	// });
 
-	$(window).resize(function() {
-		init();
-	});
+	// $(window).resize(function() {
+	// 	init();
+	// });
 
 	function init(){
 
