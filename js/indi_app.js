@@ -37,8 +37,8 @@ function setupCanvas(){
 	canvas = document.querySelector("#visualiser");
 
 	if(canvas.getContext){
-		canvas.width = $(window).outerWidth();
-		var topNavHeight = $('header').outerHeight();
+		canvas.width = window.innerWidth;
+		var topNavHeight = $('header').height();
 		canvas.height = $(window).outerHeight() -topNavHeight;
 		canvWidth = canvas.width;
 		canvHeight = canvas.height;
@@ -182,14 +182,19 @@ function visualise(visMode){
 $('.visMode-button').click(function(button){
 	$('.active-visual').removeClass('active-visual');
 	$(this).addClass('active-visual');
+	clearVisual();
+	visualise($(this).val());
+});
+
+function clearVisual(){
 	window.cancelAnimationFrame(drawVisual);
 	canvasCtx.clearRect(0, 0, canvWidth, canvHeight);
 	drawVisual = undefined;
 	$('#visdat-gui').remove();
-	visualise($(this).val());
-});
-
+}
 
 $(window ).resize(function() {
+	clearVisual();
   setupCanvas();
+	visualise($('.active-visual').val());
 });
