@@ -50,7 +50,7 @@ function chladniPlate(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
-		nodeDamping: 5,
+		nodeDamping: 2.5,
 		attractMode: 'basic',
 		attractRadius: canvWidth*2,
 		attractStrength: 70,
