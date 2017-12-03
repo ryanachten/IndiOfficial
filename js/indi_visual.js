@@ -180,6 +180,8 @@ function chladniPlate(dataArray, bufferLength){
 	var nodeDamping;
 	var attractor, nodes;
 
+	var soundIndex = 0;
+
 	// $(window ).resize(function() {
 	// 	init();
 	// });
@@ -234,7 +236,9 @@ function chladniPlate(dataArray, bufferLength){
 		var dataArray = new Uint8Array(fftSampleSize);
 		fft.getByteTimeDomainData(dataArray);
 
-		var da = dataArray[0];
+		var da = dataArray[soundIndex];
+		soundIndex++;
+		if (soundIndex > dataArray.length-1) soundIndex = 0;
 		var mapda = map_range(da, 10, 250, 0, 1);
 
 		canvasCtx.clearRect(0,0, canvWidth, canvHeight);
@@ -420,6 +424,8 @@ function nodeAttraction(dataArray, bufferLength){
 	var nodes;
 	var node_Damping = guiObj.nodeDamping/100;
 
+	var soundIndex = 0;
+
 	var attractor;
 	var attractor_MaxRamp, attractor_Radius, attractor_Strength;
 
@@ -494,7 +500,9 @@ function nodeAttraction(dataArray, bufferLength){
 		var dataArray = new Uint8Array(fftSampleSize);
 		fft.getByteTimeDomainData(dataArray);
 
-		var da = dataArray[0];
+		var da = dataArray[soundIndex];
+		soundIndex++;
+		if (soundIndex > dataArray.length-1) soundIndex = 0;
 		var mapda = map_range(da, 10, 250, 0, 1);
 
 		canvasCtx.clearRect(0,0, canvWidth,canvHeight);
@@ -626,6 +634,8 @@ function lissajousFigure(dataArray, bufferLength){
 	var dashPart = new DashParticle();
 	var dotPart = new DotParticle();
 
+	var soundIndex = 0;
+
 	function init(){
 		canvasCtx.clearRect(0,0, canvWidth, canvHeight);
 		canvasCtx.fillStyle = bgColor;
@@ -667,7 +677,10 @@ function lissajousFigure(dataArray, bufferLength){
 
 			var dataArray = new Uint8Array(fftSampleSize);
 			fft.getByteTimeDomainData(dataArray);
-			var da = dataArray[0];
+			// var da = dataArray[0];
+			var da = dataArray[soundIndex];
+			soundIndex++;
+			if (soundIndex > dataArray.length-1) soundIndex = 0;
 
 			// var logda = (Math.log(da) / Math.log(1.5));
 			var logda = map_range(da, 0, 200, 0, 20);
