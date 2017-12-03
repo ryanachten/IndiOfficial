@@ -50,6 +50,7 @@ function chladniPlate(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
+		alpha: 80,
 		nodeDamping: 2.5,
 		attractMode: 'basic',
 		attractRadius: canvWidth*2,
@@ -57,6 +58,7 @@ function chladniPlate(dataArray, bufferLength){
 		attractRamp: 1
 	};
 
+	gui.add(guiObj, "alpha").min(0).max(100);
 	gui.add(guiObj, "attractMode", ['basic', 'smooth', 'twirl']);
 	gui.add(guiObj, "nodeDamping").min(0).max(20);
 	gui.add(guiObj, "attractRadius").min(0).max(canvWidth*4);
@@ -241,8 +243,7 @@ function chladniPlate(dataArray, bufferLength){
 		if (soundIndex > dataArray.length-1) soundIndex = 0;
 		var mapda = map_range(da, 10, 250, 0, 1);
 
-		canvasCtx.clearRect(0,0, canvWidth, canvHeight);
-		renderBgColour(mapda, 1);
+		renderBgColour(mapda, 1, guiObj.alpha);
 
 		attractor.strength = mapda * guiObj.attractStrength;
 		if(Math.floor(Math.random()*2) === 1) attractor.strength *= -1;
@@ -318,6 +319,7 @@ function nodeAttraction(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
+		alpha: 80,
 		showAttactionNode: false,
 		nodeDamping: 8,
 		attractRadius: canvWidth,
@@ -325,6 +327,8 @@ function nodeAttraction(dataArray, bufferLength){
 		attractRamp: 3,
 		maxVelocity: 15,
 	};
+
+	gui.add(guiObj, "alpha").min(0).max(100);
 	gui.add(guiObj, "showAttactionNode");
 	gui.add(guiObj, "nodeDamping").min(0).max(100);
 	gui.add(guiObj, "attractRadius").min(0).max(canvWidth*1.5);
@@ -449,17 +453,6 @@ function nodeAttraction(dataArray, bufferLength){
 	  // console.log('touch', touch);
 	  });
 
-		// if (typeof e.pageX !== 'undefined' && typeof e.pageY !== 'undefined'){
-		// 	var rect = canvas.getBoundingClientRect();
-		// 	clientX = e.pageX - rect.left;
-		// 	clientY = e.pageY - rect.top;
-		// 	console.log('clientX', clientX, 'clientY', clientY);
-		// }
-	// });
-
-	// $(window).resize(function() {
-	// 	init();
-	// });
 
 	function init(){
 
@@ -505,8 +498,7 @@ function nodeAttraction(dataArray, bufferLength){
 		if (soundIndex > dataArray.length-1) soundIndex = 0;
 		var mapda = map_range(da, 10, 250, 0, 1);
 
-		canvasCtx.clearRect(0,0, canvWidth,canvHeight);
-		renderBgColour(mapda, 2);
+		renderBgColour(mapda, 2, guiObj.alpha);
 
 		attractor_Radius = mapda * guiObj.attractRadius;
 		attractor_Strength = guiObj.attractStrength;
@@ -594,6 +586,7 @@ function lissajousFigure(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
+		alpha: 80,
 		phi: 20,
 		pointCount: 49,
 		freqX: 4,
@@ -602,6 +595,8 @@ function lissajousFigure(dataArray, bufferLength){
 		modFreqX: 1,
 		modFreqY: 4
 	};
+
+	gui.add(guiObj, "alpha").min(0).max(100);
 	gui.add(guiObj, "pointCount").min(1).max(300).onChange(init);
 	gui.add(guiObj, "phi").min(1).max(360);
 	gui.add(guiObj, "freqX").min(1).max(8);
@@ -688,8 +683,7 @@ function lissajousFigure(dataArray, bufferLength){
 			// console.log('logda', logda);
 			if(isFinite(logda) && logda !== 0){
 
-				canvasCtx.clearRect(0,0, canvWidth, canvHeight);
-				renderBgColour(mapda, 3);
+				renderBgColour(mapda, 3, guiObj.alpha);
 
 				freqX = guiObj.freqX;
 				freqY = guiObj.freqY;
@@ -779,7 +773,7 @@ function map_range(value, low1, high1, low2, high2) {
 	return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
 }
 
-function renderBgColour(mapda, bgVersion){
+function renderBgColour(mapda, bgVersion, alpha){
 
 	bgColor = canvasCtx.createRadialGradient(canvWidth/2, canvHeight/2, 0, canvWidth/2, canvHeight/2, canvWidth/2);
 
@@ -808,9 +802,10 @@ function renderBgColour(mapda, bgVersion){
 
 	}
 
+	alpha = (alpha/100).toFixed(2);
 
-	bgColor.addColorStop(1,"hsl("+hue1+","+sat1+"%, "+light1+"%)");
-	bgColor.addColorStop(0,"hsl(150, 0.5%, 95%)");
+	bgColor.addColorStop(1,"hsla("+hue1+","+sat1+"%, "+light1+"%,"+alpha+")");
+	bgColor.addColorStop(0,"hsla(150, 0.5%, 95%,"+alpha+")");
 
 	canvasCtx.fillStyle = bgColor;
 	canvasCtx.fillRect(0,0, canvWidth, canvHeight);
