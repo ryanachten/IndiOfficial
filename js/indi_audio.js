@@ -62,14 +62,21 @@ function setupAudioGui(){
 	audioSettings.show().append(gui.domElement);
 
 	var guiObj = {
-		volume: 50
+		volume: 50,
+		smoothing: 80
 	};
 
 	gui.add(guiObj, "volume").min(0).max(100).onChange(updateGain);
+	// gui.add(guiObj, "smoothing").min(0).max(100).onChange(updateSmoothing);
 
 	function updateGain(){
 		var gainLevel = (guiObj.volume/100).toFixed(2);
-		console.log(gainLevel);
 		gainNode.gain.value = gainLevel;
+	}
+
+	function updateSmoothing(){
+		var smoothingLevel = (guiObj.smoothing/100).toFixed(2);
+		console.log(smoothingLevel);
+		fft.smoothingTimeConstant = smoothingLevel;
 	}
 }
