@@ -23,6 +23,8 @@ function initSound(){
 	catch(e){
 		alert("it seems your browser doesn't support webaudio - try another browser");
 	}
+
+	setupAudioGui();
 }
 
 
@@ -33,7 +35,7 @@ function setupAudioNodes(){
 	source.buffer = buffer;
 
 	//init gain node for volume control
-	gainNode = audioCtx.createGain()
+	gainNode = audioCtx.createGain();
 
 	//create FFT
 	fft = audioCtx.createAnalyser();
@@ -51,4 +53,23 @@ function setupAudioNodes(){
 	source.start(0); //might want to expose this for start/pause control
 
 	setup = true;
+}
+
+function setupAudioGui(){
+	var gui = new dat.GUI({ autoPlace: false });
+	gui.domElement.id = 'audiodat-gui';
+	var audioSettings	= $('#audio-settings');
+	audioSettings.show().append(gui.domElement);
+
+	var guiObj = {
+		volume: 50
+	};
+
+	gui.add(guiObj, "volume").min(0).max(100).onChange(updateGain);
+
+	function updateGain(){
+		var gainLevel = (guiObj.volume/100).toFixed(2);
+		console.log(gainLevel);
+		gainNode.gain.value = gainLevel;
+	}
 }
