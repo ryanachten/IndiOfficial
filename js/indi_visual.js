@@ -50,7 +50,7 @@ function chladniPlate(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
-		alpha: 80,
+		alpha: 90,
 		nodeDamping: 2.5,
 		attractMode: 'basic',
 		attractRadius: canvWidth*2,
@@ -319,7 +319,7 @@ function nodeAttraction(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
-		alpha: 80,
+		alpha: 100,
 		showAttactionNode: false,
 		nodeDamping: 8,
 		attractRadius: canvWidth,
@@ -586,7 +586,7 @@ function lissajousFigure(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
-		alpha: 80,
+		alpha: 90,
 		phi: 20,
 		pointCount: 49,
 		freqX: 4,

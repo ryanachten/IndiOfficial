@@ -33,6 +33,7 @@ function setupAudioNodes(){
 	// create source node from buffer
 	var source = audioCtx.createBufferSource();
 	source.buffer = buffer;
+	source.loop = true;
 
 	//init gain node for volume control
 	gainNode = audioCtx.createGain();
