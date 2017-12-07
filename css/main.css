@@ -73,6 +73,29 @@ header {
     display: block;
     margin: 0 auto;
     margin-bottom: 30px; } }
+header {
+  position: inherit; }
+
+main {
+  text-align: center;
+  margin-top: 40px; }
+
+#music-overview {
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto; }
+
+.music-date-period {
+  margin-top: 40px; }
+
+.bandcamp-embed {
+  margin: 0 20px;
+  margin-bottom: 40px;
+  display: inline-block; }
+
+body.landing header {
+  position: absolute; }
+
 #loading-scene {
   position: absolute;
   width: 100%;
@@ -138,24 +161,5 @@ button.visMode-button.active-visual {
     margin-top: 200px;
     padding: 0;
     padding-bottom: 20px; } }
-header {
-  position: inherit; }
-
-main {
-  text-align: center;
-  margin-top: 40px; }
-
-#music-overview {
-  width: 80%;
-  max-width: 800px;
-  margin: 0 auto; }
-
-.music-date-period {
-  margin-top: 40px; }
-
-.bandcamp-embed {
-  margin: 0 20px;
-  margin-bottom: 40px;
-  display: inline-block; }
 
 /*# sourceMappingURL=main.css.map */
