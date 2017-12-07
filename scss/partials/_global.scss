@@ -3,15 +3,16 @@ $header-type: 'Kelly Slab', cursive;
 $body-type: 'Roboto', sans-serif;
 
 // Colour scheme
-$background-color: #FAF5F3;
-$primary-color: #413D3B;
+$background-color: #3e4249; //#413D3B; //#FAF5F3;
+$lighter-bg-color: #464b53;
+$primary-color: #FAF5F3; //#413D3B;
 $secondary-color: #9f9b99;
-$active-color: #ffabab; //for active buttons
+$active-color: #E1F3F2; //for active buttons
 
 body{
 	margin: 0px;
 	font-family: $body-type;
-	background: $background-color;
+	background: $lighter-bg-color;
 }
 h1{
 	font-family: $header-type;
@@ -74,6 +75,7 @@ header{
 	vertical-align: middle;
 	width: 270px;
 	margin-right: 10px;
+  filter: invert(1);
 }
 #indi-logo-link{
 	padding: 0px;
