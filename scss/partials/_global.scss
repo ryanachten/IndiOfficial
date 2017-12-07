@@ -1,38 +1,48 @@
+// Typography
+$header-type: 'Kelly Slab', cursive;
+$body-type: 'Roboto', sans-serif;
+
+// Colour scheme
+$background-color: #FAF5F3;
+$primary-color: #413D3B;
+$secondary-color: #9f9b99;
+$active-color: #ffabab; //for active buttons
+
 body{
 	margin: 0px;
-	font-family: 'Roboto', sans-serif;
-	background: #FAF5F3;
+	font-family: $body-type;
+	background: $background-color;
 }
 h1{
-	font-family: 'Kelly Slab', cursive;
+	font-family: $header-type;
 	text-transform: lowercase;
 	font-size: 3em;
 	font-weight: normal;
   margin-bottom: 20px;
-  color: #413D3B;
+  color: $primary-color;
 }
 h2{
-	font-family: 'Roboto', sans-serif;
+	font-family: $body-type;
 	text-transform: uppercase;
 	font-weight: bold;
 	letter-spacing: 2px;
 	font-size: 1em;
 	margin-bottom: 5px;
-  color: #413D3B;
+  color: $primary-color;
 }
 h3{
-	font-family: 'Roboto', sans-serif;
+	font-family: $body-type;
 	text-transform: uppercase;
 	font-weight: bold;
 	letter-spacing: 2px;
 	font-size: 0.8em;
 	margin-bottom: 5px;
   margin-top: 20px;
-	color: #413D3B;
+	color: $primary-color;
 }
 p{
-	font-family: 'Roboto', sans-serif;
-	color: #413D3B;
+	font-family: $body-type;
+	color: $primary-color;
 	text-align: left;
   line-height: 25px;
 }
@@ -43,7 +53,7 @@ hr{
 }
 header{
 	width: 100%;
-	background: #FAF5F3;
+	background: $background-color;
 	box-shadow: 0 0 5px 0 rgba(0,0,0,0.50);
 	position: absolute;
 }
@@ -55,7 +65,7 @@ header{
 .top-nav-link{
  	padding: 0 20px;
   font-size: 15px;
- 	color: #413D3B;
+ 	color: $primary-color;
  	text-transform: uppercase;
  	text-decoration: none;
  	letter-spacing: 3px;
@@ -75,6 +85,5 @@ header{
 		display: block;
 		margin: 0 auto;
 		margin-bottom: 30px;
-		/*margin: 0px;*/
 	}
 }

@@ -1,0 +1,161 @@
+body {
+  margin: 0px;
+  font-family: "Roboto", sans-serif;
+  background: #FAF5F3; }
+
+h1 {
+  font-family: "Kelly Slab", cursive;
+  text-transform: lowercase;
+  font-size: 3em;
+  font-weight: normal;
+  margin-bottom: 20px;
+  color: #413D3B; }
+
+h2 {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 1em;
+  margin-bottom: 5px;
+  color: #413D3B; }
+
+h3 {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 0.8em;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  color: #413D3B; }
+
+p {
+  font-family: "Roboto", sans-serif;
+  color: #413D3B;
+  text-align: left;
+  line-height: 25px; }
+
+hr {
+  width: 60%;
+  max-width: 500px;
+  margin: 20px auto 30px auto; }
+
+header {
+  width: 100%;
+  background: #FAF5F3;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  position: absolute; }
+
+#top-nav {
+  padding: 20px;
+  text-align: center;
+  text-transform: lowercase; }
+
+.top-nav-link {
+  padding: 0 20px;
+  font-size: 15px;
+  color: #413D3B;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 3px; }
+
+#indi-logo {
+  vertical-align: middle;
+  width: 270px;
+  margin-right: 10px; }
+
+#indi-logo-link {
+  padding: 0px; }
+
+@media screen and (max-width: 800px) {
+  #indi-logo {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 30px; } }
+#loading-scene {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #FAF5F3;
+  z-index: 2;
+  text-align: center;
+  padding-top: 40px; }
+
+.loading-branding {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  margin: 0 auto; }
+
+#loading-message img, #loading-message h2 {
+  display: inline; }
+#loading-message img {
+  transform: translateY(4px); }
+
+#ui-panel {
+  position: absolute;
+  z-index: 1;
+  padding: 20px;
+  margin-left: 40px;
+  margin-top: 140px;
+  text-align: center; }
+
+#visualiser, #container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1; }
+
+#visual-options {
+  display: inline-block; }
+
+button.visMode-button {
+  display: inline-block;
+  width: 70px;
+  color: white;
+  background-color: #FAF5F3;
+  margin: 5px;
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #9f9b99;
+  border-radius: 50%;
+  cursor: pointer; }
+
+button.visMode-button.active-visual {
+  background-color: #ffabab; }
+
+.visMode-button img {
+  width: 100%; }
+
+.dg.main .close-button.close-bottom {
+  position: relative; }
+
+@media screen and (max-width: 600px) {
+  #ui-panel {
+    width: 100%;
+    margin-left: auto;
+    margin-top: 200px;
+    padding: 0;
+    padding-bottom: 20px; } }
+header {
+  position: inherit; }
+
+main {
+  text-align: center;
+  margin-top: 40px; }
+
+#music-overview {
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto; }
+
+.music-date-period {
+  margin-top: 40px; }
+
+.bandcamp-embed {
+  margin: 0 20px;
+  margin-bottom: 40px;
+  display: inline-block; }
+
+/*# sourceMappingURL=main.css.map */
