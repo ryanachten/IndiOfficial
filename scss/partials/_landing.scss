@@ -49,8 +49,24 @@ body.landing{
 #visual-options{
   display: inline-block;
 
-  h2, .ui-section h3{
+  #visualmode-header{
     color: $background-color;
+    font-family: $body-type;
+  	text-transform: uppercase;
+  	font-weight: bold;
+  	letter-spacing: 2px;
+  	font-size: 1em;
+  	margin-bottom: 5px;
+  }
+  #vissettings-header, #audiosettings-header{
+    color: $background-color;
+    font-family: $body-type;
+  	text-transform: uppercase;
+  	font-weight: bold;
+  	letter-spacing: 2px;
+  	font-size: 0.8em;
+  	margin-bottom: 5px;
+    margin-top: 20px;
   }
 }
 

@@ -1,0 +1,36 @@
+header{
+    position: inherit;
+}
+main{
+  text-align: center;
+  margin-top: 40px;
+
+  #vault-title, .vault-date-period h3{
+    color: $secondary-color;
+  }
+}
+
+#vault-overview{
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.vault-date-period{
+  margin-top: 40px;
+}
+.vault-date-period h3{
+  font-size: 1.2em;
+  font-family: $header-type;
+  border: 1px solid #fefbd7;
+  padding: 10px;
+  width: 80px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.bandcamp-embed{
+  margin: 0 20px;
+  margin-bottom: 40px;
+  display: inline-block;
+}
