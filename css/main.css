@@ -1,7 +1,7 @@
 body {
   margin: 0px;
   font-family: "Roboto", sans-serif;
-  background: #464b53; }
+  background-image: radial-gradient(#75898f 0%, #464b53 100%); }
 
 h1 {
   font-family: "Kelly Slab", cursive;
@@ -55,10 +55,13 @@ header {
 .top-nav-link {
   padding: 0 20px;
   font-size: 15px;
-  color: #FAF5F3;
+  color: #fefbd7;
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: 3px; }
+
+.top-nav-link:hover {
+  text-decoration: underline; }
 
 #indi-logo {
   vertical-align: middle;
@@ -80,14 +83,25 @@ header {
 main {
   text-align: center;
   margin-top: 40px; }
+  main #vault-title, main .vault-date-period h3 {
+    color: #fefbd7; }
 
-#music-overview {
+#vault-overview {
   width: 80%;
   max-width: 800px;
   margin: 0 auto; }
 
-.music-date-period {
+.vault-date-period {
   margin-top: 40px; }
+
+.vault-date-period h3 {
+  font-size: 1.2em;
+  font-family: "Kelly Slab", cursive;
+  border: 1px solid #fefbd7;
+  padding: 10px;
+  width: 80px;
+  margin: 0 auto;
+  margin-bottom: 20px; }
 
 .bandcamp-embed {
   margin: 0 20px;
@@ -133,8 +147,23 @@ body.landing header {
 
 #visual-options {
   display: inline-block; }
-  #visual-options h2, #visual-options .ui-section h3 {
-    color: #3e4249; }
+  #visual-options #visualmode-header {
+    color: #3e4249;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 1em;
+    margin-bottom: 5px; }
+  #visual-options #vissettings-header, #visual-options #audiosettings-header {
+    color: #3e4249;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 0.8em;
+    margin-bottom: 5px;
+    margin-top: 20px; }
 
 button.visMode-button {
   display: inline-block;
