@@ -4,15 +4,21 @@ $body-type: 'Roboto', sans-serif;
 
 // Colour scheme
 $background-color: #3e4249; //#413D3B; //#FAF5F3;
-$bg-gradient: radial-gradient(#75898f 0%, #464b53 100%);
 $primary-color: #FAF5F3; //#413D3B;
 $secondary-color: #fefbd7;
 $active-color: #E1F3F2; //for active buttons
 
+@mixin background-gradient {
+  background-image: radial-gradient(#75898f 0%, #464b53 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 body{
 	margin: 0px;
 	font-family: $body-type;
-  background-image: $bg-gradient;
+  @include background-gradient;
 }
 h1{
 	font-family: $header-type;
@@ -20,7 +26,7 @@ h1{
 	font-size: 3em;
 	font-weight: normal;
   margin-bottom: 20px;
-  color: $primary-color;
+  color: $secondary-color;
 }
 h2{
 	font-family: $body-type;
