@@ -9,7 +9,7 @@ $secondary-color: #fefbd7;
 $active-color: #E1F3F2; //for active buttons
 
 @mixin background-gradient {
-  background-image: radial-gradient(#75898f 0%, #464b53 100%);
+  background-image: radial-gradient(#727780 0%, #3e4249 100%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -53,6 +53,10 @@ p{
 	text-align: left;
   line-height: 25px;
 }
+a{
+  color: $secondary-color;
+  text-decoration: none;
+}
 hr{
 	width: 60%;
 	max-width: 500px;
@@ -88,6 +92,15 @@ header{
 }
 #indi-logo-link{
 	padding: 0px;
+}
+
+.indi-social-links {
+  text-align: center;
+  i{
+    font-size: 30px;
+    color: $secondary-color;
+    margin: 0 10px;
+  }
 }
 
 

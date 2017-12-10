@@ -1,7 +1,7 @@
 body {
   margin: 0px;
   font-family: "Roboto", sans-serif;
-  background-image: radial-gradient(#75898f 0%, #464b53 100%);
+  background-image: radial-gradient(#727780 0%, #3e4249 100%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center; }
@@ -39,6 +39,10 @@ p {
   text-align: left;
   line-height: 25px; }
 
+a {
+  color: #fefbd7;
+  text-decoration: none; }
+
 hr {
   width: 60%;
   max-width: 500px;
@@ -74,6 +78,13 @@ header {
 
 #indi-logo-link {
   padding: 0px; }
+
+.indi-social-links {
+  text-align: center; }
+  .indi-social-links i {
+    font-size: 30px;
+    color: #fefbd7;
+    margin: 0 10px; }
 
 @media screen and (max-width: 800px) {
   #indi-logo {
@@ -117,7 +128,7 @@ main {
   background-size: cover;
   background-position: top;
   height: 500px;
-  width: 100%;
+  width: 80%;
   max-width: 1000px;
   margin: 0 auto; }
 
