@@ -1,0 +1,32 @@
+#music-main p{
+  text-align: center;
+}
+
+#music-heroimage{
+  background-image: url('https://i.scdn.co/image/71084d90fdbe0c2850ef60ee12c1e43399001359');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  width: 80%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#music-pullquote{
+  line-height: 25px;
+}
+#music-infocontainer, #music-pullquote{
+  width: 70%;
+  margin: 0 auto;
+}
+
+#music-albumhosts{
+  margin: 30px auto;
+  text-align: center;
+  i{
+    font-size: 40px;
+    color: $secondary-color;
+    margin: 0 10px;
+  }
+}
