@@ -115,9 +115,10 @@ main {
   background-image: url("../img/Indi_PressImg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: top;
   height: 500px;
-  width: 90%;
+  width: 100%;
+  max-width: 1000px;
   margin: 0 auto; }
 
 #about-infocontainer, #about-pullquote {
