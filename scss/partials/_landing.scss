@@ -51,7 +51,7 @@ body.landing{
 
   #visualmode-header{
     color: $background-color;
-    font-family: $body-type;
+    font-family: $secondheader-type;
   	text-transform: uppercase;
   	font-weight: bold;
   	letter-spacing: 2px;
@@ -60,7 +60,7 @@ body.landing{
   }
   #vissettings-header, #audiosettings-header{
     color: $background-color;
-    font-family: $body-type;
+    font-family: $secondheader-type;
   	text-transform: uppercase;
   	font-weight: bold;
   	letter-spacing: 2px;

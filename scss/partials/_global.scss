@@ -1,6 +1,7 @@
 // Typography
 $header-type: 'Kelly Slab', cursive;
-$body-type: 'Roboto', sans-serif;
+$secondheader-type: 'Roboto', sans-serif;
+$body-type:'Slabo 27px', serif;
 
 // Colour scheme
 $background-color: #3e4249; //#413D3B; //#FAF5F3;
@@ -29,7 +30,7 @@ h1{
   color: $secondary-color;
 }
 h2{
-	font-family: $body-type;
+	font-family: $secondheader-type;
 	text-transform: uppercase;
 	font-weight: bold;
 	letter-spacing: 2px;
@@ -51,6 +52,7 @@ p{
 	font-family: $body-type;
 	color: $primary-color;
 	text-align: left;
+  font-size: 1.2em;
   line-height: 25px;
 }
 a{
@@ -79,7 +81,8 @@ header{
  	color: $secondary-color;
  	text-transform: uppercase;
  	text-decoration: none;
- 	letter-spacing: 3px;
+ 	letter-spacing: 5px;
+  vertical-align: middle;
 }
 .top-nav-link:hover{
   text-decoration: underline;
@@ -95,6 +98,7 @@ header{
 }
 
 .indi-social-links {
+  margin: 30px auto;
   text-align: center;
   i{
     font-size: 30px;

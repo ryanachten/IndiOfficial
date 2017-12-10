@@ -1,6 +1,6 @@
 body {
   margin: 0px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Slabo 27px", serif;
   background-image: radial-gradient(#727780 0%, #3e4249 100%);
   background-repeat: no-repeat;
   background-size: cover;
@@ -24,7 +24,7 @@ h2 {
   color: #FAF5F3; }
 
 h3 {
-  font-family: "Roboto", sans-serif;
+  font-family: "Slabo 27px", serif;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
@@ -34,9 +34,10 @@ h3 {
   color: #FAF5F3; }
 
 p {
-  font-family: "Roboto", sans-serif;
+  font-family: "Slabo 27px", serif;
   color: #FAF5F3;
   text-align: left;
+  font-size: 1.2em;
   line-height: 25px; }
 
 a {
@@ -65,7 +66,8 @@ header {
   color: #fefbd7;
   text-transform: uppercase;
   text-decoration: none;
-  letter-spacing: 3px; }
+  letter-spacing: 5px;
+  vertical-align: middle; }
 
 .top-nav-link:hover {
   text-decoration: underline; }
@@ -80,6 +82,7 @@ header {
   padding: 0px; }
 
 .indi-social-links {
+  margin: 30px auto;
   text-align: center; }
   .indi-social-links i {
     font-size: 30px;
@@ -135,9 +138,6 @@ main {
 #about-infocontainer, #about-pullquote {
   width: 70%;
   margin: 0 auto; }
-
-.about-infosection {
-  font-size: 18px; }
 
 body.landing header {
   position: absolute; }
