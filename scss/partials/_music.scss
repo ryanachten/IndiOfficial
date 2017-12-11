@@ -1,5 +1,10 @@
-#music-main p{
+#music-main{
+  width: 80%;
+  margin: 40px auto;
   text-align: center;
+  p{
+    text-align: center;
+  }
 }
 
 #music-heroimage{
@@ -8,9 +13,9 @@
   background-size: cover;
   background-position: center;
   height: 500px;
-  width: 80%;
   max-width: 1000px;
   margin: 0 auto;
+  border-radius: 10px;
 }
 
 #music-pullquote{

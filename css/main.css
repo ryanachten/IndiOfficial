@@ -1,7 +1,7 @@
 body {
   margin: 0px;
   font-family: "Slabo 27px", serif;
-  background-image: radial-gradient(#727780 0%, #3e4249 100%);
+  background-image: radial-gradient(#727780 0%, #3e4249 80%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center; }
@@ -97,10 +97,10 @@ header {
 header {
   position: inherit; }
 
-main {
+#vault-main {
   text-align: center;
   margin-top: 40px; }
-  main .vault-date-period h3 {
+  #vault-main .vault-date-period h3 {
     color: #fefbd7; }
 
 #vault-overview {
@@ -125,6 +125,10 @@ main {
   margin-bottom: 40px;
   display: inline-block; }
 
+#about-main {
+  margin: 40px auto;
+  text-align: center; }
+
 #about-pressimage {
   background-image: url("../img/Indi_PressImg.jpg");
   background-repeat: no-repeat;
@@ -133,14 +137,22 @@ main {
   height: 500px;
   width: 80%;
   max-width: 1000px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  border-radius: 10px; }
 
 #about-infocontainer, #about-pullquote {
   width: 70%;
   margin: 0 auto; }
 
-#music-main p {
+#about-title {
   text-align: center; }
+
+#music-main {
+  width: 80%;
+  margin: 40px auto;
+  text-align: center; }
+  #music-main p {
+    text-align: center; }
 
 #music-heroimage {
   background-image: url("https://i.scdn.co/image/71084d90fdbe0c2850ef60ee12c1e43399001359");
@@ -148,9 +160,9 @@ main {
   background-size: cover;
   background-position: center;
   height: 500px;
-  width: 80%;
   max-width: 1000px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  border-radius: 10px; }
 
 #music-pullquote {
   line-height: 25px; }

@@ -1,3 +1,8 @@
+#about-main{
+  margin: 40px auto;
+  text-align: center;
+}
+
 #about-pressimage{
   background-image: url('../img/Indi_PressImg.jpg');
   background-repeat: no-repeat;
@@ -7,9 +12,14 @@
   width: 80%;
   max-width: 1000px;
   margin: 0 auto;
+  border-radius: 10px;
 }
 
 #about-infocontainer, #about-pullquote{
   width: 70%;
   margin: 0 auto;
+}
+
+#about-title{
+  text-align: center;
 }

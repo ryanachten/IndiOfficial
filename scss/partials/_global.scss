@@ -10,7 +10,7 @@ $secondary-color: #fefbd7;
 $active-color: #E1F3F2; //for active buttons
 
 @mixin background-gradient {
-  background-image: radial-gradient(#727780 0%, #3e4249 100%);
+  background-image: radial-gradient(#727780 0%, #3e4249 80%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
