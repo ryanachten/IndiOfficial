@@ -195,7 +195,8 @@ body.landing header {
   display: block;
   width: 80%;
   max-width: 400px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  filter: invert(1); }
 
 #loading-message img, #loading-message h2 {
   display: inline; }
