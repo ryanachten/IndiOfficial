@@ -1,7 +1,7 @@
 body {
   margin: 0px;
   font-family: "Slabo 27px", serif;
-  background-image: radial-gradient(#727780 0%, #3e4249 80%);
+  background-image: radial-gradient(#FAF5F3 0%, #e6dedb 100%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center; }
@@ -12,7 +12,7 @@ h1 {
   font-size: 3em;
   font-weight: normal;
   margin-bottom: 20px;
-  color: #fefbd7; }
+  color: #838fa0; }
 
 h2 {
   font-family: "Roboto", sans-serif;
@@ -21,7 +21,7 @@ h2 {
   letter-spacing: 2px;
   font-size: 1em;
   margin-bottom: 5px;
-  color: #FAF5F3; }
+  color: #89807c; }
 
 h3 {
   font-family: "Slabo 27px", serif;
@@ -31,17 +31,17 @@ h3 {
   font-size: 0.8em;
   margin-bottom: 5px;
   margin-top: 20px;
-  color: #FAF5F3; }
+  color: #89807c; }
 
 p {
   font-family: "Slabo 27px", serif;
-  color: #FAF5F3;
+  color: #89807c;
   text-align: left;
   font-size: 1.2em;
   line-height: 25px; }
 
 a {
-  color: #fefbd7;
+  color: #838fa0;
   text-decoration: none; }
 
 hr {
@@ -51,7 +51,7 @@ hr {
 
 header {
   width: 100%;
-  background: #3e4249;
+  background: #FAF5F3;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   position: absolute; }
 
@@ -63,7 +63,7 @@ header {
 .top-nav-link {
   padding: 0 20px;
   font-size: 16px;
-  color: #fefbd7;
+  color: #838fa0;
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: 5px;
@@ -75,8 +75,7 @@ header {
 #indi-logo {
   vertical-align: middle;
   width: 270px;
-  margin-right: 10px;
-  filter: invert(1); }
+  margin-right: 10px; }
 
 #indi-logo-link {
   padding: 0px; }
@@ -86,7 +85,7 @@ header {
   text-align: center; }
   .indi-social-links i {
     font-size: 30px;
-    color: #fefbd7;
+    color: #838fa0;
     margin: 0 10px; }
 
 @media screen and (max-width: 800px) {
@@ -101,7 +100,7 @@ header {
   text-align: center;
   margin-top: 40px; }
   #vault-main .vault-date-period h3 {
-    color: #fefbd7; }
+    color: #838fa0; }
 
 #vault-overview {
   width: 80%;
@@ -114,16 +113,22 @@ header {
 .vault-date-period h3 {
   font-size: 1.2em;
   font-family: "Kelly Slab", cursive;
-  border: 1px solid #fefbd7;
+  border: 1px dashed #838fa0;
   padding: 10px;
   width: 80px;
   margin: 0 auto;
   margin-bottom: 20px; }
 
 .bandcamp-embed {
+  width: 350px;
   margin: 0 20px;
   margin-bottom: 40px;
   display: inline-block; }
+
+.vault-embed-title {
+  text-align: center;
+  display: inline-block;
+  width: 100%; }
 
 #about-main {
   margin: 40px auto;
@@ -176,7 +181,7 @@ header {
   text-align: center; }
   #music-albumhosts i {
     font-size: 40px;
-    color: #fefbd7;
+    color: #838fa0;
     margin: 0 10px; }
 
 body.landing header {
@@ -186,7 +191,7 @@ body.landing header {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #3e4249;
+  background-color: #FAF5F3;
   z-index: 2;
   text-align: center;
   padding-top: 40px; }
@@ -195,8 +200,7 @@ body.landing header {
   display: block;
   width: 80%;
   max-width: 400px;
-  margin: 0 auto;
-  filter: invert(1); }
+  margin: 0 auto; }
 
 #loading-message img, #loading-message h2 {
   display: inline; }
@@ -220,7 +224,7 @@ body.landing header {
 #visual-options {
   display: inline-block; }
   #visual-options #visualmode-header {
-    color: #3e4249;
+    color: #FAF5F3;
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     font-weight: bold;
@@ -228,7 +232,7 @@ body.landing header {
     font-size: 1em;
     margin-bottom: 5px; }
   #visual-options #vissettings-header, #visual-options #audiosettings-header {
-    color: #3e4249;
+    color: #FAF5F3;
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     font-weight: bold;
@@ -241,7 +245,7 @@ button.visMode-button {
   display: inline-block;
   width: 70px;
   color: white;
-  background-color: #FAF5F3;
+  background-color: #89807c;
   margin: 5px;
   padding: 15px;
   text-align: center;

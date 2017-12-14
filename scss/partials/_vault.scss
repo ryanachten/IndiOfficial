@@ -22,7 +22,7 @@ header{
 .vault-date-period h3{
   font-size: 1.2em;
   font-family: $header-type;
-  border: 1px solid #fefbd7;
+  border: 1px dashed $secondary-color;
   padding: 10px;
   width: 80px;
   margin: 0 auto;
@@ -30,7 +30,14 @@ header{
 }
 
 .bandcamp-embed{
+  width: 350px;
   margin: 0 20px;
   margin-bottom: 40px;
   display: inline-block;
+}
+
+.vault-embed-title{
+  text-align: center;
+  display: inline-block;
+  width: 100%;
 }
