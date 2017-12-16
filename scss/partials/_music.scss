@@ -1,6 +1,4 @@
 #music-main{
-  width: 80%;
-  margin: 40px auto;
   text-align: center;
   p{
     text-align: center;
@@ -12,22 +10,31 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 500px;
-  max-width: 1000px;
+  height: 80vh; //500px;
   margin: 0 auto;
-  border-radius: 10px;
+  padding-top: 100px;
+}
+
+#music-infocontainer{
+  width: 70%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #faf5f3;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+#music-title{
+  margin: 0px;
+  margin-bottom: 20px;
 }
 
 #music-pullquote{
   line-height: 25px;
 }
-#music-infocontainer, #music-pullquote{
-  width: 70%;
-  margin: 0 auto;
-}
 
 #music-albumhosts{
-  margin: 30px auto;
+  margin: 20px auto;
   text-align: center;
   i{
     font-size: 40px;

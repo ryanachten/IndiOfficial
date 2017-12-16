@@ -85,12 +85,14 @@ header{
   vertical-align: middle;
 }
 .top-nav-link:hover{
-  text-decoration: underline;
+  text-decoration: line-through;
 }
 #indi-logo{
-	vertical-align: middle;
-	width: 270px;
-	margin-right: 10px;
+  display: block;
+  width: 270px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  vertical-align: middle;
 }
 #indi-logo-link{
 	padding: 0px;
@@ -104,13 +106,4 @@ header{
     color: $secondary-color;
     margin: 0 10px;
   }
-}
-
-
-@media screen and (max-width: 800px) {
-	#indi-logo{
-		display: block;
-		margin: 0 auto;
-		margin-bottom: 30px;
-	}
 }
