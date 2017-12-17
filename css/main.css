@@ -96,16 +96,12 @@ header {
 #vault-main {
   text-align: center;
   margin-top: 40px; }
+  #vault-main #vault-overview {
+    margin-bottom: 30px; }
   #vault-main .vault-date-period h3 {
     color: #838fa0; }
-
-#vault-overview {
-  width: 80%;
-  max-width: 800px;
-  margin: 0 auto; }
-
-.vault-date-period {
-  margin-top: 40px; }
+  #vault-main hr {
+    margin-top: 0px; }
 
 .vault-date-period h3 {
   font-size: 1.2em;
@@ -114,19 +110,65 @@ header {
   padding: 10px;
   width: 80px;
   margin: 0 auto;
-  margin-bottom: 20px; }
+  margin-bottom: 30px; }
 
-.bandcamp-embed {
+div.vault-musictile {
+  perspective: 1200px;
   width: 350px;
-  margin: 0 20px;
-  margin-bottom: 40px;
-  display: inline-block; }
-
-.vault-embed-title {
-  text-align: center;
   display: inline-block;
-  width: 100%; }
+  margin: 0px 20px; }
+  div.vault-musictile figure {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: 1s transform;
+    font-size: 1.6rem;
+    margin: 0px; }
+    div.vault-musictile figure img {
+      width: 350px;
+      height: 350px; }
+    div.vault-musictile figure p {
+      text-align: center;
+      font-size: 16px;
+      transition: 1s opacity;
+      margin: 0px;
+      margin-top: 10px; }
+    div.vault-musictile figure iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0px;
+      transform: rotateY(0.5turn) translateZ(1px);
+      background: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      opacity: 0.6;
+      transition: 1s opacity; }
+  div.vault-musictile:hover figure {
+    transform: rotateY(0.5turn); }
+    div.vault-musictile:hover figure p {
+      opacity: 0; }
+    div.vault-musictile:hover figure iframe {
+      opacity: 1; }
+  div.vault-musictile:after {
+    content: " ";
+    display: block;
+    height: 8vw;
+    width: 100%;
+    transform: rotateX(90deg);
+    background-image: radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0) 100%); }
 
+@media screen and (max-width: 800px) {
+  div#vault-musictile {
+    perspective-origin: center top; }
+
+  div#vault-musictile figure {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 12vw; }
+
+  div#vault-musictile figure:last-child {
+    display: none; } }
 #about-main {
   margin: 40px auto;
   text-align: center; }
