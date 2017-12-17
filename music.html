@@ -20,77 +20,23 @@
   		</nav>
   	</header>
     <main id="music-main">
-
-
-
+			<div id="music-heroimage">
+				<section id="music-infocontainer">
+					<h1 id="music-title">Precipice</h1>
+					<h2 id="music-pullquote">Album out now
+						<br>Listen at the links below:</h2>
+					<div id="music-albumhosts">
+						<a href="https://open.spotify.com/album/3D4fyVS6INVe4QA2HKiNZX"><i class="fi-social-spotify"></i></a>
+						<a href="https://geo.itunes.apple.com/nz/album/id1276409405"><i class="fi-social-apple"></i></a>
+					</div>
+					<p>Read more about the album at <a href="https://www.thelineofbestfit.com/new-music/discovery/new-zealands-indi.-stuns-on-experimental-alt.-pop-debut-precipice">The Line of Best Fit</a>.</p>
+				</section>
+			</div>
     </main>
-		<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-		<div class="video-container">
-	 		<div id="player"></div>
-	 </div>
-
-	 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/F72HosSCy0g?rel=0&amp;controls=0&amp;showinfo=0&autoplay=1" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe> -->
-
     <footer class="indi-social-links">
 			<a href="https://www.facebook.com/indiforceofficial"><i class="fi-social-facebook"></i></a>
 			<a href="https://twitter.com/IndiForce"><i class="fi-social-twitter"></i></a>
 			<a href="https://www.instagram.com/indiforce/"><i class="fi-social-instagram"></i></a>
     </footer>
   </body>
-	<!-- <script>
-		// $( document ).ready(function() {
-		// 2. This code loads the IFrame Player API code asynchronously.
-		var tag = document.createElement('script');
-
-		tag.src = "https://www.youtube.com/iframe_api";
-		var firstScriptTag = document.getElementsByTagName('script')[0];
-		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-		// 3. This function creates an <iframe> (and YouTube player)
-		//    after the API code downloads.
-		var player;
-		function onYouTubeIframeAPIReady() {
-			var innerWidth = $(window).innerWidth();
-			// var innerHeight = $(window).innerHeight();
-			player = new YT.Player('player', {
-				height: '100%',
-				color: 'white',
-				width: '100%',
-				origin: window.location.href,
-				videoId: 'F72HosSCy0g',
-				playerVars: {
-					'autoplay': 1,
-					'controls': 0,
-					'rel': 0, //should hide related videos once video stops
-					'showinfo': 0, //should hide video info
-					'modestbranding': 1, //prevent YT branding
-					'color' : 'white'
-				},
-				events: {
-					'onReady': onPlayerReady,
-					// 'onStateChange': onPlayerStateChange
-				}
-			});
-		}
-
-		// 4. The API will call this function when the video player is ready.
-		function onPlayerReady(event) {
-			event.target.playVideo();
-		}
-
-		// 5. The API calls this function when the player's state changes.
-		//    The function indicates that when playing a video (state=1),
-		//    the player should play for six seconds and then stop.
-		// var done = false;
-		// function onPlayerStateChange(event) {
-		// 	if (event.data == YT.PlayerState.PLAYING && !done) {
-		// 		setTimeout(stopVideo, 6000);
-		// 		done = true;
-		// 	}
-		// }
-		// function stopVideo() {
-		// 	player.stopVideo();
-		// }
-		// });
-	</script> -->
 </html>
