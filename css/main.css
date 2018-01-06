@@ -215,6 +215,8 @@ div.vault-musictile {
   padding: 10px; }
 
 #music-title {
+  font-size: 3.5rem;
+  letter-spacing: 3px;
   margin: 0px;
   margin-bottom: 20px; }
 
@@ -229,18 +231,14 @@ div.vault-musictile {
     color: #838fa0;
     margin: 0 10px; }
 
-.video-container {
-  overflow: hidden;
-  padding-bottom: 56.25%;
-  position: relative;
-  height: 0; }
-
-.video-container iframe, .video-container object, .video-container embed {
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  position: absolute; }
+.music-page.indi-social-links {
+  margin: 0px;
+  position: fixed;
+  bottom: 0px;
+  width: 100vw;
+  background-color: #faf5f3; }
+  .music-page.indi-social-links div {
+    margin: 30px auto; }
 
 body.landing header {
   position: absolute; }
