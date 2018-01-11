@@ -38,9 +38,9 @@ function setupCanvas(){
 	canvas = document.querySelector("#visualiser");
 
 	if(canvas.getContext){
-		canvas.width = window.innerWidth;
+		canvas.width = $(window).innerWidth();
 		var topNavHeight = $('header').height();
-		canvas.height = $(window).outerHeight() -topNavHeight;
+		canvas.height = $(window).innerHeight() -topNavHeight;
 		canvWidth = canvas.width;
 		canvHeight = canvas.height;
 		canvasCtx = canvas.getContext('2d');
