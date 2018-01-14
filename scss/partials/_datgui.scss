@@ -5,11 +5,11 @@
 }
 
 .dg.main .close-button {
-    background-color: #ccc;
+    background-color: darken($background-color, 5%);
 }
 
 .dg.main .close-button:hover {
-    background-color: #ddd;
+    background-color: darken($background-color, 5%);
 }
 
 .dg {

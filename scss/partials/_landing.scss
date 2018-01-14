@@ -92,7 +92,7 @@ button.visMode-button{
 }
 
 button.visMode-button.active-visual{
-	background-color: $active-color;
+	background-color: darken($background-color, 10%);
 }
 
 .visMode-button img{

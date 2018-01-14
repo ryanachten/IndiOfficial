@@ -7,7 +7,7 @@ $body-type:'Slabo 27px', serif;
 $background-color: #f4eeeb; //#413D3B; //#FAF5F3;
 $primary-color: #89807c; //#413D3B;
 $secondary-color: #838fa0;
-$active-color: #E1F3F2; //for active buttons
+$active-color: #d5daeb; //for active buttons
 
 @mixin background-gradient {
   background-image: radial-gradient(#FAF5F3 0%, #e6dedb 100%);
@@ -19,6 +19,7 @@ $active-color: #E1F3F2; //for active buttons
 body{
 	margin: 0px;
 	font-family: $body-type;
+  cursor: crosshair;
   @include background-gradient;
 }
 h1{
@@ -106,4 +107,11 @@ header{
     color: $secondary-color;
     margin: 0 10px;
   }
+}
+
+
+#cursor-circle{
+      background: linear-gradient($background-color, $secondary-color);
+  border-radius: 50%;
+  position: absolute;
 }
