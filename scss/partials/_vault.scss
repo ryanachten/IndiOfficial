@@ -33,7 +33,7 @@ div.vault-musictile {
   perspective: 1200px;
   width: 350px;
   display: inline-block;
-  margin: 0px 20px;
+  margin: 0px 20px 30px 20px;
 
   figure {
     position: relative;
@@ -78,15 +78,6 @@ div.vault-musictile {
     iframe {
       opacity: 1;
     }
-  }
-
-  &:after {
-    content: " ";
-    display: block;
-    height: 8vw;
-    width: 100%;
-    transform: rotateX(90deg);
-    background-image: radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
   }
 }
 
