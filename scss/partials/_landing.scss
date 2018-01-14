@@ -50,23 +50,30 @@ body.landing{
   display: inline-block;
 
   #visualmode-header{
-    color: $background-color;
     font-family: $secondheader-type;
   	text-transform: uppercase;
   	font-weight: bold;
   	letter-spacing: 2px;
   	font-size: 1em;
   	margin-bottom: 5px;
+
+    background-color: #f4eeeb;
+    display: inline-block;
+    padding: 5px;
+    color: $secondary-color;
   }
   #vissettings-header, #audiosettings-header{
-    color: $background-color;
     font-family: $secondheader-type;
   	text-transform: uppercase;
-  	font-weight: bold;
   	letter-spacing: 2px;
   	font-size: 0.8em;
   	margin-bottom: 5px;
     margin-top: 20px;
+
+    background-color: #f4eeeb;
+    display: inline-block;
+    padding: 5px;
+    color: $secondary-color;
   }
 }
 

@@ -51,7 +51,7 @@ hr {
 
 header {
   width: 100%;
-  background: #FAF5F3;
+  background: #f4eeeb;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   position: absolute; }
 
@@ -192,6 +192,13 @@ div.vault-musictile {
 #about-title {
   text-align: center; }
 
+.about-quotes {
+  width: 80%;
+  margin: 0 auto; }
+  .about-quotes p {
+    text-align: center;
+    margin: 20 auto; }
+
 #music-main {
   text-align: center; }
   #music-main p {
@@ -247,7 +254,7 @@ body.landing header {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #FAF5F3;
+  background-color: #f4eeeb;
   z-index: 2;
   text-align: center;
   padding-top: 40px; }
@@ -280,28 +287,33 @@ body.landing header {
 #visual-options {
   display: inline-block; }
   #visual-options #visualmode-header {
-    color: #FAF5F3;
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 2px;
     font-size: 1em;
-    margin-bottom: 5px; }
+    margin-bottom: 5px;
+    background-color: #f4eeeb;
+    display: inline-block;
+    padding: 5px;
+    color: #838fa0; }
   #visual-options #vissettings-header, #visual-options #audiosettings-header {
-    color: #FAF5F3;
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
-    font-weight: bold;
     letter-spacing: 2px;
     font-size: 0.8em;
     margin-bottom: 5px;
-    margin-top: 20px; }
+    margin-top: 20px;
+    background-color: #f4eeeb;
+    display: inline-block;
+    padding: 5px;
+    color: #838fa0; }
 
 button.visMode-button {
   display: inline-block;
   width: 70px;
   color: white;
-  background-color: #FAF5F3;
+  background-color: #f4eeeb;
   margin: 5px;
   padding: 15px;
   text-align: center;
@@ -326,5 +338,52 @@ button.visMode-button.active-visual {
     margin-top: 200px;
     padding: 0;
     padding-bottom: 20px; } }
+.dg.main.taller-than-window .close-button {
+  border-top: 1px solid #ddd; }
+
+.dg.main .close-button {
+  background-color: #ccc; }
+
+.dg.main .close-button:hover {
+  background-color: #ddd; }
+
+.dg {
+  color: #555;
+  text-shadow: none !important; }
+
+.dg.main::-webkit-scrollbar {
+  background: #fafafa; }
+
+.dg.main::-webkit-scrollbar-thumb {
+  background: #bbb; }
+
+.dg li:not(.folder) {
+  background: #f4eeeb;
+  border-bottom: 1px solid #ddd; }
+
+.dg li.save-row .button {
+  text-shadow: none !important; }
+
+.dg li.title {
+  background: #e8e8e8 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat; }
+
+.dg .cr.function:hover, .dg .cr.boolean:hover {
+  background: #fff; }
+
+.dg .c input[type=text] {
+  background: #e9e9e9; }
+
+.dg .c input[type=text]:hover {
+  background: #eee; }
+
+.dg .c input[type=text]:focus {
+  background: #eee;
+  color: #555; }
+
+.dg .c .slider {
+  background: #e9e9e9; }
+
+.dg .c .slider:hover {
+  background: #eee; }
 
 /*# sourceMappingURL=main.css.map */
