@@ -1,0 +1,98 @@
+header{
+    position: inherit;
+}
+#vault-main{
+  text-align: center;
+  margin-top: 40px;
+
+  #vault-overview{
+    margin-bottom: 30px;
+  }
+
+  .vault-date-period h3{
+    color: $secondary-color;
+  }
+
+  hr{
+    margin-top: 0px;
+  }
+}
+
+.vault-date-period h3{
+  font-size: 1.2em;
+  font-family: $header-type;
+  border: 1px dashed $secondary-color;
+  padding: 10px;
+  width: 80px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+div.vault-musictile {
+  // 3D effect inspired by https://codepen.io/dudleystorey/pen/KdAev
+  perspective: 1200px;
+  width: 350px;
+  display: inline-block;
+  margin: 0px 20px 30px 20px;
+
+  figure {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: 1s transform;
+    font-size: 1.6rem;
+    margin: 0px;
+
+    img {
+      width: 350px;
+      height: 350px;
+    }
+
+    p{
+      text-align: center;
+      font-size: 16px;
+      transition: 1s opacity;
+      margin: 0px;
+      margin-top: 10px;
+    }
+
+    iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0px;
+      transform: rotateY(.5turn) translateZ(1px);
+      background: rgba(255, 255, 255, 0.9);
+      text-align: center;
+      opacity: 0.6;
+      transition: 1s opacity;
+    }
+  }
+
+  &:hover figure {
+    transform: rotateY(.5turn);
+
+    p{
+      opacity: 0;
+    }
+    iframe {
+      opacity: 1;
+    }
+  }
+}
+
+
+@media screen and (max-width: 800px) {
+  div#vault-musictile {
+    perspective-origin: center top;
+  }
+  div#vault-musictile figure {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 12vw;
+  }
+  div#vault-musictile figure:last-child {
+    display: none;
+  }
+}

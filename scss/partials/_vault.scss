@@ -1,98 +1,89 @@
 header{
     position: inherit;
 }
-#vault-main{
+.vault__container{
   text-align: center;
   margin-top: 40px;
-
-  #vault-overview{
-    margin-bottom: 30px;
-  }
-
-  .vault-date-period h3{
-    color: $secondary-color;
-  }
-
-  hr{
-    margin-top: 0px;
-  }
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
 }
 
-.vault-date-period h3{
-  font-size: 1.2em;
-  font-family: $header-type;
-  border: 1px dashed $secondary-color;
-  padding: 10px;
-  width: 80px;
-  margin: 0 auto;
+.vault__title{
+  width: 100%;
+  margin-top: 0;
+}
+
+.vault__overview{
   margin-bottom: 30px;
+  width: 100%;
 }
 
-div.vault-musictile {
-  // 3D effect inspired by https://codepen.io/dudleystorey/pen/KdAev
-  perspective: 1200px;
-  width: 350px;
+
+.vault__musictile--active{
   display: inline-block;
-  margin: 0px 20px 30px 20px;
+  position:relative;
+  width: 100%;
+}
 
-  figure {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: 1s transform;
-    font-size: 1.6rem;
-    margin: 0px;
+.vault__tilebackground{
+  background-image:  url('https://f4.bcbits.com/img/a2201458935_16.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.5;
+  filter: blur(10px);
+  z-index:-1;
+}
 
-    img {
-      width: 350px;
-      height: 350px;
-    }
+.vault__tileimg{
+  height: 300px;
+  margin: 20px;
+  width: 300px;
+}
 
-    p{
-      text-align: center;
-      font-size: 16px;
-      transition: 1s opacity;
-      margin: 0px;
-      margin-top: 10px;
-    }
+.vault__tilecontent{
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+}
 
-    iframe {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0px;
-      transform: rotateY(.5turn) translateZ(1px);
-      background: rgba(255, 255, 255, 0.9);
-      text-align: center;
-      opacity: 0.6;
-      transition: 1s opacity;
-    }
+.vault__tiledescription {
+  flex-grow: 1;
+  max-width: 700px;
+  min-width: 300px;
+  padding: 20px;
+
+  h2{
+    font-size: 2rem;
+    margin-top: 0;
+    letter-spacing: 5px;
   }
-
-  &:hover figure {
-    transform: rotateY(.5turn);
-
-    p{
-      opacity: 0;
-    }
-    iframe {
-      opacity: 1;
-    }
+  h3{
+    font-size: 1.5rem;
   }
 }
 
+.vault__tileiframe{
+  display: block;
+  margin: 0 auto;
+}
 
-@media screen and (max-width: 800px) {
-  div#vault-musictile {
-    perspective-origin: center top;
-  }
-  div#vault-musictile figure {
-    display: block;
-    width: 50%;
-    margin: 0 auto;
-    margin-bottom: 12vw;
-  }
-  div#vault-musictile figure:last-child {
-    display: none;
-  }
+
+
+.vault__musictile{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 300px;
+  margin: 20px;
+  width: 300px;
+}
+.vault__musictile.hidden{
+  display: none;
 }
