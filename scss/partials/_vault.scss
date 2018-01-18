@@ -7,6 +7,8 @@ header{
   display: flex;
   flex-flow: wrap;
   justify-content: center;
+  max-width: 1400px;
+  margin: 40px auto 0 auto;
 }
 
 .vault__title{
@@ -36,15 +38,15 @@ header{
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.5;
+  opacity: 0.3;
   filter: blur(10px);
   z-index:-1;
 }
 
 .vault__tileimg{
   height: 300px;
-  margin: 20px;
   width: 300px;
+  margin: 20px;
 }
 
 .vault__tilecontent{
@@ -59,13 +61,22 @@ header{
   min-width: 300px;
   padding: 20px;
 
-  h2{
+  .vault__tiletitle{
+    color: $secondary-color;
+    font-family: $body-type;
     font-size: 2rem;
     margin-top: 0;
     letter-spacing: 5px;
   }
-  h3{
+  .vault__tileartist{
+    font-family: $body-type;
     font-size: 1.5rem;
+    text-transform: lowercase;
+  }
+  .vault__tiledate{
+    color: $primary-color;
+    font-family: $secondheader-type;
+    font-size: 1.2rem;
   }
 }
 
@@ -74,15 +85,16 @@ header{
   margin: 0 auto;
 }
 
-
-
 .vault__musictile{
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  height: 300px;
   margin: 20px;
-  width: 300px;
+  height: 25vw;
+  width: 25vw;
+  min-height: 300px;
+  min-width: 300px;
+  max-height: 400px;
 }
 .vault__musictile.hidden{
   display: none;

@@ -75,11 +75,12 @@ var musicTileObj = {
 
 $(document).ready(function(){
   $('.vault__musictile').click(function(){
-    $('.hidden').show();
+    $('.hidden').fadeIn();
     $('.hidden').removeClass('hidden');
     createActiveMusicTile(this.id);
     $(this).hide();
     $(this).addClass('hidden');
+    location.href = '#splash';
   });
 });
 
