@@ -1,4 +1,67 @@
 .video-container{
-  width: 100vw;
+  width: 100%;
+  // width: 100vw;
+  height: 100%;
   height: 100vh;
+}
+
+#music-infocontainer{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  text-align: center;
+
+  p{
+    text-align: center;
+  }
+}
+
+#music-info{
+  width: 70%;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 10px;
+  background-color: #faf5f3;
+  border-radius: 8px;
+  padding: 20px;
+  opacity: 0.9;
+}
+
+#music-albumthumb{
+  height: 200px;
+  width: 200px;
+  border-radius: 5px;
+}
+
+#music-title{
+  font-size: 3.5rem;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+
+#music-pullquote{
+  line-height: 25px;
+}
+
+#music-albumhosts{
+  margin: 20px auto;
+  text-align: center;
+  i{
+    font-size: 40px;
+    color: $secondary-color;
+    margin: 0 10px;
+  }
+}
+
+.music-page.indi-social-links{
+  margin: 0px;
+  position: fixed;
+  bottom: 0px;
+  width: 100vw;
+  background-color: #faf5f3;
+
+  div{
+    margin: 30px auto;
+  }
 }

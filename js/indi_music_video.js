@@ -1,5 +1,5 @@
 $(document).ready(
-	function functionName() {
+	function(){
 		$('.video-container').vide(
 			{
 	  		mp4: 'video/indi',
@@ -19,3 +19,8 @@ $(document).ready(
 		);
 	}
 );
+
+$(window).resize(function(){
+	var vide = $('.video-container').data('vide');
+	vide.resize();
+});
