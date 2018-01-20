@@ -1,32 +1,41 @@
-#music-main{
+.video-container{
+  width: 100%;
+  // width: 100vw;
+  height: 100%;
+  height: 100vh;
+}
+
+#music-infocontainer{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
   text-align: center;
+
   p{
     text-align: center;
   }
 }
 
-#music-heroimage{
-  background-image: url('https://i.scdn.co/image/71084d90fdbe0c2850ef60ee12c1e43399001359');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 80vh; //500px;
-  margin: 0 auto;
-  padding-top: 100px;
-}
-
-#music-infocontainer{
+#music-info{
   width: 70%;
   max-width: 500px;
   margin: 0 auto;
+  margin-top: 10px;
   background-color: #faf5f3;
   border-radius: 8px;
-  padding: 10px;
+  padding: 20px;
+  opacity: 0.9;
+}
+
+#music-albumthumb{
+  height: 200px;
+  width: 200px;
+  border-radius: 5px;
 }
 
 #music-title{
   font-size: 3.5rem;
-  letter-spacing: 3px;
   margin: 0px;
   margin-bottom: 20px;
 }
