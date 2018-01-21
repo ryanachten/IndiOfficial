@@ -19,7 +19,6 @@ $active-color: #d5daeb; //for active buttons
 body{
 	margin: 0px;
 	font-family: $body-type;
-  cursor: crosshair;
   @include background-gradient;
 }
 h1{
