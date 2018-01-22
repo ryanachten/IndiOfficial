@@ -5,16 +5,16 @@ $(document).ready(
 	  		mp4: 'video/indi',
 				poster: 'img/Indi_AlbumCover'
 			},{
-			  volume: 1,
+			  volume: 0.1,
 			  playbackRate: 1,
-			  muted: false,
+			  muted: true,
 			  loop: true,
 			  autoplay: true,
 			  position: '50% 50%',
 			  posterType: 'detect',
 			  resizing: true,
 			  bgColor: 'transparent',
-			  className: ''
+			  className: 'music-video--blurred'
 			}
 		);
 	}
@@ -23,4 +23,26 @@ $(document).ready(
 $(window).resize(function(){
 	var vide = $('.video-container').data('vide');
 	vide.resize();
+});
+
+$('#music-infoclose').click(function(){
+	var video = $('.music-video--blurred');
+	$(video).addClass('music-video--unblurred');
+	$(video).removeClass('music-video--blurred');
+
+	$('#music-infocontainer').fadeOut(); $('.video-container').data('vide').getVideoObject().muted = false;
+
+	$('#music-infoopen').fadeIn();
+});
+
+
+$('#music-infoopen').click(function(){
+	var video = $('.music-video--unblurred');
+	$(video).addClass('music-video--blurred');
+	$(video).removeClass('music-video--unblurred');
+
+	$('#music-infocontainer').fadeOut(); $('.video-container').data('vide').getVideoObject().muted = true;
+
+	$('#music-infocontainer').fadeIn();
+	$('#music-infoopen').fadeOut();
 });

@@ -85,7 +85,6 @@ $(document).ready(function(){
 });
 
 function createActiveMusicTile(id){
-  console.log(id);
   var curObj;
 
   switch (id) {
@@ -118,7 +117,6 @@ function createActiveMusicTile(id){
   }
 
   var newElement = $('.vault__musictile--active');
-  console.log(newElement);
 
   $(newElement).insertBefore('#'+id);
   $('.vault__tilebackground').css('backgroundImage','url('+curObj.imgSrc+')');
