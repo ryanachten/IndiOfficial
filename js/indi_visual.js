@@ -588,9 +588,10 @@ function lissajousFigure(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
-		alpha: 90,
+		alpha: 100,
 		phi: 20,
 		pointCount: 49,
+		mouseMode: 'y',
 		freqX: 4,
 		freqY: 1,
 		modulated: false,
@@ -601,8 +602,9 @@ function lissajousFigure(dataArray, bufferLength){
 	gui.add(guiObj, "alpha").min(0).max(100);
 	gui.add(guiObj, "pointCount").min(1).max(300).onChange(init);
 	gui.add(guiObj, "phi").min(1).max(360);
-	gui.add(guiObj, "freqX").min(1).max(8);
-	gui.add(guiObj, "freqY").min(1).max(8);
+	gui.add(guiObj, "mouseMode", ['x', 'y', 'both']);
+	// gui.add(guiObj, "freqX").min(1).max(8);
+	// gui.add(guiObj, "freqY").min(1).max(8);
 	gui.add(guiObj, "modulated").onChange(init);
 	gui.add(guiObj, "modFreqX").min(1).max(8);
 	gui.add(guiObj, "modFreqY").min(1).max(8);
@@ -670,6 +672,27 @@ function lissajousFigure(dataArray, bufferLength){
 	init();
 
 
+	var clientX = canvWidth/2;
+	var clientY = canvHeight/2;
+
+	// get attraction node to follow mouse input
+	$(window).mousemove(function(e){
+		if (typeof e.pageX !== 'undefined' && typeof e.pageY !== 'undefined'){
+			var rect = canvas.getBoundingClientRect();
+			clientX = e.pageX - rect.left;
+			clientY = e.pageY - rect.top;
+		}
+	});
+
+	canvas.addEventListener("touchmove", function (e) {
+		var touch = e.touches[0];
+		var rect = canvas.getBoundingClientRect();
+		clientX = touch.clientX - rect.left;
+		clientY = touch.clientY - rect.top;
+	  // console.log('touch', touch);
+	  });
+
+
 	function draw(){
 
 			var dataArray = new Uint8Array(fftSampleSize);
@@ -687,8 +710,8 @@ function lissajousFigure(dataArray, bufferLength){
 
 				renderBgColour(mapda, 3, guiObj.alpha);
 
-				freqX = guiObj.freqX;
-				freqY = guiObj.freqY;
+				// freqX = guiObj.freqX;
+				// freqY = guiObj.freqY;
 				modFreqX = guiObj.modFreqX;
 				modFreqY = guiObj.modFreqY;
 
@@ -701,18 +724,27 @@ function lissajousFigure(dataArray, bufferLength){
 				if(guiObj.phi > 360)
 					guiObj.phi = 1;
 
-				freqX = guiObj.freqX;
-				// console.log('freqX', freqX)
-				guiObj.freqX = freqX+0.1;
-				if(guiObj.freqX > 5)
-					guiObj.freqX = 1;
+				if (guiObj.mouseMode === 'x' || guiObj.mouseMode === 'both') {
+						freqX = map_range(clientX, 0, canvWidth, 0, 3);
+				}
+				else{
+					freqX = guiObj.freqX;
+					// console.log('freqX', freqX)
+					guiObj.freqX = freqX+mapda/10;
+					if(guiObj.freqX > 5)
+						guiObj.freqX = 1;
+				}
 
-				freqY = guiObj.freqY + 0.1;
-				// console.log('freqY', freqY)
-				guiObj.freqY = freqY+0.1;
-				if(guiObj.freqY > 5)
-					guiObj.freqY = 1;
-
+				if (guiObj.mouseMode === 'y' || guiObj.mouseMode === 'both') {
+						freqY = map_range(clientY, 0, canvHeight, 0, 3);
+				}
+				else{
+					freqY = guiObj.freqY +mapda/10;
+					// console.log('freqY', freqY)
+					guiObj.freqY = freqY+0.1;
+					if(guiObj.freqY > 5)
+						guiObj.freqY = 1;
+				}
 			}
 
 			for(var i = 0; i < particleArray.length; i++){
