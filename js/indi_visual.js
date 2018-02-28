@@ -50,7 +50,7 @@ function chladniPlate(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
-		alpha: 90,
+		alpha: 60,
 		nodeDamping: 2.5,
 		attractMode: 'basic',
 		attractRadius: canvWidth*2,
@@ -319,10 +319,10 @@ function nodeAttraction(dataArray, bufferLength){
 	visSettings.show().append(gui.domElement);
 
 	var guiObj = {
-		alpha: 100,
+		alpha: 0,
 		showAttactionNode: false,
 		nodeDamping: 8,
-		attractRadius: canvWidth,
+		attractRadius: canvWidth/3,
 		attractStrength: -42,
 		attractRamp: 3,
 		maxVelocity: 15,
@@ -455,6 +455,8 @@ function nodeAttraction(dataArray, bufferLength){
 
 
 	function init(){
+
+		renderBgColour(0.5, 2, 100);
 
 		xCount = canvWidth/75;
 		yCount = canvHeight/75;
