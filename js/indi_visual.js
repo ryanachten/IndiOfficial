@@ -322,7 +322,7 @@ function nodeAttraction(dataArray, bufferLength){
 		alpha: 0,
 		showAttactionNode: false,
 		nodeDamping: 8,
-		attractRadius: canvWidth/3,
+		attractRadius: (canvWidth/3 > 300 ? canvWidth/3 : 300),
 		attractStrength: -42,
 		attractRamp: 3,
 		maxVelocity: 15,
@@ -710,17 +710,11 @@ function lissajousFigure(dataArray, bufferLength){
 
 				renderBgColour(mapda, 3, guiObj.alpha);
 
-				// freqX = guiObj.freqX;
-				// freqY = guiObj.freqY;
 				modFreqX = guiObj.modFreqX;
 				modFreqY = guiObj.modFreqY;
 
-				// phi = guiObj.phi;
-
 				// Increment per animation frame
 				phi = guiObj.phi * mapda;
-				// console.log('phi', phi);
-				// guiObj.phi = phi+logda;
 				if(guiObj.phi > 360)
 					guiObj.phi = 1;
 
