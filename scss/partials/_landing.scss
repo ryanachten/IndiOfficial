@@ -12,6 +12,9 @@ body.landing{
 	background-color: $background-color;
 	z-index: 2;
 	text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .loading-branding{
 	display: block;
@@ -19,6 +22,10 @@ body.landing{
 	max-width: 400px;
 	margin: 20px auto 0 auto;
 }
+.loading-branding.circle{
+  margin: 0 auto 0 auto;
+}
+
 #loading-message{
   img, h2{
   	display: inline;
