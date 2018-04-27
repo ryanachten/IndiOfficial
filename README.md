@@ -1,4 +1,4 @@
-# Indi Official - Audio-Visual Website
+# Indi Official (Audio-Visual Website)
 
 ## Overview
 The website for New Zealand musician, Indi, looks to bring her visual identity to life by using her music to create generative visualisations. These audio-visualisations look to extend concepts formerly established in her branding; simulating acoustically-driven microbiological colonies.
